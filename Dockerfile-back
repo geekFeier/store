@@ -1,0 +1,3 @@
+FROM golang:1.11.3
+COPY store/store .
+CMD ["./store", "serve"]

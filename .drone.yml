@@ -2,17 +2,33 @@ kind: pipeline
 name: default
 
 steps:
-- name: build-font
-  image: fanux/store-font:dev
+    #- name: build-font
+    #  image: fanux/store-font:dev
+    #  commands:
+    #     - cd font
+    #     - npm build
+    #
+    #- name: publish-font
+    #  image: plugins/docker
+    #  settings:
+    #    repo: fanux/store-font
+    #    tags: ${DRONE_TAG=latest}
+    #    username: fanux
+    #    password:
+    #      from_secret: docker-hub-pass
+- name: build-backend
+  image: fanux/store-back:dev
   commands:
-     - cd font
-     - npm build
+     - mkdir -p /go/github.com/fanux/store/
+     - cp -r store /go/github.com/fanux/store/
+     - cd /go/github.com/fanux/store/store && go build 
 
-- name: publish-font
+- name: publish-back
   image: plugins/docker
   settings:
-    repo: fanux/store-font
+    repo: fanux/store-back
     tags: ${DRONE_TAG=latest}
     username: fanux
+    dockerfile: Dockerfile-back
     password:
       from_secret: docker-hub-pass
