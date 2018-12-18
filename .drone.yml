@@ -1,5 +1,9 @@
 kind: pipeline
 name: default
+workspace:
+   base: /go
+   path: src/github.com/fanux/
+    
 
 steps:
     #- name: build-font
@@ -19,10 +23,7 @@ steps:
 - name: build-backend
   image: fanux/store-back:dev
   commands:
-     - mkdir -p /go/src/github.com/fanux/store/
-     - cp -r store /go/src/github.com/fanux/store/
-     - cd /go/src/github.com/fanux/store/store && go build -o store-back && cd -
-     - cp /go/src/github.com/fanux/store/store/store-back .
+     - cd store && go build -o store-back 
 
 - name: publish-back
   image: plugins/docker

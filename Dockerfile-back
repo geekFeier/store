@@ -1,3 +1,3 @@
 FROM golang:1.11.3
-COPY store-back .
+COPY store/store-back .
 CMD ["./store-back", "serve"]
