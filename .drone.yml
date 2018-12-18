@@ -20,8 +20,9 @@ steps:
   image: fanux/store-back:dev
   commands:
      - mkdir -p /go/github.com/fanux/store/
-     - cp -r store /go/github.com/fanux/store/
-     - cd /go/github.com/fanux/store/store && go build 
+     - cp -r store /go/src/github.com/fanux/store/
+     - cd /go/src/github.com/fanux/store/store && go build -o store-back && cd -
+     - cp /go/src/github.com/fanux/store/store/store-back .
 
 - name: publish-back
   image: plugins/docker
