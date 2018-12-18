@@ -23,7 +23,7 @@ steps:
 - name: build-backend
   image: fanux/store-back:dev
   commands:
-     - cd store && go build -o store-back 
+     - cd store && pwd && ls && go build -o store-back 
 
 - name: publish-back
   image: plugins/docker
