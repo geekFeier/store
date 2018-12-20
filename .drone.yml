@@ -30,3 +30,27 @@ steps:
     - sleep 15
     - kubectl create -f deploy/store-back.yaml || true
 
+- name: build-font
+  image: fanux/store-font:dev
+  commands:
+     - cd font && npm build
+
+- name: publish-font
+  image: plugins/docker
+  settings:
+    repo: fanux/store-font
+    tags: ${DRONE_TAG=latest}
+    username: fanux
+    dockerfile: Dockerfile-font
+    password:
+      from_secret: docker-hub-pass
+
+- name: deploy-font
+  image: lachlanevenson/k8s-kubectl
+  commands:
+    - mkdir ~/.kube
+    - cp deploy/config ~/.kube/config
+    - kubectl delete -f deploy/store-font.yaml || true
+    - sleep 15
+    - kubectl create -f deploy/store-font.yaml || true
+
