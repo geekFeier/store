@@ -1,13 +1,18 @@
-kind: Deployment
 apiVersion: apps/v1
+kind: Deployment
 metadata:
-  labels:
-    store: back 
   name: store-back
+  labels:
+    app: store-back
 spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: store-back
+  template:
     metadata:
       labels:
-        store: back 
+        app: store-back
     spec:
       containers:
       - name: store-back
