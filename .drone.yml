@@ -31,7 +31,7 @@ steps:
     - kubectl create -f deploy/store-back.yaml || true
 
 - name: build-font
-  image: fanux/store-font:dev
+  image: fanux/store-font:latest
   commands:
      - cd font && npm run build
 
