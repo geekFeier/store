@@ -95,7 +95,11 @@ func (u UserResource) callback(request *restful.Request, response *restful.Respo
 	state := request.QueryParameter("state")
 	fmt.Println("redirect url is : ", state)
 	//redirect back to user request
-	url := fmt.Sprintf("http://%s:%d", Domian, BackPort)
+	if state == "" {
+		url := fmt.Sprintf("http://%s", Domian)
+	} else {
+		url := fmt.Sprintf("http://%s:%d", Domian, BackPort)
+	}
 	http.Redirect(response, request.Request, url+state, http.StatusMovedPermanently)
 
 	io.WriteString(response.ResponseWriter, "code is : "+code)
