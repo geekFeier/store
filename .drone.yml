@@ -1,36 +1,27 @@
 kind: pipeline
 name: default
-workspace:
-   base: /go
-   path: src/github.com/sealyun/store/
-    
 
 steps:
-    #- name: build-font
-    #  image: fanux/store-font:dev
-    #  commands:
-    #     - cd font
-    #     - npm build
-    #
-    #- name: publish-font
-    #  image: plugins/docker
-    #  settings:
-    #    repo: fanux/store-font
-    #    tags: ${DRONE_TAG=latest}
-    #    username: fanux
-    #    password:
-    #      from_secret: docker-hub-pass
-- name: build-backend
-  image: fanux/store-back:dev
+- name: build-font
+  image: fanux/store-font:dev
   commands:
-     - cd store && pwd && ls && go build -o store-back 
+     - cd font
+     - npm build
 
-- name: publish-back
+- name: publish-font
   image: plugins/docker
   settings:
-    repo: fanux/store-back
+    repo: fanux/store-font
     tags: ${DRONE_TAG=latest}
     username: fanux
-    dockerfile: Dockerfile-back
     password:
       from_secret: docker-hub-pass
+
+- name: deploy-back
+  image: lachlanevenson/k8s-kubectl
+  commands:
+    - mkdir ~/.kube
+    - cp deploy/config ~/.kube/config
+    - kubectl delete -f deploy/store-back.yaml || true
+    - kubectl create -f deploy/store-back.yaml || true
+
