@@ -33,7 +33,7 @@ steps:
 - name: build-font
   image: fanux/store-font:dev
   commands:
-     - cd font && npm build
+     - cd font && npm run build
 
 - name: publish-font
   image: plugins/docker
