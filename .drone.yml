@@ -31,7 +31,7 @@ steps:
     - kubectl create -f deploy/store-back.yaml || true
 
 - name: build-font
-  image: fanux/vue-cli:latest
+  image: fanux/vue:latest
   commands:
      - cd font && npm run build
 
