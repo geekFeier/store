@@ -28,6 +28,12 @@ import (
 //UserResource  s
 type UserResource struct{}
 
+//const
+const (
+	Domian   = "store.lameleg.com"
+	FontPort = 8080
+)
+
 //RegisterTo is
 func (u UserResource) RegisterTo(container *restful.Container) {
 	loginless := new(restful.WebService)
@@ -89,7 +95,8 @@ func (u UserResource) callback(request *restful.Request, response *restful.Respo
 	state := request.QueryParameter("state")
 	fmt.Println("redirect url is : ", state)
 	//redirect back to user request
-	http.Redirect(response, request.Request, "http://localhost:8001"+state, http.StatusMovedPermanently)
+	url := fmt.Sprintf("http://%s:%d", Domian, BackPort)
+	http.Redirect(response, request.Request, url+state, http.StatusMovedPermanently)
 
 	io.WriteString(response.ResponseWriter, "code is : "+code)
 }

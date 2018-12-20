@@ -27,5 +27,6 @@ steps:
     - mkdir ~/.kube
     - cp deploy/config ~/.kube/config
     - kubectl delete -f deploy/store-back.yaml || true
+    - sleep 15
     - kubectl create -f deploy/store-back.yaml || true
 
