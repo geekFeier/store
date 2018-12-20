@@ -1,19 +1,23 @@
 kind: pipeline
 name: default
 
-steps:
-- name: build-font
-  image: fanux/store-font:dev
-  commands:
-     - cd font
-     - npm build
+workspace:
+   base: /go
+   path: src/github.com/sealyun/store/
 
-- name: publish-font
+steps:
+- name: build-backend
+  image: fanux/store-back:dev
+  commands:
+     - cd store && pwd && ls && go build -o store-back 
+
+- name: publish-back
   image: plugins/docker
   settings:
-    repo: fanux/store-font
+    repo: fanux/store-back
     tags: ${DRONE_TAG=latest}
     username: fanux
+    dockerfile: Dockerfile-back
     password:
       from_secret: docker-hub-pass
 
