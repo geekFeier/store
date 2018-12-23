@@ -6,11 +6,14 @@ import (
 	"crypto/rsa"
 	"crypto/sha256"
 	"crypto/x509"
+	"encoding/base64"
 	"encoding/json"
 	"encoding/pem"
 	"fmt"
 	"io/ioutil"
+	"net/url"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -19,6 +22,12 @@ MIIEowIBAAKCAQEA3wA8ROUMryWVwbicdwaasILBurRx4LEZSpMK/llBTR8Njj/C+7E1Gwx4G9Ovr2U7
 	`)
 
 var privateText = []byte(privateStr)
+
+//const is
+const (
+	//ContentTypeForm = "application/x-www-form-urlencoded;charset=utf-8"
+	ContentTypeForm = "text/html;charset=utf-8"
+)
 
 //Alipay is
 type Alipay struct {
@@ -49,17 +58,34 @@ func GetBizContent(req *AlipayReq) string {
 		return ""
 	}
 
-	return string(b)
+	return fmt.Sprintf("%s", b)
 }
 
 //SortPay is
 func SortPay(pay *Alipay, req *AlipayReq) string {
 	pay.BizContent = GetBizContent(req)
-	s := fmt.Sprintf("app_id=%s&biz_content=%s&charset=utf-8&method=%s&sign_type=RSA&timestamp=%s&version=1.0",
+
+	s := fmt.Sprintf("app_id=%s&biz_content=%s&charset=utf-8&method=%s&sign_type=%s&timestamp=%s&version=1.0",
 		pay.AppID,
-		pay.BizContent,
+		strings.TrimSpace(pay.BizContent),
 		pay.Method,
-		pay.Timestamp,
+		pay.SignType,
+		strings.TrimSpace(pay.Timestamp),
+	)
+	fmt.Println("req: ", s)
+	return s
+}
+
+//URLEscape is
+func URLEscape(pay *Alipay, req *AlipayReq) string {
+	pay.BizContent = GetBizContent(req)
+
+	s := fmt.Sprintf("app_id=%s&biz_content=%s&charset=utf-8&method=%s&sign_type=%s&timestamp=%s&version=1.0",
+		url.QueryEscape(strings.TrimSpace(pay.AppID)),
+		url.QueryEscape(strings.TrimSpace(pay.BizContent)),
+		url.QueryEscape(strings.TrimSpace(pay.Method)),
+		url.QueryEscape(strings.TrimSpace(pay.SignType)),
+		url.QueryEscape(strings.TrimSpace(pay.Timestamp)),
 	)
 	fmt.Println("req: ", s)
 	return s
@@ -84,13 +110,15 @@ func Sign(body string) string {
 	rng := rand.Reader
 	para := []byte(body)
 	hashed := sha256.Sum256(para)
+
 	signature, err := rsa.SignPKCS1v15(rng, key, crypto.SHA256, hashed[:])
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error from signing: %s\n", err)
 		return ""
 	}
-	fmt.Printf("sign: %s", signature)
-	return string(signature)
+	encoded := base64.StdEncoding.EncodeToString(signature)
+	fmt.Printf("signature %s", encoded)
+	return encoded
 }
 
 // Form 生成支付宝即时到帐提交表单html代码
@@ -98,34 +126,37 @@ func Form() string {
 	//实例化参数
 	pay := &Alipay{
 		AppID:  "2018121662557851",
-		Method: "alipay.trade.refund",
+		Method: "alipay.trade.page.pay",
 	}
 	req := &AlipayReq{
 		OutTradeNo:  "1klaskdjfaa",
-		ProductCode: "kubernetes",
+		ProductCode: "FAST_INSTANT_TRADE_PAY",
 		TotalAmount: 50,
 		Subject:     "kubernetesv1.13.1",
 	}
-	pay.SignType = "RSA"
+	pay.SignType = "RSA2"
 	pay.Timestamp = time.Now().Format("2006-01-02 15:04:05")
 
+	st := SortPay(pay, req)
 	//生成签名
-	sign := Sign(SortPay(pay, req))
+	sign := Sign(st)
 
 	//追加参数
 	pay.Sign = sign
 
+	fmt.Println("encode: ", fmt.Sprintf("%s&sign=%s", URLEscape(pay, req), url.QueryEscape(sign)))
+
 	//生成自动提交form
 	return `
 		<form id="alipaysubmit" name="alipaysubmit" action="https://openapi.alipay.com/gateway.do" method="post" style='display:none;'>
-			<input type="hidden" name="charset" value="utf-8">
-			<input type="hidden" name="sign" value="` + pay.Sign + `">
-			<input type="hidden" name="sign_type" value="` + pay.SignType + `">
 			<input type="hidden" name="app_id" value="` + pay.AppID + `">
+			<input type="hidden" name="biz_content" value="` + strings.TrimSpace(pay.BizContent) + `">
+			<input type="hidden" name="charset" value="utf-8">
 			<input type="hidden" name="method" value="` + pay.Method + `">
-			<input type="hidden" name="timestamp" value="` + pay.Timestamp + `">
+			<input type="hidden" name="sign_type" value="` + pay.SignType + `">
+			<input type="hidden" name="timestamp" value="` + strings.TrimSpace(pay.Timestamp) + `">
 			<input type="hidden" name="version" value="1.0">
-			<input type="hidden" name="biz_content" value="` + pay.BizContent + `">
+			<input type="hidden" name="sign" value="` + pay.Sign + `">
 		</form>
 		<script>
 			document.forms['alipaysubmit'].submit();

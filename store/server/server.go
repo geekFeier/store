@@ -76,7 +76,27 @@ func (u UserResource) nop(request *restful.Request, response *restful.Response) 
 }
 
 func (u UserResource) pay(request *restful.Request, response *restful.Response) {
-	response.AddHeader("content-type", "text/html")
+	/*
+		var client = alipay.New("2018121662557851", aliPublicKey, privateKey, true)
+
+		var p = alipay.AliPayTradeWapPay{}
+		p.NotifyURL = "http://xxx"
+		p.ReturnURL = "http://xxx"
+		p.Subject = "k8s"
+		p.OutTradeNo = "asfsfdaf"
+		p.TotalAmount = "10.00"
+		p.ProductCode = "1231231"
+
+		var url, err = client.TradeWapPay(p)
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		var payURL = url.String()
+		fmt.Println(payURL)
+	*/
+
+	response.AddHeader("Content-Type", ContentTypeForm)
 	io.WriteString(response.ResponseWriter, Form())
 }
 
