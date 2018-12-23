@@ -36,28 +36,28 @@ const (
 
 //RegisterTo is
 func (u UserResource) RegisterTo(container *restful.Container) {
-	loginless := new(restful.WebService)
-	loginless.
-		Path("").
-		Consumes("*/*").
-		Produces("*/*")
-	loginless.Route(loginless.GET("/callback").To(u.callback))
-
+	//loginless := new(restful.WebService)
+	//loginless.
+	//	Path("").
+	//	Consumes("*/*").
+	//	Produces("*/*")
+	//loginless.Route(loginless.GET("/callback").To(u.callback))
+	//
 	ws := new(restful.WebService)
 	ws.
 		Path("/user").
 		Consumes("*/*").
 		Produces("*/*")
 
-	ws.Filter(checkCookie)
+	//ws.Filter(checkCookie)
 
-	ws.Route(ws.GET("/{user-id}").To(u.nop))
+	ws.Route(ws.GET("/pay").To(u.pay))
 	ws.Route(ws.POST("").To(u.nop))
 	ws.Route(ws.PUT("/{user-id}").To(u.nop))
 	ws.Route(ws.DELETE("/{user-id}").To(u.nop))
 
 	container.Add(ws)
-	container.Add(loginless)
+	//container.Add(loginless)
 }
 
 // if check cookie failed, redirect to login page
@@ -73,6 +73,11 @@ func checkCookie(req *restful.Request, resp *restful.Response, chain *restful.Fi
 
 func (u UserResource) nop(request *restful.Request, response *restful.Response) {
 	io.WriteString(response.ResponseWriter, "this would be a normal response")
+}
+
+func (u UserResource) pay(request *restful.Request, response *restful.Response) {
+	response.AddHeader("content-type", "text/html")
+	io.WriteString(response.ResponseWriter, Form())
 }
 
 func (u UserResource) callback(request *restful.Request, response *restful.Response) {

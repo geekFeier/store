@@ -3,7 +3,7 @@ name: default
 
 workspace:
    base: /go
-   path: src/github.com/sealyun/store/
+   path: src/github.com/fanux/store/
 
 steps:
 - name: build-backend

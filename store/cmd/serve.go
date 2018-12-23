@@ -17,7 +17,7 @@ package cmd
 import (
 	"fmt"
 
-	serve "github.com/sealyun/store/store/server"
+	serve "github.com/fanux/store/store/server"
 	"github.com/spf13/cobra"
 )
 

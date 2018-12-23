@@ -8,7 +8,7 @@
     </p>
     <h3>Installed CLI Plugins</h3>
     <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
+      <li><a href="https://api.mch.weixin.qq.com/pay/unifiedorder?appid=wxe38b82bc182448c5&mch_id=1521198291&nonce_str=aksdffa123&sign=asfas111&body=kuberntes&out_trade_no=123111&total_fee=0.01&spbill_create_ip=127.0.0.1&notify_url=localhost" target="_blank" rel="noopener">wechat pay</a></li>
       <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
     </ul>
     <h3>Essential Links</h3>

@@ -14,7 +14,7 @@
 
 package main
 
-import "github.com/sealyun/store/store/cmd"
+import "github.com/fanux/store/store/cmd"
 
 func main() {
 	cmd.Execute()
