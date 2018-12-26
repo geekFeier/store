@@ -29,35 +29,42 @@ import (
 type UserResource struct{}
 
 //const
-const (
-	Domian   = "store.lameleg.com"
-	BackPort = 8080
+var (
+	Domain   = "store.lameleg.com"
+	BackPort = "8080"
 )
+
+//GetFullURL is
+func GetFullURL(path string) string {
+	return fmt.Sprintf("http://%s:%s/%s", Domain, BackPort, path)
+}
 
 //RegisterTo is
 func (u UserResource) RegisterTo(container *restful.Container) {
-	//loginless := new(restful.WebService)
-	//loginless.
-	//	Path("").
-	//	Consumes("*/*").
-	//	Produces("*/*")
-	//loginless.Route(loginless.GET("/callback").To(u.callback))
-	//
+	loginless := new(restful.WebService)
+	loginless.
+		Path("").
+		Consumes("*/*").
+		Produces("*/*")
+	loginless.Route(loginless.GET("/callback").To(u.callback))
+
 	ws := new(restful.WebService)
 	ws.
-		Path("/user").
+		Path("/pro").
 		Consumes("*/*").
 		Produces("*/*")
 
-	//ws.Filter(checkCookie)
+	ws.Filter(checkCookie)
 
-	ws.Route(ws.GET("/pay").To(u.pay))
+	ws.Route(ws.GET("/pay/notify/{login}/{product}/{referrer}").To(pay))
 	ws.Route(ws.POST("").To(u.nop))
 	ws.Route(ws.PUT("/{user-id}").To(u.nop))
 	ws.Route(ws.DELETE("/{user-id}").To(u.nop))
 
+	ws.Route(ws.GET("/{product}").To(product))
+
 	container.Add(ws)
-	//container.Add(loginless)
+	container.Add(loginless)
 }
 
 // if check cookie failed, redirect to login page
@@ -71,37 +78,86 @@ func checkCookie(req *restful.Request, resp *restful.Response, chain *restful.Fi
 	chain.ProcessFilter(req, resp)
 }
 
+func product(request *restful.Request, response *restful.Response) {
+	referrer := request.QueryParameter("referrer")
+	productName := request.PathParameter("product")
+
+	cookie, err := request.Request.Cookie("user")
+	if err != nil {
+		fmt.Println("Can't get cookie")
+		return
+	}
+
+	login := cookie.Value
+	fmt.Printf("user %s buy product %s", login, productName)
+
+	//TODO read user product in database by key (login , productname)
+	up := &UserProduct{}
+	var has bool
+	has, err = up.Get(login, productName)
+	if err != nil {
+		fmt.Println("get userpro failed", err)
+		return
+	}
+	if !has {
+		up.Login = login
+		up.ProductName = productName
+		up.Status = "see"
+		_, err = up.Save()
+		if err != nil {
+			fmt.Println("save user product failed", err)
+			return
+		}
+	}
+
+	if up.Status == "payed" {
+		response.AddHeader("Content-Type", "application/x-gzip")
+		http.Redirect(response, request.Request, GetProductURL(productName), http.StatusMovedPermanently)
+		return
+	}
+	if referrer == "" && up.Referrer == "" {
+		referrer = "fanux"
+	}
+	price := GetProductPrice(productName)
+	returnURL := fmt.Sprintf("pro/%s", productName)
+	notifyURL := fmt.Sprintf("/pro/pay/notify/%s/%s/%s", login, productName, referrer)
+	payURL := PayURL(price, login+productName, productName, GetFullURL(returnURL), GetFullURL(notifyURL))
+	http.Redirect(response, request.Request, payURL, http.StatusMovedPermanently)
+
+}
+
 func (u UserResource) nop(request *restful.Request, response *restful.Response) {
 	io.WriteString(response.ResponseWriter, "this would be a normal response")
 }
 
-func (u UserResource) pay(request *restful.Request, response *restful.Response) {
-	/*
-		var client = alipay.New("2018121662557851", aliPublicKey, privateKey, true)
+func pay(request *restful.Request, response *restful.Response) {
+	//TODO check sign
+	login := request.PathParameter("login")
+	productName := request.PathParameter("product")
+	referrer := request.PathParameter("referrer")
 
-		var p = alipay.AliPayTradeWapPay{}
-		p.NotifyURL = "http://xxx"
-		p.ReturnURL = "http://xxx"
-		p.Subject = "k8s"
-		p.OutTradeNo = "asfsfdaf"
-		p.TotalAmount = "10.00"
-		p.ProductCode = "1231231"
+	//TODO save up
+	up := &UserProduct{
+		Login:       login,
+		ProductName: productName,
+	}
+	has, err := up.Get(login, productName)
+	if err != nil {
+		fmt.Println("get user pro error", err)
+	}
+	up.Referrer = referrer
+	if !has {
+		fmt.Println("can't find up")
+	}
+	up.Status = "payed"
+	up.Referrer = referrer
+	_, err = up.Save()
+	if err != nil {
+		fmt.Println("save up error", err)
+	}
 
-		var url, err = client.TradeWapPay(p)
-		if err != nil {
-			fmt.Println(err)
-		}
-
-		var payURL = url.String()
-		fmt.Println(payURL)
-	*/
-
-	//	r := rand.New(rand.NewSource(time.Now().UnixNano()))
-	//	outTradeNo := strconv.FormatInt(r.Int63(), 63)
-	outTradeNo := "asdfaf"
-
-	// response.AddHeader("Content-Type", ContentTypeForm)
-	io.WriteString(response.ResponseWriter, PayURL(0.01, outTradeNo, "kubernetes1.13.1", "http://www.sealyun.com/", "https://sealyun.com/pro/products/"))
+	response.AddHeader("Content-Type", "application/x-gzip")
+	http.Redirect(response, request.Request, GetProductURL(productName), http.StatusMovedPermanently)
 }
 
 func (u UserResource) callback(request *restful.Request, response *restful.Response) {
@@ -126,9 +182,9 @@ func (u UserResource) callback(request *restful.Request, response *restful.Respo
 	//redirect back to user request
 	var url string
 	if state == "" {
-		url = fmt.Sprintf("http://%s", Domian)
+		url = fmt.Sprintf("http://%s", Domain)
 	} else {
-		url = fmt.Sprintf("http://%s:%d", Domian, BackPort)
+		url = fmt.Sprintf("http://%s:%s", Domain, BackPort)
 	}
 	http.Redirect(response, request.Request, url+state, http.StatusMovedPermanently)
 
@@ -157,3 +213,23 @@ func Run() {
 	server := &http.Server{Addr: ":8080", Handler: wsContainer}
 	log.Fatal(server.ListenAndServe())
 }
+
+/*
+	var client = alipay.New("2018121662557851", aliPublicKey, privateKey, true)
+
+	var p = alipay.AliPayTradeWapPay{}
+	p.NotifyURL = "http://xxx"
+	p.ReturnURL = "http://xxx"
+	p.Subject = "k8s"
+	p.OutTradeNo = "asfsfdaf"
+	p.TotalAmount = "10.00"
+	p.ProductCode = "1231231"
+
+	var url, err = client.TradeWapPay(p)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	var payURL = url.String()
+	fmt.Println(payURL)
+*/

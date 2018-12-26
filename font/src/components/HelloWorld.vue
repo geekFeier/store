@@ -6,10 +6,9 @@
       check out the
       <a href="https://github.com/login/oauth/authorize?client_id=89c1b05d77fb1c92a1ef&scope=user:email" target="_blank" rel="noopener">login github</a>.
     </p>
-    <h3>Installed CLI Plugins</h3>
+    <h3>products list</h3>
     <ul>
-      <li><a href="https://api.mch.weixin.qq.com/pay/unifiedorder?appid=wxe38b82bc182448c5&mch_id=1521198291&nonce_str=aksdffa123&sign=asfas111&body=kuberntes&out_trade_no=123111&total_fee=0.01&spbill_create_ip=127.0.0.1&notify_url=localhost" target="_blank" rel="noopener">wechat pay</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
+      <li><a href="http://localhost:8001/pro/kubernetes1.13.1" target="_blank" rel="noopener">kubernetes1.13.1</a> share link</li>
     </ul>
     <h3>Essential Links</h3>
     <ul>

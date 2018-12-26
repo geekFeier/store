@@ -46,6 +46,8 @@ func init() {
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
 	// serveCmd.PersistentFlags().String("foo", "", "A help for foo")
+	serveCmd.Flags().StringVarP(&serve.Domain, "domain", "d", "localhost", "backend domain")
+	serveCmd.Flags().StringVarP(&serve.BackPort, "port", "p", "8001", "backend domain")
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
