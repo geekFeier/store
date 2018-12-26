@@ -96,8 +96,12 @@ func (u UserResource) pay(request *restful.Request, response *restful.Response) 
 		fmt.Println(payURL)
 	*/
 
-	response.AddHeader("Content-Type", ContentTypeForm)
-	io.WriteString(response.ResponseWriter, Form())
+	//	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	//	outTradeNo := strconv.FormatInt(r.Int63(), 63)
+	outTradeNo := "asdfaf"
+
+	// response.AddHeader("Content-Type", ContentTypeForm)
+	io.WriteString(response.ResponseWriter, PayURL(0.01, outTradeNo, "kubernetes1.13.1", "http://www.sealyun.com/", "https://sealyun.com/pro/products/"))
 }
 
 func (u UserResource) callback(request *restful.Request, response *restful.Response) {
