@@ -7,7 +7,7 @@
     </p>
     <h3>商品列表</h3>
     <ul>
-      <li><a href="http://store.lameleg.com:8080/pro/kubernetes1.13.1" target="_blank" rel="noopener">kubernetes1.13.1</a> 分销链接（开发中）</li>
+      <li><a href="http://store.lameleg.com:8080/pro/kubernetes1.13.1" rel="noopener">kubernetes1.13.1</a> 分销链接（开发中）</li>
     </ul>
     <h3>LINKS</h3>
     <ul>
