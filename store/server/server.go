@@ -103,7 +103,7 @@ func product(request *restful.Request, response *restful.Response) {
 		return
 	}
 	r := rand.New(rand.NewSource(99))
-	prorand := fmt.Sprintf("%s-%s-%s", login, productName, r.Int63())
+	prorand := fmt.Sprintf("%s-%s-%d", login, productName, r.Int63())
 	up.ID = prorand
 	if !has {
 		up.Login = login
@@ -185,10 +185,13 @@ func (u UserResource) callback(request *restful.Request, response *restful.Respo
 		fmt.Println(err)
 	}
 
-	//has,err := user.Get(user.Login)
-	_, err = user.Save()
-	if err != nil {
-		fmt.Println("save suer faieled: ", err)
+	has, err := user.Get(user.Login)
+	if !has || err != nil {
+		//has,err := user.Get(user.Login)
+		_, err = user.Save()
+		if err != nil {
+			fmt.Println("save suer faieled: ", err)
+		}
 	}
 
 	// Set cookie
