@@ -8,7 +8,7 @@
     </p>
     <h3>products list</h3>
     <ul>
-      <li><a href="http://localhost:8001/pro/kubernetes1.13.1" target="_blank" rel="noopener">kubernetes1.13.1</a> share link</li>
+      <li><a href="http://store.lameleg.com:8080/pro/kubernetes1.13.1" target="_blank" rel="noopener">kubernetes1.13.1</a> share link</li>
     </ul>
     <h3>Essential Links</h3>
     <ul>
