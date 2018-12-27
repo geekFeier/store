@@ -212,6 +212,7 @@ func (u UserResource) callback(request *restful.Request, response *restful.Respo
 	} else {
 		url = fmt.Sprintf("http://%s:%s", Domain, BackPort)
 	}
+	_ = url
 	//http.Redirect(response, request.Request, url+state, http.StatusMovedPermanently)
 }
 
