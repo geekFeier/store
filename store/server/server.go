@@ -74,7 +74,9 @@ func checkCookie(req *restful.Request, resp *restful.Response, chain *restful.Fi
 	cookie, err := req.Request.Cookie("user")
 	if err != nil || cookie == nil {
 		fmt.Println("login please : ", err, req.Request.URL.String())
-		http.Redirect(resp, req.Request, GetLoginURL(req.Request.URL.String()), http.StatusMovedPermanently)
+		//http.Redirect(resp, req.Request, GetLoginURL(req.Request.URL.String()), http.StatusMovedPermanently)
+		//防止出现重定向次数过多
+		http.Redirect(resp, req.Request, GetLoginURL(""), http.StatusMovedPermanently)
 		return
 	}
 	chain.ProcessFilter(req, resp)
@@ -114,6 +116,7 @@ func product(request *restful.Request, response *restful.Response) {
 			return
 		}
 	}
+	response.AddHeader("Cache-Control", "no-cache")
 
 	if up.Status == "payed" {
 		response.AddHeader("Content-Type", "application/x-gzip")
@@ -209,7 +212,7 @@ func (u UserResource) callback(request *restful.Request, response *restful.Respo
 	} else {
 		url = fmt.Sprintf("http://%s:%s", Domain, BackPort)
 	}
-	http.Redirect(response, request.Request, url+state, http.StatusMovedPermanently)
+	//http.Redirect(response, request.Request, url+state, http.StatusMovedPermanently)
 }
 
 //Run is
