@@ -165,7 +165,7 @@ func pay(request *restful.Request, response *restful.Response) {
 	}
 	up.Status = "payed"
 	up.Referrer = referrer
-	_, err = up.Save()
+	_, err = up.Update()
 	if err != nil {
 		fmt.Println("save up error", err)
 	}
