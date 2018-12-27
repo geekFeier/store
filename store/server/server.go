@@ -76,7 +76,7 @@ func checkCookie(req *restful.Request, resp *restful.Response, chain *restful.Fi
 		fmt.Println("login please : ", err, req.Request.URL.String())
 		//http.Redirect(resp, req.Request, GetLoginURL(req.Request.URL.String()), http.StatusMovedPermanently)
 		//防止出现重定向次数过多
-		http.Redirect(resp, req.Request, GetLoginURL(""), http.StatusMovedPermanently)
+		http.Redirect(resp, req.Request, GetLoginURL("s"), http.StatusMovedPermanently)
 		return
 	}
 	chain.ProcessFilter(req, resp)
@@ -206,7 +206,7 @@ func (u UserResource) callback(request *restful.Request, response *restful.Respo
 	fmt.Println("redirect url is : ", state)
 	//redirect back to user request
 	var url string
-	if state == "" {
+	if state == "s" {
 		//TODO return to home page
 		url = fmt.Sprintf("http://%s", Domain)
 	} else {
