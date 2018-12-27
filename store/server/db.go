@@ -29,6 +29,7 @@ type Product struct {
 
 //UserProduct is
 type UserProduct struct {
+	ID           string
 	Login        string
 	ProductName  string
 	ProductPrice float64

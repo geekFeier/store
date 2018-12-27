@@ -17,7 +17,7 @@ spec:
       volumes:
       - hostPath:
           path: /data
-          type: FileOrCreate
+          type: DirectoryOrCreate
         name: data
       containers:
       - name: store-back

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"log"
+	"math/rand"
 	"net/http"
 
 	"github.com/emicklei/go-restful"
@@ -100,6 +101,9 @@ func product(request *restful.Request, response *restful.Response) {
 		fmt.Println("get userpro failed", err)
 		return
 	}
+	r := rand.New(rand.NewSource(99))
+	prorand := fmt.Sprintf("%s-%s-%s", login, productName, r.Int63())
+	up.ID = prorand
 	if !has {
 		up.Login = login
 		up.ProductName = productName
@@ -119,11 +123,12 @@ func product(request *restful.Request, response *restful.Response) {
 	if referrer == "" && up.Referrer == "" {
 		referrer = "fanux"
 	}
+
 	price := GetProductPrice(productName)
 	//returnURL := fmt.Sprintf("pro/%s", productName)
 	returnURL := fmt.Sprintf("/pro/pay/notify/%s/%s/%s", login, productName, referrer)
 	notifyURL := fmt.Sprintf("/pro/pay/notify/%s/%s/%s", login, productName, referrer)
-	payURL := PayURL(price, login+productName, productName, GetFullURL(returnURL), GetFullURL(notifyURL))
+	payURL := PayURL(price, prorand, productName, GetFullURL(returnURL), GetFullURL(notifyURL))
 	http.Redirect(response, request.Request, payURL, http.StatusMovedPermanently)
 }
 

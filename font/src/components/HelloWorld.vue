@@ -9,11 +9,11 @@
     <ul>
       <li><a href="http://store.lameleg.com:8080/pro/kubernetes1.13.1" target="_blank" rel="noopener">kubernetes1.13.1</a> 分销链接（开发中）</li>
     </ul>
-    <h3>Essential Links</h3>
+    <h3>LINKS</h3>
     <ul>
       <li><a href="https://sealyun.com/pro/products/" target="_blank" rel="noopener">安装文档与常见问题</a></li><br/>
       <li><a href="https://sealyun.com" target="_blank" rel="noopener">博客</a></li><br/>
-      <li>公众号<img src="https://sealyun.com/kubernetes-qrcode.jpg"></img></li><br/>
+      <li><img src="https://sealyun.com/kubernetes-qrcode.jpg"></img></li><br/>公众号<br/>
       <li>联系方式：fhtjob@hotmail.com</li>
     </ul>
   </div>
