@@ -3,8 +3,8 @@ package serve
 import (
 	"fmt"
 
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/go-xorm/xorm"
-	_ "github.com/mattn/go-sqlite3"
 )
 
 var engine *xorm.Engine
@@ -12,7 +12,7 @@ var engine *xorm.Engine
 //GetEngine is
 func GetEngine() {
 	var err error
-	engine, err = xorm.NewEngine("sqlite3", "/data/stroe.db")
+	engine, err = xorm.NewEngine("mysql", "root:Fanux#123@/store?charset=utf8")
 	if err != nil {
 		fmt.Println(err)
 		panic("start engine failed")
@@ -50,10 +50,10 @@ type UserPayeeAccount struct {
 
 //CreateTables is
 func CreateTables() {
-	err := engine.Sync2(new(User))
-	err = engine.Sync2(new(Product))
-	err = engine.Sync2(new(UserProduct))
-	err = engine.Sync2(new(UserPayeeAccount))
+	err := engine.CreateTables(new(User))
+	err = engine.CreateTables(new(Product))
+	err = engine.CreateTables(new(UserProduct))
+	err = engine.CreateTables(new(UserPayeeAccount))
 
 	if err != nil {
 		fmt.Println("new table failed", err)

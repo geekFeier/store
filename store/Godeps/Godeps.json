@@ -19,6 +19,11 @@
 			"Rev": "ccc981bf80385c528a65fbfdd49bf2d8da22aa23"
 		},
 		{
+			"ImportPath": "github.com/go-sql-driver/mysql",
+			"Comment": "v1.4.0-15-gc45f530",
+			"Rev": "c45f530f8e7fe40f4687eaa50d0c8c5f1b66f9e0"
+		},
+		{
 			"ImportPath": "github.com/go-xorm/builder",
 			"Comment": "v0.3.3",
 			"Rev": "03eb88feccce3e477c318ce7f6f1b386544ab20b"
@@ -97,11 +102,6 @@
 			"ImportPath": "github.com/magiconair/properties",
 			"Comment": "v1.8.0-8-g7c38529",
 			"Rev": "7c38529aac7222391b7a2661365177a97e21b998"
-		},
-		{
-			"ImportPath": "github.com/mattn/go-sqlite3",
-			"Comment": "v1.10.0-27-g87ac1cb",
-			"Rev": "87ac1cb49789a0ef6b0d7be6b7aa458a9b90d7ae"
 		},
 		{
 			"ImportPath": "github.com/mitchellh/mapstructure",

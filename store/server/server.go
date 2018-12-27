@@ -97,6 +97,7 @@ func product(request *restful.Request, response *restful.Response) {
 	up := &UserProduct{}
 	var has bool
 	has, err = up.Get(login, productName)
+	fmt.Printf("user %s product %s status %s", login, productName, up.Status)
 	if err != nil {
 		fmt.Println("get userpro failed", err)
 		return
