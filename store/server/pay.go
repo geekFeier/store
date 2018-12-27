@@ -10,7 +10,6 @@ import (
 	"encoding/json"
 	"encoding/pem"
 	"fmt"
-	"io/ioutil"
 	"net/url"
 	"os"
 	"strings"
@@ -97,7 +96,15 @@ func URLEscape(pay *Alipay, req *AlipayReq) string {
 
 //Sign is
 func Sign(body string) string {
-	rsaPrivateKey, err := ioutil.ReadFile("rsa_private_key.pem")
+	/*
+		rsaPrivateKey, err := ioutil.ReadFile("rsa_private_key.pem")
+		if err != nil {
+			fmt.Println("read private key failed : ", err)
+			return ""
+		}
+	*/
+	rsaStr := os.Getenv("RSA_PRIVATE_KEY")
+	rsaPrivateKey, err := base64.StdEncoding.DecodeString(rsaStr)
 	if err != nil {
 		fmt.Println("read private key failed : ", err)
 		return ""

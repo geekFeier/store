@@ -6,12 +6,13 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"os"
 	"strings"
 )
 
-const (
+var (
 	clientID     = "89c1b05d77fb1c92a1ef"
-	clientSecret = "541ddd76e65abeabd12ad9f8b02f6601394d3ad0"
+	clientSecret = ""
 )
 
 //User is
@@ -45,6 +46,7 @@ func GetLoginURL(state string) string {
 
 //GetGithubAccessToken is
 func GetGithubAccessToken(id, secret, code string) (token string, err error) {
+	secret = os.Getenv("GIT_CLIENT_SECRET")
 	url := fmt.Sprintf("https://github.com/login/oauth/access_token?client_id=%s&client_secret=%s&code=%s",
 		id, secret, code)
 	resp, err := http.Get(url)

@@ -17,5 +17,12 @@ spec:
       containers:
       - name: store-back
         image: fanux/store-back:latest
+        commands:
+            - ./store-back
+            - serve
+            - -d
+            - "store.lameleg.com"
+            - -p
+            - "8080"
         imagePullPolicy: Always
       hostNetwork: true

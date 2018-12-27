@@ -57,6 +57,7 @@ func (u UserResource) RegisterTo(container *restful.Container) {
 	ws.Filter(checkCookie)
 
 	ws.Route(ws.GET("/pay/notify/{login}/{product}/{referrer}").To(pay))
+	ws.Route(ws.POST("/pay/notify/{login}/{product}/{referrer}").To(notify))
 	ws.Route(ws.POST("").To(u.nop))
 	ws.Route(ws.PUT("/{user-id}").To(u.nop))
 	ws.Route(ws.DELETE("/{user-id}").To(u.nop))
@@ -91,7 +92,7 @@ func product(request *restful.Request, response *restful.Response) {
 	login := cookie.Value
 	fmt.Printf("user %s buy product %s", login, productName)
 
-	//TODO read user product in database by key (login , productname)
+	//read user product in database by key (login , productname)
 	up := &UserProduct{}
 	var has bool
 	has, err = up.Get(login, productName)
@@ -119,24 +120,31 @@ func product(request *restful.Request, response *restful.Response) {
 		referrer = "fanux"
 	}
 	price := GetProductPrice(productName)
-	returnURL := fmt.Sprintf("pro/%s", productName)
+	//returnURL := fmt.Sprintf("pro/%s", productName)
+	returnURL := fmt.Sprintf("/pro/pay/notify/%s/%s/%s", login, productName, referrer)
 	notifyURL := fmt.Sprintf("/pro/pay/notify/%s/%s/%s", login, productName, referrer)
 	payURL := PayURL(price, login+productName, productName, GetFullURL(returnURL), GetFullURL(notifyURL))
 	http.Redirect(response, request.Request, payURL, http.StatusMovedPermanently)
-
 }
 
 func (u UserResource) nop(request *restful.Request, response *restful.Response) {
 	io.WriteString(response.ResponseWriter, "this would be a normal response")
 }
 
+//notify RUL
+func notify(request *restful.Request, response *restful.Response) {
+}
+
+// return RUL
 func pay(request *restful.Request, response *restful.Response) {
 	//TODO check sign
 	login := request.PathParameter("login")
 	productName := request.PathParameter("product")
 	referrer := request.PathParameter("referrer")
 
-	//TODO save up
+	fmt.Println("notify called", login, productName, referrer)
+
+	//save up
 	up := &UserProduct{
 		Login:       login,
 		ProductName: productName,
@@ -171,6 +179,12 @@ func (u UserResource) callback(request *restful.Request, response *restful.Respo
 		fmt.Println(err)
 	}
 
+	//has,err := user.Get(user.Login)
+	_, err = user.Save()
+	if err != nil {
+		fmt.Println("save suer faieled: ", err)
+	}
+
 	// Set cookie
 	cookie := http.Cookie{Name: "user", Value: user.Login, Path: "/", MaxAge: 86400}
 	http.SetCookie(response, &cookie)
@@ -182,13 +196,12 @@ func (u UserResource) callback(request *restful.Request, response *restful.Respo
 	//redirect back to user request
 	var url string
 	if state == "" {
+		//TODO return to home page
 		url = fmt.Sprintf("http://%s", Domain)
 	} else {
 		url = fmt.Sprintf("http://%s:%s", Domain, BackPort)
 	}
 	http.Redirect(response, request.Request, url+state, http.StatusMovedPermanently)
-
-	io.WriteString(response.ResponseWriter, "code is : "+code)
 }
 
 //Run is
