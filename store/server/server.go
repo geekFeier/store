@@ -71,6 +71,9 @@ func (u UserResource) RegisterTo(container *restful.Container) {
 
 // if check cookie failed, redirect to login page
 func checkCookie(req *restful.Request, resp *restful.Response, chain *restful.FilterChain) {
+	resp.AddHeader("Cache-Control", "no-cache,no-store,must-revalidate")
+	resp.AddHeader("Pragma", "no-cache")
+	resp.AddHeader("Expires", "0")
 	cookie, err := req.Request.Cookie("user")
 	if err != nil || cookie == nil {
 		fmt.Println("login please : ", err, req.Request.URL.String())

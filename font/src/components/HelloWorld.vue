@@ -1,5 +1,10 @@
 <template>
   <div class="hello">
+
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+
     <h1>{{ msg }}</h1>
     <p>
       为了能记录您已经购买了哪些产品，和未来的分销功能，请登录:<br>
