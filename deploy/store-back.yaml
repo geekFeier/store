@@ -14,9 +14,17 @@ spec:
       labels:
         app: store-back
     spec:
+      volumes:
+      - hostPath:
+          path: /data
+          type: FileOrCreate
+        name: data
       containers:
       - name: store-back
         image: fanux/store-back:latest
+        volumeMounts:
+         - mountPath: /data
+           name: data
         command:
             - ./store-back
             - serve

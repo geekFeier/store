@@ -11,9 +11,9 @@
     </ul>
     <h3>Essential Links</h3>
     <ul>
-      <li><a href="https://sealyun.com/pro/products/" target="_blank" rel="noopener">安装文档与常见问题</a></li>
-      <li><a href="https://sealyun.com" target="_blank" rel="noopener">博客</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">公众号<img src="https://sealyun.com/kubernetes-qrcode.jpg"></img></a></li>
+      <li><a href="https://sealyun.com/pro/products/" target="_blank" rel="noopener">安装文档与常见问题</a></li><br/>
+      <li><a href="https://sealyun.com" target="_blank" rel="noopener">博客</a></li><br/>
+      <li>公众号<img src="https://sealyun.com/kubernetes-qrcode.jpg"></img></li><br/>
       <li>联系方式：fhtjob@hotmail.com</li>
     </ul>
   </div>
