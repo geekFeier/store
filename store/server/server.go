@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"io"
 	"log"
-	"math/rand"
 	"net/http"
+	"time"
 
 	"github.com/emicklei/go-restful"
 )
@@ -102,8 +102,7 @@ func product(request *restful.Request, response *restful.Response) {
 		fmt.Println("get userpro failed", err)
 		return
 	}
-	r := rand.New(rand.NewSource(99))
-	prorand := fmt.Sprintf("%s-%s-%d", login, productName, r.Int63())
+	prorand := fmt.Sprintf("%s-%s-%d", login, productName, time.Now().Unix())
 	up.ID = prorand
 	if !has {
 		up.Login = login
