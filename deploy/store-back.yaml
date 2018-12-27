@@ -17,7 +17,7 @@ spec:
       containers:
       - name: store-back
         image: fanux/store-back:latest
-        commands:
+        command:
             - ./store-back
             - serve
             - -d
