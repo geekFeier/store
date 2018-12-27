@@ -214,6 +214,7 @@ func (u UserResource) callback(request *restful.Request, response *restful.Respo
 	}
 	_ = url
 	//http.Redirect(response, request.Request, url+state, http.StatusMovedPermanently)
+	response.AddHeader("Cache-Control", "no-cache")
 	http.Redirect(response, request.Request, url, http.StatusMovedPermanently)
 }
 
