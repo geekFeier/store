@@ -74,9 +74,7 @@ func checkCookie(req *restful.Request, resp *restful.Response, chain *restful.Fi
 	cookie, err := req.Request.Cookie("user")
 	if err != nil || cookie == nil {
 		fmt.Println("login please : ", err, req.Request.URL.String())
-		//http.Redirect(resp, req.Request, GetLoginURL(req.Request.URL.String()), http.StatusMovedPermanently)
-		//防止出现重定向次数过多
-		http.Redirect(resp, req.Request, GetLoginURL("s"), http.StatusMovedPermanently)
+		http.Redirect(resp, req.Request, GetLoginURL(req.Request.URL.String()), http.StatusMovedPermanently)
 		return
 	}
 	chain.ProcessFilter(req, resp)
@@ -116,7 +114,6 @@ func product(request *restful.Request, response *restful.Response) {
 			return
 		}
 	}
-	response.AddHeader("Cache-Control", "no-cache")
 
 	if up.Status == "payed" {
 		response.AddHeader("Content-Type", "application/x-gzip")
@@ -206,15 +203,14 @@ func (u UserResource) callback(request *restful.Request, response *restful.Respo
 	fmt.Println("redirect url is : ", state)
 	//redirect back to user request
 	var url string
-	if state == "s" {
+	if state == "" {
 		//TODO return to home page
 		url = fmt.Sprintf("http://%s", Domain)
 	} else {
-		url = fmt.Sprintf("http://%s:%s", Domain, BackPort)
+		url = fmt.Sprintf("http://%s:%s%s?user=%s", Domain, BackPort, state, user.Login)
 	}
-	_ = url
+	io.WriteString(response.ResponseWriter, "this would be a normal response")
 	//http.Redirect(response, request.Request, url+state, http.StatusMovedPermanently)
-	response.AddHeader("Cache-Control", "no-cache")
 	http.Redirect(response, request.Request, url, http.StatusMovedPermanently)
 }
 
