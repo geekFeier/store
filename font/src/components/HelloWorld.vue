@@ -2,29 +2,19 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
+      为了能记录您已经购买了哪些产品，和未来的分销功能，请登录:<br>
       <a href="https://github.com/login/oauth/authorize?client_id=89c1b05d77fb1c92a1ef&scope=user:email" target="_blank" rel="noopener">login github</a>.
     </p>
-    <h3>products list</h3>
+    <h3>商品列表</h3>
     <ul>
-      <li><a href="http://store.lameleg.com:8080/pro/kubernetes1.13.1" target="_blank" rel="noopener">kubernetes1.13.1</a> share link</li>
+      <li><a href="http://store.lameleg.com:8080/pro/kubernetes1.13.1" target="_blank" rel="noopener">kubernetes1.13.1</a> 分销链接（开发中）</li>
     </ul>
     <h3>Essential Links</h3>
     <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
+      <li><a href="https://sealyun.com/pro/products/" target="_blank" rel="noopener">安装文档与常见问题</a></li>
+      <li><a href="https://sealyun.com" target="_blank" rel="noopener">博客</a></li>
+      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">公众号<img src="https://sealyun.com/kubernetes-qrcode.jpg"></img></a></li>
+      <li>联系方式：fhtjob@hotmail.com</li>
     </ul>
   </div>
 </template>
