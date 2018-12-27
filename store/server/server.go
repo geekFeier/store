@@ -209,7 +209,7 @@ func (u UserResource) callback(request *restful.Request, response *restful.Respo
 	} else {
 		url = fmt.Sprintf("http://%s:%s%s?user=%s", Domain, BackPort, state, user.Login)
 	}
-	io.WriteString(response.ResponseWriter, "this would be a normal response")
+	//io.WriteString(response.ResponseWriter, "this would be a normal response")
 	//http.Redirect(response, request.Request, url+state, http.StatusMovedPermanently)
 	http.Redirect(response, request.Request, url, http.StatusMovedPermanently)
 }
