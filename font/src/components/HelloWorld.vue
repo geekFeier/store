@@ -5,6 +5,7 @@
       为了能记录您已经购买了哪些产品，点击连接时会跳转到github进行第三方登录<br>
       网站丑的原因： 相信客户不会为网站漂亮买单<br>
       通过用户专有的分享连接交易完成的商品，用户分成60%<br>
+      支付成功后会自动跳转到下载安装包<br>
       <!--a href="https://github.com/login/oauth/authorize?client_id=89c1b05d77fb1c92a1ef&scope=user:email" target="_blank" rel="noopener">login github</a-->.
     </p>
     <h3>商品列表</h3>
