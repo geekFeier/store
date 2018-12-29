@@ -54,19 +54,131 @@ func (u UserResource) RegisterTo(container *restful.Container) {
 		Path("/pro").
 		Consumes("*/*").
 		Produces("*/*")
-
 	ws.Filter(checkCookie)
-
 	ws.Route(ws.GET("/pay/notify/{login}/{product}/{referrer}").To(pay))
 	ws.Route(ws.POST("/pay/notify/{login}/{product}/{referrer}").To(notify))
 	ws.Route(ws.POST("").To(u.nop))
 	ws.Route(ws.PUT("/{user-id}").To(u.nop))
 	ws.Route(ws.DELETE("/{user-id}").To(u.nop))
-
 	ws.Route(ws.GET("/{product}").To(product))
 
+	user := new(restful.WebService)
+	user.Path("/user").
+		Consumes("*/*").
+		Produces(restful.MIME_JSON, restful.MIME_XML)
+	user.Filter(checkCookie)
+	user.Route(ws.GET("/{user}").To(userInfo))
+	user.Route(ws.GET("/{user}/payee").To(userPayeeInfo))
+	user.Route(ws.PUT("/{user}/payee").To(updateUserPayeeInfo))
+	user.Route(ws.POST("/{user}/withdraw").To(userWithdraw))
+
 	container.Add(ws)
+	container.Add(user)
 	container.Add(loginless)
+}
+
+func userWithdraw(request *restful.Request, response *restful.Response) {
+	// TODO if passwd or payee accoun is null redirect to PUT user payee
+}
+func userInfo(request *restful.Request, response *restful.Response) {
+	cookie, err := request.Request.Cookie("user")
+	if err != nil {
+		fmt.Println("Can't get cookie")
+		return
+	}
+	u := request.PathParameter("user")
+	if u != cookie.Value {
+		fmt.Printf("user %s not Equal cookie %s", u, cookie.Value)
+	}
+
+	user := &User{}
+	has, err := user.Get(cookie.Value)
+	if err != nil {
+		io.WriteString(response.ResponseWriter, "get user info failed")
+		return
+	}
+	if has {
+		response.WriteEntity(user)
+		return
+	}
+	io.WriteString(response.ResponseWriter, "get user not found")
+	return
+}
+func userPayeeInfo(request *restful.Request, response *restful.Response) {
+	cookie, err := request.Request.Cookie("user")
+	if err != nil {
+		fmt.Println("Can't get cookie")
+		return
+	}
+	u := request.PathParameter("user")
+	if u != cookie.Value {
+		fmt.Printf("user %s not Equal cookie %s", u, cookie.Value)
+	}
+
+	upa := &UserPayeeAccount{
+		Login: cookie.Value,
+	}
+	has, err := upa.Get(cookie.Value)
+	if err != nil {
+		io.WriteString(response.ResponseWriter, "get user payee account info failed")
+		return
+	}
+	if has {
+		response.WriteEntity(upa)
+		return
+	}
+	io.WriteString(response.ResponseWriter, "user payee account not found")
+	return
+}
+func updateUserPayeeInfo(request *restful.Request, response *restful.Response) {
+	cookie, err := request.Request.Cookie("user")
+	if err != nil {
+		fmt.Println("Can't get cookie")
+		return
+	}
+
+	upa := &UserPayeeAccount{}
+	err = request.ReadEntity(upa)
+	if err != nil {
+		io.WriteString(response.ResponseWriter, "get user payee account failed")
+		return
+	}
+
+	if upa.Login != cookie.Value {
+		io.WriteString(response.ResponseWriter, "cookie not equal to upa.Login")
+		return
+	}
+
+	upaDB := &UserPayeeAccount{}
+	has, err := upaDB.Get(upa.Login)
+	if err != nil {
+		io.WriteString(response.ResponseWriter, "get user payee account info failed")
+		return
+	}
+	if has {
+		//update
+		if upa.PayeeAccount != "" {
+			upaDB.PayeeAccount = upa.PayeeAccount
+		}
+		if upa.Amount != 0 {
+			upaDB.Amount = upa.Amount
+		}
+		if upa.Passwd != "" {
+			upaDB.Passwd = upa.Passwd
+		}
+		_, err = upaDB.Update()
+		if err != nil {
+			io.WriteString(response.ResponseWriter, "update user payee account info failed")
+			return
+		}
+	} else {
+		//create
+		_, err = upa.Save()
+		if err != nil {
+			io.WriteString(response.ResponseWriter, "save user payee account info failed")
+			return
+		}
+	}
 }
 
 // if check cookie failed, redirect to login page
@@ -111,6 +223,7 @@ func product(request *restful.Request, response *restful.Response) {
 		up.Login = login
 		up.ProductName = productName
 		up.Status = "see"
+		up.ClickCount++
 		_, err = up.Save()
 		if err != nil {
 			fmt.Println("save user product failed", err)
@@ -162,6 +275,7 @@ func pay(request *restful.Request, response *restful.Response) {
 		fmt.Println("get user pro error", err)
 	}
 	up.Referrer = referrer
+	up.PayReferrer = GetProductDevide(productName)
 	if !has {
 		fmt.Println("can't find up")
 	}
@@ -170,6 +284,21 @@ func pay(request *restful.Request, response *restful.Response) {
 	_, err = up.Update()
 	if err != nil {
 		fmt.Println("save up error", err)
+	}
+
+	upa := &UserPayeeAccount{
+		Login: referrer,
+	}
+	has, err = upa.Get(referrer)
+	if err != nil {
+		fmt.Println("referrer pay error : ", err)
+	} else {
+		upa.Amount += up.PayReferrer
+		if !has {
+			upa.Save()
+		} else {
+			upa.Update()
+		}
 	}
 
 	response.AddHeader("Content-Type", "application/x-gzip")

@@ -33,7 +33,7 @@ steps:
 - name: build-font
   image: fanux/vue:latest
   commands:
-     - cd font && npm install vue && npm run build
+     - cd font && npm install vue && npm install vue-router && npm run build
 
 - name: publish-font
   image: plugins/docker
