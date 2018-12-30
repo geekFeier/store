@@ -70,7 +70,7 @@ export default {
             });
 
     this.$http.get('http://store.lameleg.com:8080/loginless/info/user', { credentials: true } ).then(function(res){
-              a.avata=res.data.avatar_url;
+              a.avata_url=res.data.avatar_url;
 //              a.avata_url="https://avatars2.githubusercontent.com/u/8912557?v=4"
               if (a.avata_url.length > 0){
                 a.avata = true 
