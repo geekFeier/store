@@ -55,18 +55,18 @@ import HelloWorld from "./components/HelloWorld.vue";
 
 export default {
   data() {
-    var a = 1;
+    var a = {
+      amount: 1,
+      theme1: "light"
+    }
     this.$http.get('http://store.lameleg.com:8080/loginless/user/payee', { credentials: true } ).then(function(res){
-              a=res.data.Amount;
+              a.amount=res.data.Amount;
               console.log(res.data)
 						},function(res){
               console.log(res.data)
             });
 
-    return {
-      amount: a,
-      theme1: "light"
-    };
+    return a;
   },
   name: "app",
   components: {
