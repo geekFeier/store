@@ -67,10 +67,10 @@ func (u UserResource) RegisterTo(container *restful.Container) {
 		Consumes("*/*").
 		Produces(restful.MIME_JSON, restful.MIME_XML)
 	user.Filter(checkCookie)
-	user.Route(ws.GET("/{user}").To(userInfo))
-	user.Route(ws.GET("/{user}/payee").To(userPayeeInfo))
-	user.Route(ws.PUT("/{user}/payee").To(updateUserPayeeInfo))
-	user.Route(ws.POST("/{user}/withdraw").To(userWithdraw))
+	user.Route(user.GET("/{user}").To(userInfo))
+	user.Route(user.GET("/{user}/payee").To(userPayeeInfo))
+	user.Route(user.PUT("/{user}/payee").To(updateUserPayeeInfo))
+	user.Route(user.POST("/{user}/withdraw").To(userWithdraw))
 
 	container.Add(ws)
 	container.Add(user)
@@ -81,6 +81,7 @@ func userWithdraw(request *restful.Request, response *restful.Response) {
 	// TODO if passwd or payee accoun is null redirect to PUT user payee
 }
 func userInfo(request *restful.Request, response *restful.Response) {
+	fmt.Println("user info called")
 	cookie, err := request.Request.Cookie("user")
 	if err != nil {
 		fmt.Println("Can't get cookie")
