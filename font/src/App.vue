@@ -24,7 +24,7 @@
             <Tooltip content="分享收入可提现金额">
               <li>
                 <i class="ivu-icon ivu-icon-logo-yen">
-                  <Badge :count="100">&nbsp;&nbsp;&nbsp;&nbsp;</Badge>
+                  <Badge :count="amount">&nbsp;&nbsp;&nbsp;&nbsp;</Badge>
                 </i>
               </li>
             </Tooltip>
@@ -55,7 +55,16 @@ import HelloWorld from "./components/HelloWorld.vue";
 
 export default {
   data() {
+    var a;
+    this.$http.get('http://store.lameleg.com:8080/user/payee').then(function(res){
+              a=res.data.Amount;
+              console.log(res.data)
+						},function(res){
+              console.log(res.data)
+            });
+
     return {
+      amount: a,
       theme1: "light"
     };
   },

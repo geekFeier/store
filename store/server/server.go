@@ -46,8 +46,10 @@ func (u UserResource) RegisterTo(container *restful.Container) {
 	loginless.
 		Path("").
 		Consumes("*/*").
-		Produces("*/*")
+		Produces(restful.MIME_JSON)
 	loginless.Route(loginless.GET("/callback").To(u.callback))
+	loginless.Route(loginless.GET("/pro/{product}/payed").To(payedUserList))
+	loginless.Route(loginless.GET("/user/payee").To(userPayeeInfo))
 
 	ws := new(restful.WebService)
 	ws.
@@ -65,12 +67,12 @@ func (u UserResource) RegisterTo(container *restful.Container) {
 	user := new(restful.WebService)
 	user.Path("/user").
 		Consumes("*/*").
-		Produces(restful.MIME_JSON, restful.MIME_XML)
+		Produces(restful.MIME_JSON)
 	user.Filter(checkCookie)
-	user.Route(user.GET("/{user}").To(userInfo))
-	user.Route(user.GET("/{user}/payee").To(userPayeeInfo))
-	user.Route(user.PUT("/{user}/payee").To(updateUserPayeeInfo))
-	user.Route(user.POST("/{user}/withdraw").To(userWithdraw))
+	user.Route(user.GET("/info/{user}").To(userInfo))
+	user.Route(user.GET("/info/{user}/payee").To(userPayeeInfo))
+	user.Route(user.PUT("/info/{user}/payee").To(updateUserPayeeInfo))
+	user.Route(user.POST("/info/{user}/withdraw").To(userWithdraw))
 
 	container.Add(ws)
 	container.Add(user)
@@ -111,10 +113,12 @@ func userPayeeInfo(request *restful.Request, response *restful.Response) {
 		fmt.Println("Can't get cookie")
 		return
 	}
-	u := request.PathParameter("user")
-	if u != cookie.Value {
-		fmt.Printf("user %s not Equal cookie %s", u, cookie.Value)
-	}
+	/*
+		u := request.PathParameter("user")
+		if u != cookie.Value {
+			fmt.Printf("user %s not Equal cookie %s", u, cookie.Value)
+		}
+	*/
 
 	upa := &UserPayeeAccount{
 		Login: cookie.Value,
@@ -125,6 +129,7 @@ func userPayeeInfo(request *restful.Request, response *restful.Response) {
 		return
 	}
 	if has {
+		upa.Passwd = "want passwd? no way!"
 		response.WriteEntity(upa)
 		return
 	}
@@ -194,6 +199,11 @@ func checkCookie(req *restful.Request, resp *restful.Response, chain *restful.Fi
 		return
 	}
 	chain.ProcessFilter(req, resp)
+}
+
+func payedUserList(request *restful.Request, response *restful.Response) {
+	productName := request.PathParameter("product")
+	_ = productName
 }
 
 func product(request *restful.Request, response *restful.Response) {

@@ -11,6 +11,7 @@
     "iview": "^3.2.1",
     "ivue": "0.0.33",
     "vue": "^2.5.21",
+    "vue-resource": "^1.5.1",
     "vue-router": "^3.0.2"
   },
   "devDependencies": {
