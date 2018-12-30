@@ -30,7 +30,8 @@
             </Tooltip>
           </MenuItem>
           <MenuItem name="5">
-            <Tooltip content="请使用github账户登录">
+            <img v-if="avata" :src="avata_url" style="border-radius:50%;width:30px;height:30px;cursor:pointer;margin-top:12px;"></img>
+            <Tooltip v-else content="请使用github账户登录">
               <a
                 href="https://github.com/login/oauth/authorize?client_id=89c1b05d77fb1c92a1ef&scope=user:email"
                 target="_blank"
@@ -57,11 +58,24 @@ export default {
   data() {
     var a = {
       amount: 1,
-      theme1: "light"
+      theme1: "light",
+      avata: false,
+      avata_url: "",
     }
     this.$http.get('http://store.lameleg.com:8080/loginless/user/payee', { credentials: true } ).then(function(res){
               a.amount=res.data.Amount;
               console.log(res.data)
+						},function(res){
+              console.log(res.data)
+            });
+
+    this.$http.get('http://store.lameleg.com:8080/loginless/info/user', { credentials: true } ).then(function(res){
+              a.avata=res.data.avatar_url;
+//              a.avata_url="https://avatars2.githubusercontent.com/u/8912557?v=4"
+              if (a.avata_url.length > 0){
+                a.avata = true 
+              }
+              console.log(res.data,"avata:", a.avata)
 						},function(res){
               console.log(res.data)
             });

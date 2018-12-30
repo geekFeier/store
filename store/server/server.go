@@ -50,6 +50,7 @@ func (u UserResource) RegisterTo(container *restful.Container) {
 	loginless.Route(loginless.GET("/callback").To(u.callback))
 	loginless.Route(loginless.GET("/pro/{product}/payed").To(payedUserList))
 	loginless.Route(loginless.GET("/loginless/user/payee").To(userPayeeInfo))
+	loginless.Route(loginless.GET("/loginless/info/user").To(userInfo))
 
 	ws := new(restful.WebService)
 	ws.
@@ -89,10 +90,12 @@ func userInfo(request *restful.Request, response *restful.Response) {
 		fmt.Println("Can't get cookie")
 		return
 	}
-	u := request.PathParameter("user")
-	if u != cookie.Value {
-		fmt.Printf("user %s not Equal cookie %s", u, cookie.Value)
-	}
+	/*
+		u := request.PathParameter("user")
+		if u != cookie.Value {
+			fmt.Printf("user %s not Equal cookie %s", u, cookie.Value)
+		}
+	*/
 
 	user := &User{}
 	has, err := user.Get(cookie.Value)
