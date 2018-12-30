@@ -369,7 +369,7 @@ func Run() {
 		ExposeHeaders:  []string{"X-My-Header"},
 		AllowedHeaders: []string{"Content-Type", "Accept"},
 		AllowedMethods: []string{"GET", "POST"},
-		CookiesAllowed: false,
+		CookiesAllowed: true,
 		Container:      wsContainer}
 	wsContainer.Filter(cors.Filter)
 

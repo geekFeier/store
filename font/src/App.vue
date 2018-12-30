@@ -55,7 +55,7 @@ import HelloWorld from "./components/HelloWorld.vue";
 
 export default {
   data() {
-    var a;
+    var a = 1;
     this.$http.get('http://store.lameleg.com:8080/loginless/user/payee', { credentials: true } ).then(function(res){
               a=res.data.Amount;
               console.log(res.data)
