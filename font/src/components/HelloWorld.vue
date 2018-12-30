@@ -22,7 +22,15 @@
 </template>
 
 <script  type="text/javascript">
-export default {};
+export default {
+  name: 'HelloWorld',
+  props: {
+    msg: String
+  },
+  data: function(){
+    return {time: 'http://store.lameleg.com:8080/pro/kubernetes1.13.1?time=' + (new Date()).getTime()}
+  }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
