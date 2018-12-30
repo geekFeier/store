@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <h1>Welcom to SealYun</h1>
     <p>
       kubernetes生态应用市场<br>
       容器可复用软件销售平台<br>
