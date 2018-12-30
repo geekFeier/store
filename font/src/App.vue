@@ -14,7 +14,7 @@
           </a>
         </MenuItem>
         <MenuItem name="3">
-          <a target="_blank" href="http://www.sealyun.com/pro/products">
+          <a target="_blank" href="https://sealyun.com/post/docs/">
             <li>Docs</li>
           </a>
         </MenuItem>
