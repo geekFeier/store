@@ -56,7 +56,7 @@ import HelloWorld from "./components/HelloWorld.vue";
 export default {
   data() {
     var a;
-    this.$http.get('http://store.lameleg.com:8080/user/payee').then(function(res){
+    this.$http.get('http://store.lameleg.com:8080/loginless/user/payee').then(function(res){
               a=res.data.Amount;
               console.log(res.data)
 						},function(res){

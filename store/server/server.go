@@ -49,7 +49,7 @@ func (u UserResource) RegisterTo(container *restful.Container) {
 		Produces(restful.MIME_JSON)
 	loginless.Route(loginless.GET("/callback").To(u.callback))
 	loginless.Route(loginless.GET("/pro/{product}/payed").To(payedUserList))
-	loginless.Route(loginless.GET("/user/payee").To(userPayeeInfo))
+	loginless.Route(loginless.GET("/loginless/user/payee").To(userPayeeInfo))
 
 	ws := new(restful.WebService)
 	ws.
