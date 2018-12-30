@@ -113,6 +113,11 @@ func (p *Product) Save() (int64, error) {
 	return engine.Insert(p)
 }
 
+//Update is
+func (p *Product) Update() (int64, error) {
+	return engine.Where("product_name = ?", p.ProductName).Update(p)
+}
+
 //Get is
 func (p *Product) Get(name string) (bool, error) {
 	return engine.Where("product_name= ?", name).Get(p)
@@ -153,8 +158,18 @@ func init() {
 		ProductPrice:  5,
 		ProductDivide: 0.6,
 	}
-	_, err := p.Save()
+
+	has, err := p.Get(p.ProductName)
 	if err != nil {
-		fmt.Println("save product failed")
+		fmt.Println("get product info failed")
+	}
+	if has {
+		p.Update()
+	} else {
+		//TODO use update not save
+		_, err := p.Save()
+		if err != nil {
+			fmt.Println("save product failed")
+		}
 	}
 }

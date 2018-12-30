@@ -219,11 +219,11 @@ func product(request *restful.Request, response *restful.Response) {
 	}
 	prorand := fmt.Sprintf("%s-%s-%d", login, productName, time.Now().Unix())
 	up.ID = prorand
+	up.ClickCount++
 	if !has {
 		up.Login = login
 		up.ProductName = productName
 		up.Status = "see"
-		up.ClickCount++
 		_, err = up.Save()
 		if err != nil {
 			fmt.Println("save user product failed", err)
@@ -276,6 +276,7 @@ func pay(request *restful.Request, response *restful.Response) {
 	}
 	up.Referrer = referrer
 	up.PayReferrer = GetProductDevide(productName)
+	up.ProductPrice = GetProductPrice(productName)
 	if !has {
 		fmt.Println("can't find up")
 	}

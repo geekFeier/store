@@ -10,7 +10,7 @@
     <h3>商品列表</h3>
     <div id="pro-link">
     <ul>
-      <li><a :href="time" rel="noopener">kubernetes1.13.1 (元旦一折优惠中 5元)</a></li>
+      <li><a :href="time" target="_blank" rel="noopener">kubernetes1.13.1 (元旦一折优惠中 5元)</a></li>
     </ul>
     </div>
     <h3>LINKS</h3>
