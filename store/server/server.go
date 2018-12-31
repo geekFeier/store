@@ -224,7 +224,7 @@ func updateUserPayeeInfo(request *restful.Request, response *restful.Response) {
 			return
 		}
 	}
-	response.WriteEntity(&Res{1, "save user payee account successed"})
+	response.WriteEntity(&Res{0, "save user payee account successed"})
 }
 
 // if check cookie failed, redirect to login page

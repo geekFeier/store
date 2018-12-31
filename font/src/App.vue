@@ -43,7 +43,8 @@
           </MenuItem>
 
           <MenuItem name="5">
-            <img v-if="avata" :src="avata_url" style="border-radius:50%;width:30px;height:30px;cursor:pointer;margin-top:12px;"></img>
+            <!--img v-if="avata" :src="avata_url" style="border-radius:50%;width:30px;height:30px;cursor:pointer;margin-top:12px;"></img-->
+            <Avatar v-if="avata" :src="avata_url" />
             <Tooltip v-else content="请使用github账户登录">
               <a
                 href="https://github.com/login/oauth/authorize?client_id=89c1b05d77fb1c92a1ef&scope=user:email"
