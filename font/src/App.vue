@@ -2,7 +2,7 @@
   <div id="app">
     <Menu mode="horizontal" :theme="theme1" active-name="1">
       <Row>
-        <Col span="19">
+        <Col span="21">
           <MenuItem name="1">
             <a target="_blank" href="http://store.lameleg.com">
               <li>SealYun</li>
@@ -19,7 +19,7 @@
             </a>
           </MenuItem>
         </Col>
-        <Col span="5">
+        <Col span="3">
           <MenuItem name="4">
             <Tooltip content="分享收入可提现金额">
               <li>
@@ -72,10 +72,10 @@ export default {
     this.$http.get('http://store.lameleg.com:8080/loginless/info/user', { credentials: true } ).then(function(res){
               a.avata_url=res.data.avatar_url;
 //              a.avata_url="https://avatars2.githubusercontent.com/u/8912557?v=4"
-              if (a.avata_url.length > 0){
+              if (typeof(a.avata_url) != "undefined"){
                 a.avata = true 
               }
-              console.log(res.data,"avata:", a.avata)
+              console.log(res.data,"avata:", a)
 						},function(res){
               console.log(res.data)
             });
