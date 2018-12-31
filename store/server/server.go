@@ -35,6 +35,16 @@ var (
 	BackPort = "8080"
 )
 
+//Res is
+type Res struct {
+	Code   int
+	Reason string
+}
+
+func (r Res) String() string {
+	return fmt.Sprintf("{Code:%d,Reason:%s}", r.Code, r.Reason)
+}
+
 //GetFullURL is
 func GetFullURL(path string) string {
 	return fmt.Sprintf("http://%s:%s/%s", Domain, BackPort, path)
@@ -165,14 +175,14 @@ func userPayeeInfo(request *restful.Request, response *restful.Response) {
 func updateUserPayeeInfo(request *restful.Request, response *restful.Response) {
 	cookie, err := request.Request.Cookie("user")
 	if err != nil {
-		fmt.Println("Can't get cookie")
+		io.WriteString(response.ResponseWriter, Res{1, "Can't get cookie"}.String())
 		return
 	}
 
 	upa := &UserPayeeAccount{}
 	err = request.ReadEntity(upa)
 	if err != nil {
-		io.WriteString(response.ResponseWriter, "get user payee account failed")
+		io.WriteString(response.ResponseWriter, Res{2, "get user payee account failed"}.String())
 		return
 	}
 	upa.Login = cookie.Value
@@ -187,7 +197,7 @@ func updateUserPayeeInfo(request *restful.Request, response *restful.Response) {
 	upaDB := &UserPayeeAccount{}
 	has, err := upaDB.Get(upa.Login)
 	if err != nil {
-		io.WriteString(response.ResponseWriter, "get user payee account info failed")
+		io.WriteString(response.ResponseWriter, Res{2, "get user payee account info failed"}.String())
 		return
 	}
 	if has {
@@ -203,18 +213,18 @@ func updateUserPayeeInfo(request *restful.Request, response *restful.Response) {
 		}
 		_, err = upaDB.Update()
 		if err != nil {
-			io.WriteString(response.ResponseWriter, "update user payee account info failed")
+			io.WriteString(response.ResponseWriter, Res{2, "update user payee account info failed"}.String())
 			return
 		}
 	} else {
 		//create
 		_, err = upa.Save()
 		if err != nil {
-			io.WriteString(response.ResponseWriter, "save user payee account info failed")
+			io.WriteString(response.ResponseWriter, Res{2, "save user payee account info failed"}.String())
 			return
 		}
 	}
-	io.WriteString(response.ResponseWriter, "save user payee account successed")
+	io.WriteString(response.ResponseWriter, Res{0, "save user payee account successed"}.String())
 }
 
 // if check cookie failed, redirect to login page
