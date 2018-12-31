@@ -175,11 +175,14 @@ func updateUserPayeeInfo(request *restful.Request, response *restful.Response) {
 		io.WriteString(response.ResponseWriter, "get user payee account failed")
 		return
 	}
+	upa.Login = cookie.Value
 
-	if upa.Login != cookie.Value {
-		io.WriteString(response.ResponseWriter, "cookie not equal to upa.Login")
-		return
-	}
+	/*
+		if upa.Login != cookie.Value {
+			io.WriteString(response.ResponseWriter, "cookie not equal to upa.Login")
+			return
+		}
+	*/
 
 	upaDB := &UserPayeeAccount{}
 	has, err := upaDB.Get(upa.Login)

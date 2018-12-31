@@ -116,8 +116,7 @@ export default {
         Passwd: this.passwd,
       }
 
-      this.$http.put("http://store.lameleg.com:8080/user/info/payee",para,{headers:{"Content-Type":"application/json"}
-        ,credentials:true}).then(function(res){
+      this.$http.put("http://store.lameleg.com:8080/user/info/payee",para,{credentials:true,responseType:"json"}).then(function(res){
         console.log(res.data)
         this.$Message.info(res.data);
       },function(res){
