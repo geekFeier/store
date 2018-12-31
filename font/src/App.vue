@@ -4,12 +4,12 @@
       <Row>
         <Col span="21">
           <MenuItem name="1">
-            <a target="_blank" href="http://store.lameleg.com">
+            <a href="http://store.lameleg.com">
               <li>SealYun</li>
             </a>
           </MenuItem>
           <MenuItem name="2">
-            <a target="_blank" href="https://www.sealyun.com">
+            <a target="_blank" href="https://sealyun.com">
               <li>Blog</li>
             </a>
           </MenuItem>
