@@ -22,16 +22,18 @@
         <Col span="3">
 
           <MenuItem name="4">
-            <Tooltip >
-              <li content="分享收入可提现金额" @click="payeeFormCheck">
+            <Tooltip :content="'分享收入可提现金额,您可提现'+amount+'元'">
+              <li @click="payeeFormCheck">
               <Modal
                 v-model="payeeForm"
-                title="设置提现账号与密码"
                 @on-ok="ok"
+                title="设置收款支付宝账号与提现密码"
                 @on-cancel="cancel">
-                <p>Content of dialog</p>
-                <p>Content of dialog</p>
-                <p>Content of dialog</p>
+                <div class="payee">
+                  <label>提现账号</label><input v-model="account" placeholder="收款支付宝账号"> <br/>
+                  <label>提现密码</label><input v-model="passwd" placeholder="提现安全密码"><br/>
+                  <label>确认密码</label><input v-model="passwdCheck" placeholder="切勿使用支付宝密码"><br/>
+                </div>
                </Modal>
                 <i class="ivu-icon ivu-icon-logo-yen">
                   <Badge :count="amount">&nbsp;&nbsp;&nbsp;&nbsp;</Badge>
@@ -68,6 +70,10 @@ import HelloWorld from "./components/HelloWorld.vue";
 export default {
   data() {
     var a = {
+      account:"",
+      passwd:"",
+      passwdCheck:"",
+
       amount: 1,
       theme1: "light",
       avata: false,
@@ -99,14 +105,31 @@ export default {
     HelloWorld
   },
   methods: {
-     ok () {
-        this.$Message.info('Clicked ok');
+    ok () {
+      if (this.passwd != this.passwdCheck){
+        this.$Message.info('两次密码设置不相同');
+        return
+      }
+
+      var para = {
+        PayeeAccount: this.account,
+        Passwd: this.passwd,
+        credentials:true,
+      }
+
+      this.$http.put("http://store.lameleg.com:8080/user/info/payee",para).then(function(res){
+        console.log(res.data)
+        this.$Message.info(res.data);
+      },function(res){
+        this.$Message.info(res.data);
+      })
     },
     cancel () {
-        this.$Message.info('Clicked cancel');
+        this.$Message.info('取消设置');
     },
     payeeFormCheck:function(event){
       this.$http.post('http://store.lameleg.com:8080/user/info/withdraw',{credentials:true}).then(function(res){
+        this.payeeForm = true
         if (res.data.Amount == 0) {
           console.log("withdraw is 0")
         }
@@ -116,8 +139,18 @@ export default {
         }
         console.log(res.data)
       }, function(res){
-
+        this.payeeForm = true
       });
+    },
+
+    handleSubmit(name) {
+        this.$refs[name].validate((valid) => {
+            if (valid) {
+                this.$Message.success('Success!');
+            } else {
+                this.$Message.error('Fail!');
+            }
+        })
     },
   }
 };
@@ -130,5 +163,14 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+.payee {
+    margin: 10px;
+}
+.payee label {
+  margin:10px;
+}
+.payee input{
+  margin:10px;
 }
 </style>
