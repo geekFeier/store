@@ -20,15 +20,26 @@
           </MenuItem>
         </Col>
         <Col span="3">
+
           <MenuItem name="4">
-            <Tooltip content="分享收入可提现金额">
-              <li>
+            <Tooltip >
+              <li content="分享收入可提现金额" @click="payeeFormCheck">
+              <Modal
+                v-model="payeeForm"
+                title="设置提现账号与密码"
+                @on-ok="ok"
+                @on-cancel="cancel">
+                <p>Content of dialog</p>
+                <p>Content of dialog</p>
+                <p>Content of dialog</p>
+               </Modal>
                 <i class="ivu-icon ivu-icon-logo-yen">
                   <Badge :count="amount">&nbsp;&nbsp;&nbsp;&nbsp;</Badge>
                 </i>
               </li>
             </Tooltip>
           </MenuItem>
+
           <MenuItem name="5">
             <img v-if="avata" :src="avata_url" style="border-radius:50%;width:30px;height:30px;cursor:pointer;margin-top:12px;"></img>
             <Tooltip v-else content="请使用github账户登录">
@@ -61,6 +72,7 @@ export default {
       theme1: "light",
       avata: false,
       avata_url: "",
+      payeeForm: false,
     }
     this.$http.get('http://store.lameleg.com:8080/loginless/user/payee', { credentials: true } ).then(function(res){
               a.amount=res.data.Amount;
@@ -85,6 +97,28 @@ export default {
   name: "app",
   components: {
     HelloWorld
+  },
+  methods: {
+     ok () {
+        this.$Message.info('Clicked ok');
+    },
+    cancel () {
+        this.$Message.info('Clicked cancel');
+    },
+    payeeFormCheck:function(event){
+      this.$http.post('http://store.lameleg.com:8080/user/info/withdraw',{credentials:true}).then(function(res){
+        if (res.data.Amount == 0) {
+          console.log("withdraw is 0")
+        }
+        if (res.data.PayeeAccount == "" || res.data.Passwd == ""){
+          // if not set, else withdraw
+          this.payeeForm = true
+        }
+        console.log(res.data)
+      }, function(res){
+
+      });
+    },
   }
 };
 </script>

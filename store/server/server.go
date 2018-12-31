@@ -70,10 +70,10 @@ func (u UserResource) RegisterTo(container *restful.Container) {
 		Consumes("*/*").
 		Produces(restful.MIME_JSON)
 	user.Filter(checkCookie)
-	user.Route(user.GET("/info/{user}").To(userInfo))
-	user.Route(user.GET("/info/{user}/payee").To(userPayeeInfo))
-	user.Route(user.PUT("/info/{user}/payee").To(updateUserPayeeInfo))
-	user.Route(user.POST("/info/{user}/withdraw").To(userWithdraw))
+	user.Route(user.GET("/info").To(userInfo))
+	user.Route(user.GET("/info/payee").To(userPayeeInfo))
+	user.Route(user.PUT("/info/payee").To(updateUserPayeeInfo))
+	user.Route(user.POST("/info/withdraw").To(userWithdraw))
 
 	container.Add(ws)
 	container.Add(user)
@@ -82,6 +82,29 @@ func (u UserResource) RegisterTo(container *restful.Container) {
 
 func userWithdraw(request *restful.Request, response *restful.Response) {
 	// TODO if passwd or payee accoun is null redirect to PUT user payee
+	cookie, err := request.Request.Cookie("user")
+	if err != nil {
+		fmt.Println("Can't get cookie")
+		return
+	}
+
+	upa := &UserPayeeAccount{Login: cookie.Value}
+	has, err := upa.Get(cookie.Value)
+	if err != nil {
+		fmt.Println("Can't get user payee account")
+		return
+	}
+
+	if !has {
+		fmt.Println("uer payee account not found")
+	}
+
+	if upa.PayeeAccount == "" || upa.Amount == 0 || upa.Passwd == "" {
+		response.WriteEntity(upa)
+		return
+	}
+
+	//TODO do withdraw
 }
 func userInfo(request *restful.Request, response *restful.Response) {
 	fmt.Println("user info called")
