@@ -128,7 +128,6 @@ export default {
     },
     payeeFormCheck:function(event){
       this.$http.post('http://store.lameleg.com:8080/user/info/withdraw',{},{credentials:true}).then(function(res){
-        this.payeeForm = true
         if (res.data.Amount == 0) {
           console.log("withdraw is 0")
         }
@@ -138,6 +137,7 @@ export default {
         }
         console.log(res.data)
       }, function(res){
+        console.log("user info withdraw failed",res.data)
         this.payeeForm = true
       });
     },
