@@ -117,7 +117,7 @@ export default {
       }
 
       this.$http.put("http://store.lameleg.com:8080/user/info/payee",para,{credentials:true,responseType:"json"}).then(function(res){
-        console.log(res.data)
+        console.log(res)
         this.$Message.info(res.data);
       },function(res){
         this.$Message.info(res.data);
@@ -141,16 +141,6 @@ export default {
         console.log("user info withdraw failed",res.data)
         this.payeeForm = true
       });
-    },
-
-    handleSubmit(name) {
-        this.$refs[name].validate((valid) => {
-            if (valid) {
-                this.$Message.success('Success!');
-            } else {
-                this.$Message.error('Fail!');
-            }
-        })
     },
   }
 };

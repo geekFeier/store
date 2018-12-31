@@ -175,14 +175,14 @@ func userPayeeInfo(request *restful.Request, response *restful.Response) {
 func updateUserPayeeInfo(request *restful.Request, response *restful.Response) {
 	cookie, err := request.Request.Cookie("user")
 	if err != nil {
-		io.WriteString(response.ResponseWriter, Res{1, "Can't get cookie"}.String())
+		response.WriteEntity(&Res{1, "Can't get cookie"})
 		return
 	}
 
 	upa := &UserPayeeAccount{}
 	err = request.ReadEntity(upa)
 	if err != nil {
-		io.WriteString(response.ResponseWriter, Res{2, "get user payee account failed"}.String())
+		response.WriteEntity(&Res{1, "get user payee account failed"})
 		return
 	}
 	upa.Login = cookie.Value
@@ -197,7 +197,7 @@ func updateUserPayeeInfo(request *restful.Request, response *restful.Response) {
 	upaDB := &UserPayeeAccount{}
 	has, err := upaDB.Get(upa.Login)
 	if err != nil {
-		io.WriteString(response.ResponseWriter, Res{2, "get user payee account info failed"}.String())
+		response.WriteEntity(&Res{1, "get user payee account info failed"})
 		return
 	}
 	if has {
@@ -213,18 +213,18 @@ func updateUserPayeeInfo(request *restful.Request, response *restful.Response) {
 		}
 		_, err = upaDB.Update()
 		if err != nil {
-			io.WriteString(response.ResponseWriter, Res{2, "update user payee account info failed"}.String())
+			response.WriteEntity(&Res{1, "update user payee account info failed"})
 			return
 		}
 	} else {
 		//create
 		_, err = upa.Save()
 		if err != nil {
-			io.WriteString(response.ResponseWriter, Res{2, "save user payee account info failed"}.String())
+			response.WriteEntity(&Res{1, "save user payee account info failed"})
 			return
 		}
 	}
-	io.WriteString(response.ResponseWriter, Res{0, "save user payee account successed"}.String())
+	response.WriteEntity(&Res{1, "save user payee account successed"})
 }
 
 // if check cookie failed, redirect to login page
