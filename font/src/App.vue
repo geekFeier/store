@@ -114,10 +114,9 @@ export default {
       var para = {
         PayeeAccount: this.account,
         Passwd: this.passwd,
-        credentials:true,
       }
 
-      this.$http.put("http://store.lameleg.com:8080/user/info/payee",para).then(function(res){
+      this.$http.put("http://store.lameleg.com:8080/user/info/payee",para,{credentials:true}).then(function(res){
         console.log(res.data)
         this.$Message.info(res.data);
       },function(res){
@@ -128,7 +127,7 @@ export default {
         this.$Message.info('取消设置');
     },
     payeeFormCheck:function(event){
-      this.$http.post('http://store.lameleg.com:8080/user/info/withdraw',{credentials:true}).then(function(res){
+      this.$http.post('http://store.lameleg.com:8080/user/info/withdraw',{},{credentials:true}).then(function(res){
         this.payeeForm = true
         if (res.data.Amount == 0) {
           console.log("withdraw is 0")
