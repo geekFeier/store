@@ -61,12 +61,13 @@
         </Col>
       </Row>
     </Menu>
-    <HelloWorld msg="Welcome to SealYun"/>
+    <HelloWorld msg="Welcome to SealYun" />
   </div>
 </template>
 
 <script>
 import HelloWorld from "./components/HelloWorld.vue";
+
 
 export default {
   data() {
@@ -119,9 +120,9 @@ export default {
 
       this.$http.put("http://store.lameleg.com:8080/user/info/payee",para,{credentials:true,responseType:"json"}).then(function(res){
         console.log(res)
-        this.$Message.info(res.data);
+        this.$Message.info(res.data.Reason);
       },function(res){
-        this.$Message.info(res.data);
+        this.$Message.info(res.data.Reason);
       })
     },
     cancel () {
@@ -137,6 +138,7 @@ export default {
           // if not set, else withdraw
           this.payeeForm = true
         }
+        this.account = res.data.PayeeAccount
         console.log(res.data)
       }, function(res){
         console.log("user info withdraw failed",res.data)

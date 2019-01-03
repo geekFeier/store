@@ -12,6 +12,14 @@
       <ul>
         <li>
           <a :href="time" target="_blank" rel="noopener">kubernetes1.13.1 (元旦一折优惠中 5元)</a>
+          <Tooltip content="获取专有分享链接，享受60%交易提成">
+            <Button @click="share = true" id="sharelink" type="success">推广链接</Button>
+            <Modal v-model="share" title="专有分享链接 - 通过sealyun赚钱" @on-ok="ok" @on-cancel="cancel">
+              <p>{{ shareLink }}</p>
+              <p>任何用户通过上面链接访问网站并成功交易您将获得交易的60%提成</p>
+              <p>如嵌入自己的markdown文档中 [kubernetes离线安装仅需三步]({{ shareLink }})</p>
+            </Modal>
+          </Tooltip>
         </li>
       </ul>
     </div>
@@ -33,12 +41,38 @@ export default {
   props: {
     msg: String
   },
+  methods: {
+    ok() {
+      this.$Message.info("Clicked ok");
+    },
+    cancel() {
+      this.$Message.info("Clicked cancel");
+    }
+  },
   data: function() {
-    return {
+    var d = {
       time:
         "http://store.lameleg.com:8080/pro/kubernetes1.13.1?time=" +
-        new Date().getTime()
+        new Date().getTime()+"&referrer=",
+      shareLink: "",
+      share: false,
     };
+
+    this.$http
+      .get("http://store.lameleg.com:8080/loginless/info/user", {
+        credentials: true
+      })
+      .then(
+        function(res) {
+          d.shareLink = "http://store.lameleg.com?referrer="+res.data.login;
+          console.log(res.data, "info:", d);
+        },
+        function(res) {
+          console.log(res.data);
+        }
+      );
+
+    return d;
   }
 };
 </script>
@@ -58,5 +92,8 @@ li {
 }
 a {
   color: #42b983;
+}
+#sharelink {
+  margin: 10px;
 }
 </style>
