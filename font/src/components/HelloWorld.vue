@@ -59,6 +59,9 @@ export default {
       share: false,
     };
 
+    d.time += this.$route.query.referrer
+    console.log("url path query: ", d.time)
+
     this.$http
       .get("http://store.lameleg.com:8080/loginless/info/user", {
         credentials: true

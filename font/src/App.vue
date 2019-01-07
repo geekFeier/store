@@ -62,6 +62,7 @@
       </Row>
     </Menu>
     <HelloWorld msg="Welcome to SealYun" />
+    <!--router-view></router-view-->
   </div>
 </template>
 
@@ -82,6 +83,7 @@ export default {
       avata_url: "",
       payeeForm: false,
     }
+
     this.$http.get('http://store.lameleg.com:8080/loginless/user/payee', { credentials: true } ).then(function(res){
               a.amount=res.data.Amount;
               console.log(res.data)
