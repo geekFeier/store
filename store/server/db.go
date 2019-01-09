@@ -155,7 +155,7 @@ func init() {
 	p := &Product{
 		ProductName:   "kubernetes1.13.1",
 		ProductURL:    "http://sealyun.oss-cn-beijing.aliyuncs.com/c89602f7cb2a/kube1.13.1.tar.gz",
-		ProductPrice:  5,
+		ProductPrice:  50,
 		ProductDivide: 0.6,
 	}
 

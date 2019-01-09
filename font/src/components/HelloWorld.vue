@@ -11,9 +11,9 @@
     <div id="pro-link">
       <ul>
         <li>
-          <a :href="time" target="_blank" rel="noopener">kubernetes1.13.1 (一折优惠中)</a>
+          <a :href="time" target="_blank" rel="noopener">kubernetes1.13.1离线安装包</a>
           <a :href="time" target="_blank" rel="noopener">
-            <Button id="buy" type="success">点击购买 5元</Button>
+            <Button id="buy" type="success">点击购买 50元</Button>
           </a>
           <Tooltip content="获取专有分享链接，享受60%交易提成">
             <Button @click="share = true" id="sharelink" type="success">推广链接</Button>

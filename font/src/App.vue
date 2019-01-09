@@ -10,12 +10,17 @@
           </MenuItem>
           <MenuItem name="2">
             <a target="_blank" href="https://sealyun.com">
-              <li>Blog</li>
+              <li>博客</li>
             </a>
           </MenuItem>
           <MenuItem name="3">
             <a target="_blank" href="https://sealyun.com/post/docs/">
-              <li>Docs</li>
+              <li>文档</li>
+            </a>
+          </MenuItem>
+          <MenuItem name="3">
+            <a target="_blank" href="https://sealyun.com/post/referrer/">
+              <li>加入营销</li>
             </a>
           </MenuItem>
         </Col>
@@ -66,7 +71,7 @@
 
 <script>
 import HelloWorld from "./components/HelloWorld.vue";
-import VueCookies from 'vue-cookies'
+import VueCookies from "vue-cookies";
 
 export default {
   data() {
@@ -86,11 +91,11 @@ export default {
     };
 
     if (typeof this.$route.query.referrer != "undefined") {
-     // a.loginurl += "&redirect_uri=http://store.lameleg.com/referrer/" + this.$route.query.referrer;
-      VueCookies.set("referrer",this.$route.query.referrer)
+      // a.loginurl += "&redirect_uri=http://store.lameleg.com/referrer/" + this.$route.query.referrer;
+      VueCookies.set("referrer", this.$route.query.referrer);
     }
-    if (VueCookies.get("referrer") != null){
-      console.log("cookie", VueCookies.get("referrer"))
+    if (VueCookies.get("referrer") != null) {
+      console.log("cookie", VueCookies.get("referrer"));
     }
     this.$http
       .get("http://store.lameleg.com:8080/loginless/user/payee", {
@@ -99,6 +104,9 @@ export default {
       .then(
         function(res) {
           a.amount = res.data.Amount;
+          if (typeof a.amount == "undefined") {
+            a.amount = 0;
+          }
           console.log(res.data);
         },
         function(res) {
