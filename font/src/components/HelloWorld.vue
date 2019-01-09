@@ -11,7 +11,10 @@
     <div id="pro-link">
       <ul>
         <li>
-          <a :href="time" target="_blank" rel="noopener">kubernetes1.13.1 (元旦一折优惠中 5元)</a>
+          <a :href="time" target="_blank" rel="noopener">kubernetes1.13.1 (一折优惠中)</a>
+          <a :href="time" target="_blank" rel="noopener">
+            <Button id="buy" type="success">点击购买 5元</Button>
+          </a>
           <Tooltip content="获取专有分享链接，享受60%交易提成">
             <Button @click="share = true" id="sharelink" type="success">推广链接</Button>
             <Modal v-model="share" title="专有分享链接 - 通过sealyun赚钱" @on-ok="ok" @on-cancel="cancel">
@@ -37,6 +40,7 @@
 </template>
 
 <script  type="text/javascript">
+import VueCookies from 'vue-cookies'
 export default {
   name: "HelloWorld",
   props: {
@@ -54,13 +58,18 @@ export default {
     var d = {
       time:
         "http://store.lameleg.com:8080/pro/kubernetes1.13.1?time=" +
-        new Date().getTime()+"&referrer=",
+        new Date().getTime(),
       shareLink: "",
-      share: false,
+      share: false
     };
-
-    d.time += this.$route.query.referrer
-    console.log("url path query: ", d.time)
+    if (typeof this.$route.query.referrer != "undefined") {
+      VueCookies.set("referrer",this.$route.query.referrer)
+    }
+    if (VueCookies.get("referrer") != null){
+      console.log("cookie", VueCookies.get("referrer"))
+      d.time += "&referrer=" + VueCookies.get("referrer")
+    }
+    console.log("url path query: ", d.time);
 
     this.$http
       .get("http://store.lameleg.com:8080/loginless/info/user", {
@@ -68,7 +77,7 @@ export default {
       })
       .then(
         function(res) {
-          d.shareLink = "http://store.lameleg.com?referrer="+res.data.login;
+          d.shareLink = "http://store.lameleg.com?referrer=" + res.data.login;
           console.log(res.data, "info:", d);
         },
         function(res) {
@@ -97,7 +106,7 @@ li {
 a {
   color: #42b983;
 }
-#sharelink {
+#buy {
   margin: 10px;
 }
 </style>

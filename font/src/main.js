@@ -3,9 +3,12 @@ import iView from 'iview'
 import 'iview/dist/styles/iview.css'
 import VueResource from 'vue-resource'
 import VueRouter from 'vue-router'
+import VueCookies from 'vue-cookies'
 
 Vue.use(VueRouter)
 Vue.use(VueResource);
+Vue.use(VueCookies);
+VueCookies.config('7d')
 
 //import HelloWorld from './components/HelloWorld.vue'
 import App from './App.vue'

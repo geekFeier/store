@@ -24,3 +24,12 @@ ls
 npm install vue-router --save
 npm run serve
 exit
+cd
+ls
+cd font/
+ls
+npm run serve
+npm install vue-router
+npm run serve
+npm install vue-cookies --save
+exit

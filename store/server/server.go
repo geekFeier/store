@@ -30,6 +30,11 @@ import (
 type UserResource struct{}
 
 //const
+const (
+	Referrer = "referrer"
+)
+
+//const
 var (
 	Domain   = "store.lameleg.com"
 	BackPort = "8080"
@@ -234,8 +239,9 @@ func checkCookie(req *restful.Request, resp *restful.Response, chain *restful.Fi
 	resp.AddHeader("Expires", "0")
 	cookie, err := req.Request.Cookie("user")
 	if err != nil || cookie == nil {
-		fmt.Println("login please : ", err, req.Request.URL.String())
-		http.Redirect(resp, req.Request, GetLoginURL(req.Request.URL.String()), http.StatusMovedPermanently)
+		fmt.Println("login please : ", err, req.Request.URL.String(), req.QueryParameter(Referrer))
+		state := fmt.Sprintf("%s", req.Request.URL.String())
+		http.Redirect(resp, req.Request, GetLoginURL(state), http.StatusMovedPermanently)
 		return
 	}
 	chain.ProcessFilter(req, resp)
@@ -247,7 +253,7 @@ func payedUserList(request *restful.Request, response *restful.Response) {
 }
 
 func product(request *restful.Request, response *restful.Response) {
-	referrer := request.QueryParameter("referrer")
+	referrer := request.QueryParameter(Referrer)
 	productName := request.PathParameter("product")
 
 	cookie, err := request.Request.Cookie("user")
@@ -312,7 +318,7 @@ func pay(request *restful.Request, response *restful.Response) {
 	//TODO check sign
 	login := request.PathParameter("login")
 	productName := request.PathParameter("product")
-	referrer := request.PathParameter("referrer")
+	referrer := request.PathParameter(Referrer)
 
 	fmt.Println("notify called", login, productName, referrer)
 
@@ -390,6 +396,7 @@ func (u UserResource) callback(request *restful.Request, response *restful.Respo
 	if state == "" {
 		//TODO return to home page
 		url = fmt.Sprintf("http://%s", Domain)
+		fmt.Println("login redirect rul is: ", url)
 	} else {
 		url = fmt.Sprintf("http://%s:%s%s?user=%s", Domain, BackPort, state, user.Login)
 	}
