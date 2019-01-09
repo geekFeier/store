@@ -21,7 +21,6 @@
               <p>{{ shareLink }}</p>
               <p>任何用户通过上面链接访问网站并成功交易您将获得交易的60%提成</p>
               <p>如嵌入自己的markdown文档中 [kubernetes离线安装仅需三步]({{ shareLink }})</p>
-              <p>功能研发中</p>
             </Modal>
           </Tooltip>
         </li>
