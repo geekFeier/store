@@ -33,7 +33,12 @@ steps:
 - name: build-font
   image: fanux/vue:latest
   commands:
-     - cd font && npm install vue && npm install vue-router && npm install iview --save && npm install vue-resource  && npm install vue-router && npm install vue-cookies
+     - cd font && npm install vue --save
+     - npm install vue-router --save
+     - npm install iview --save 
+     - npm install vue-resource  --save 
+     - npm install vue-router --save 
+     - npm install vue-cookies --save
      - npm run build
 
 - name: publish-font
