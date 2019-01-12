@@ -1,10 +1,9 @@
 <template>
   <div class="hello">
     <h1>Welcom to SealYun</h1>
-    <p>kubernetes生态应用市场
-      <br>容器可复用软件销售平台
-      <br>kubernetes集群离线安装包，一键安装，HA安装
-      <br>
+      <br>kubernetes集群离线安装包, 仅需三步, HA安装
+    <p> sh init.sh && sh master.sh
+      <br> kubeadm join 47.51.23.28:6443 --token 17r0uw.i04zbcsllzxoa0tb
       <!--a href="https://github.com/login/oauth/authorize?client_id=89c1b05d77fb1c92a1ef&scope=user:email" target="_blank" rel="noopener">login github</a-->
     </p>
     <h3>商品列表</h3>
