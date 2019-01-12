@@ -10,19 +10,21 @@
     <h3>商品列表</h3>
     <div id="pro-link">
       <ul>
-        <li>
-          <a :href="time" target="_blank" rel="noopener">kubernetes1.13.1离线安装包</a>
-          <a :href="time" target="_blank" rel="noopener">
-            <Button id="buy" type="success">点击购买 50元</Button>
-          </a>
-          <Tooltip content="获取专有分享链接，享受60%交易提成">
-            <Button @click="share = true" id="sharelink" type="success">推广链接</Button>
-            <Modal v-model="share" title="专有分享链接 - 通过sealyun赚钱" @on-ok="ok" @on-cancel="cancel">
-              <p>{{ shareLink }}</p>
-              <p>任何用户通过上面链接访问网站并成功交易您将获得交易的60%提成</p>
-              <p>如嵌入自己的markdown文档中 [kubernetes离线安装仅需三步]({{ shareLink }})</p>
-            </Modal>
-          </Tooltip>
+        <li v-for="p in products" class="li">
+          <div>
+            <a :href="p.url" target="_blank" rel="noopener">{{ p.name }}离线安装包</a>
+            <a :href="p.url" target="_blank" rel="noopener">
+              <Button id="buy" type="success">点击购买 {{ p.price }}元</Button>
+            </a>
+            <Tooltip content="获取专有分享链接，享受60%交易提成">
+              <Button @click="share = true" id="sharelink" type="success">推广链接</Button>
+              <Modal v-model="share" title="专有分享链接 - 通过sealyun赚钱" @on-ok="ok" @on-cancel="cancel">
+                <p>{{ shareLink }}</p>
+                <p>任何用户通过上面链接访问网站并成功交易您将获得交易的60%提成</p>
+                <p>如嵌入自己的markdown文档中 [kubernetes离线安装仅需三步]({{ shareLink }})</p>
+              </Modal>
+            </Tooltip>
+          </div>
         </li>
       </ul>
     </div>
@@ -39,7 +41,7 @@
 </template>
 
 <script  type="text/javascript">
-import VueCookies from 'vue-cookies'
+import VueCookies from "vue-cookies";
 export default {
   name: "HelloWorld",
   props: {
@@ -59,14 +61,16 @@ export default {
         "http://store.lameleg.com:8080/pro/kubernetes1.13.1?time=" +
         new Date().getTime(),
       shareLink: "",
-      share: false
+      share: false,
+
+      products: []
     };
     if (typeof this.$route.query.referrer != "undefined") {
-      VueCookies.set("referrer",this.$route.query.referrer)
+      VueCookies.set("referrer", this.$route.query.referrer);
     }
-    if (VueCookies.get("referrer") != null){
-      console.log("cookie", VueCookies.get("referrer"))
-      d.time += "&referrer=" + VueCookies.get("referrer")
+    if (VueCookies.get("referrer") != null) {
+      console.log("cookie", VueCookies.get("referrer"));
+      d.time += "&referrer=" + VueCookies.get("referrer");
     }
     console.log("url path query: ", d.time);
 
@@ -78,6 +82,32 @@ export default {
         function(res) {
           d.shareLink = "http://store.lameleg.com?referrer=" + res.data.login;
           console.log(res.data, "info:", d);
+        },
+        function(res) {
+          console.log(res.data);
+        }
+      );
+
+    this.$http
+      .get("http://store.lameleg.com:8080/loginless/pro", { credentials: true })
+      .then(
+        function(res) {
+          for (var i = 0; i < res.data.length; i++) {
+            var p = {};
+            p.name = res.data[i].ProductName;
+            p.url =
+              "http://store.lameleg.com:8080/pro/" +
+              p.name +
+              "?time=" +
+              new Date().getTime() +
+              "&referrer=" +
+              VueCookies.get("referrer");
+            p.price = res.data[i].ProductPrice;
+            d.products.push(p);
+          }
+          d.products.reverse()
+          console.log("products: ", res.data, "length: ", res.data.length);
+          console.log("products list: ", d.products, "");
         },
         function(res) {
           console.log(res.data);
@@ -107,5 +137,8 @@ a {
 }
 #buy {
   margin: 10px;
+}
+.li{
+  display: block;
 }
 </style>
