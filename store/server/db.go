@@ -148,17 +148,7 @@ func GetProductDevide(name string) float64 {
 	return p.ProductPrice * p.ProductDivide
 }
 
-func init() {
-	GetEngine()
-	CreateTables()
-
-	p := &Product{
-		ProductName:   "kubernetes1.13.1",
-		ProductURL:    "http://sealyun.oss-cn-beijing.aliyuncs.com/c89602f7cb2a/kube1.13.1.tar.gz",
-		ProductPrice:  50,
-		ProductDivide: 0.6,
-	}
-
+func saveProduct(p *Product) {
 	has, err := p.Get(p.ProductName)
 	if err != nil {
 		fmt.Println("get product info failed")
@@ -172,4 +162,25 @@ func init() {
 			fmt.Println("save product failed")
 		}
 	}
+}
+
+func init() {
+	GetEngine()
+	CreateTables()
+
+	p := &Product{
+		ProductName:   "kubernetes1.13.1",
+		ProductURL:    "http://sealyun.oss-cn-beijing.aliyuncs.com/c89602f7cb2a/kube1.13.1.tar.gz",
+		ProductPrice:  50,
+		ProductDivide: 0.6,
+	}
+	saveProduct(p)
+
+	p = &Product{
+		ProductName:   "kubernetes1.13.2",
+		ProductURL:    "https://sealyun.oss-cn-beijing.aliyuncs.com/tk2hhcegu9Z1-13-2/kube1.13.2.tar.gz",
+		ProductPrice:  50,
+		ProductDivide: 0.6,
+	}
+	saveProduct(p)
 }
