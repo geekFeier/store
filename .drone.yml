@@ -39,6 +39,7 @@ steps:
      - npm install vue-resource  --save 
      - npm install vue-router --save 
      - npm install vue-cookies --save
+     - npm install vue-template-compiler -D
      - npm run build
 
 - name: publish-font
