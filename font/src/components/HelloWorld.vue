@@ -1,9 +1,9 @@
 <template>
   <div class="hello">
     <h1>Welcom to SealYun</h1>
-      <br>kubernetes集群离线安装包, 仅需三步, HA安装
-    <p> sh init.sh && sh master.sh
-      <br> kubeadm join 47.51.23.28:6443 --token 17r0uw.i04zbcsllzxoa0tb
+    <br>kubernetes集群离线安装包, 仅需三步, HA安装
+    <p>sh init.sh && sh master.sh
+      <br>kubeadm join 47.51.23.28:6443 --token 17r0uw.i04zbcsllzxoa0tb
       <!--a href="https://github.com/login/oauth/authorize?client_id=89c1b05d77fb1c92a1ef&scope=user:email" target="_blank" rel="noopener">login github</a-->
     </p>
     <h3>商品列表</h3>
@@ -20,7 +20,7 @@
               <Modal v-model="share" title="专有分享链接 - 通过sealyun赚钱" @on-ok="ok" @on-cancel="cancel">
                 <p>{{ shareLink }}</p>
                 <p>任何用户通过上面链接访问网站并成功交易您将获得交易的60%提成</p>
-                <p>如嵌入自己的markdown文档中 [kubernetes离线安装仅需三步]({{ shareLink }})</p>
+                <p>如嵌入自己的markdown文档中, 发到群里，或者把链接直接发给有需要的朋友</p>
               </Modal>
             </Tooltip>
           </div>
@@ -79,7 +79,11 @@ export default {
       })
       .then(
         function(res) {
-          d.shareLink = "http://store.lameleg.com?referrer=" + res.data.login;
+          if (typeof res.data.login != "undefined") {
+            d.shareLink = "http://store.lameleg.com?referrer=" + res.data.login;
+          } else {
+            d.shareLink = "登录后才能看到您的推广连接";
+          }
           console.log(res.data, "info:", d);
         },
         function(res) {
@@ -104,7 +108,7 @@ export default {
             p.price = res.data[i].ProductPrice;
             d.products.push(p);
           }
-          d.products.reverse()
+          d.products.reverse();
           console.log("products: ", res.data, "length: ", res.data.length);
           console.log("products list: ", d.products, "");
         },
@@ -137,7 +141,7 @@ a {
 #buy {
   margin: 10px;
 }
-.li{
+.li {
   display: block;
 }
 </style>
