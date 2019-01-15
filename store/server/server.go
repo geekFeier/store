@@ -248,11 +248,6 @@ func checkCookie(req *restful.Request, resp *restful.Response, chain *restful.Fi
 	chain.ProcessFilter(req, resp)
 }
 
-func payedUserList(request *restful.Request, response *restful.Response) {
-	productName := request.PathParameter("product")
-	_ = productName
-}
-
 func product(request *restful.Request, response *restful.Response) {
 	referrer := request.QueryParameter(Referrer)
 	productName := request.PathParameter("product")
