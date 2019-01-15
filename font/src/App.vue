@@ -69,7 +69,18 @@
         </Col>
       </Row>
     </Menu>
-    <HelloWorld msg="Welcome to SealYun"/>
+    <Row>
+      <Col span="8">
+        <h1 class="payedUser">已购用户</h1>
+        <label v-for="u in payedUser">
+        <a :href='"https://github.com/"+u.login' target="_blank"><Avatar class="payedUser"  :src="u.avatar_url"/></a>
+        </label>
+      </Col>
+      <Col span="8">
+        <HelloWorld msg="Welcome to SealYun"/>
+      </Col>
+      <Col span="8"></Col>
+    </Row>
     <!--router-view></router-view-->
   </div>
 </template>
@@ -91,9 +102,25 @@ export default {
       avata_url: "",
       payeeForm: false,
 
+      payedUser: [],
+
       loginurl:
         "https://github.com/login/oauth/authorize?client_id=89c1b05d77fb1c92a1ef&scope=user:email"
     };
+
+    this.$http
+      .get("http://store.lameleg.com:8080/loginless/pro/kubernetes1.13.1/payed", {
+        credentials: true
+      })
+      .then(
+        function(res) {
+          a.payedUser = res.data
+        },
+        function(res) {
+        }
+      );
+
+
 
     if (typeof this.$route.query.referrer != "undefined") {
       // a.loginurl += "&redirect_uri=http://store.lameleg.com/referrer/" + this.$route.query.referrer;
@@ -218,6 +245,9 @@ export default {
   margin: 10px;
 }
 .payee input {
+  margin: 10px;
+}
+.payedUser {
   margin: 10px;
 }
 </style>
