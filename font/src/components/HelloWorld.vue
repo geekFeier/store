@@ -12,9 +12,11 @@
         <li v-for="p in products" class="li">
           <div>
             <a :href="p.url" target="_blank" rel="noopener">{{ p.name }}离线安装包</a>
+            <Tooltip content="购买完自动跳转下载，已付款点击自动下载">
             <a :href="p.url" target="_blank" rel="noopener">
               <Button id="buy" type="success">点击购买 {{ p.price }}元</Button>
             </a>
+            </Tooltip>
             <Tooltip content="获取专有分享链接，享受60%交易提成">
               <Button @click="share = true" id="sharelink" type="success">推广链接</Button>
               <Modal v-model="share" title="专有分享链接 - 通过sealyun赚钱" @on-ok="ok" @on-cancel="cancel">
