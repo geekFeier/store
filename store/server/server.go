@@ -376,7 +376,10 @@ func (u UserResource) callback(request *restful.Request, response *restful.Respo
 	}
 
 	has, err := user.Get(user.Login)
-	if !has || err != nil {
+	if err != nil {
+		fmt.Println("get user failed: ", user.Login)
+	}
+	if !has {
 		//has,err := user.Get(user.Login)
 		_, err = user.Save()
 		if err != nil {
