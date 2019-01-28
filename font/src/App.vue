@@ -25,7 +25,7 @@
           </MenuItem>
           <MenuItem name="3">
             <a target="_blank" href="https://mp.weixin.qq.com/s/Ra722VtdLitDbM0GExom6A">
-              <li>联系我们</li>
+              <li>售后支持</li>
             </a>
           </MenuItem>
         </Col>
