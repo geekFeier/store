@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1>Welcom to SealYun</h1>
+    <img src="http://sealyun.com/logo.jpeg" />
     <br>kubernetes集群离线安装包, 仅需三步, HA安装
     <p>sh init.sh && sh master.sh
       <br>kubeadm join 47.51.23.28:6443 --token 17r0uw.i04zbcsllzxoa0tb
