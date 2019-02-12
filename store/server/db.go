@@ -183,4 +183,12 @@ func init() {
 		ProductDivide: 0.6,
 	}
 	saveProduct(p)
+
+	p = &Product{
+		ProductName:   "kubernetes1.13.3",
+		ProductURL:    "https://sealyun.oss-cn-beijing.aliyuncs.com/1172b02fc1-13-3/kube1.13.3.tar.gz",
+		ProductPrice:  50,
+		ProductDivide: 0.6,
+	}
+	saveProduct(p)
 }
