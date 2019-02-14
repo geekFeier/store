@@ -364,21 +364,28 @@ func (u UserResource) callback(request *restful.Request, response *restful.Respo
 	accessToken, err := GetGithubAccessToken(clientID, clientSecret, code)
 	if err != nil {
 		io.WriteString(response.ResponseWriter, "fetch token failed"+accessToken)
+		return
 	}
 	user, err := GetUserInfo(accessToken)
 	if err != nil {
 		fmt.Println(err)
+		io.WriteString(response.ResponseWriter, fmt.Sprintf("get user info failed %s", err))
+		return
 	}
 
 	has, err := user.Get(user.Login)
 	if err != nil {
 		fmt.Println("get user failed: ", user.Login)
+		io.WriteString(response.ResponseWriter, fmt.Sprintf("query user info failed %s", err))
+		return
 	}
 	if !has {
 		//has,err := user.Get(user.Login)
 		_, err = user.Save()
 		if err != nil {
 			fmt.Println("save suer faieled: ", err)
+			io.WriteString(response.ResponseWriter, fmt.Sprintf("save user info failed %s", err))
+			return
 		}
 	}
 
