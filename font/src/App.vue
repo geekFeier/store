@@ -73,7 +73,9 @@
       <Col span="8">
         <h1 class="payedUser">已购用户</h1>
         <label v-for="u in payedUser">
-        <a :href='"https://github.com/"+u.login' target="_blank"><Avatar class="payedUser"  :src="u.avatar_url"/></a>
+          <a :href="'https://github.com/'+u.login" target="_blank">
+            <Avatar class="payedUser" :src="u.avatar_url"/>
+          </a>
         </label>
       </Col>
       <Col span="8">
@@ -109,18 +111,33 @@ export default {
     };
 
     this.$http
-      .get("http://store.lameleg.com:8080/loginless/pro/kubernetes1.13.1/payed", {
-        credentials: true
-      })
+      .get(
+        "http://store.lameleg.com:8080/loginless/pro/kubernetes1.13.1/payed",
+        {
+          credentials: true
+        }
+      )
       .then(
         function(res) {
-          a.payedUser = res.data
+          for (var i = 0; i < res.data.length; i++) {
+            if (res.data[i] == null) {
+              continue;
+            }
+            for (var j = i + 1; j < res.data.length; j++) {
+              if (res.data[j] == null) {
+                continue;
+              }
+              if (res.data[i].login == res.data[j].login) {
+               // res.data.splice(j - 1, 1);
+               res.data[j].avata_url = "https://avatars2.githubusercontent.com/u/8912557?v=4"
+              }
+            }
+          }
+
+          a.payedUser = res.data;
         },
-        function(res) {
-        }
+        function(res) {}
       );
-
-
 
     if (typeof this.$route.query.referrer != "undefined") {
       // a.loginurl += "&redirect_uri=http://store.lameleg.com/referrer/" + this.$route.query.referrer;
