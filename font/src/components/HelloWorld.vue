@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <img src="http://sealyun.com/logo.jpeg" />
+    <img src="https://github.com/sealyun/hugo/blob/master/static/logo.jpeg?raw=true" />
     <br>kubernetes集群离线安装包, 仅需三步, HA安装
     <p>sh init.sh && sh master.sh
       <br>kubeadm join 47.51.23.28:6443 --token 17r0uw.i04zbcsllzxoa0tb
