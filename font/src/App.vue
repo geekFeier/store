@@ -10,6 +10,16 @@ var _hmt = _hmt || [];
 })();
 </script>
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-119962244-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-119962244-1');
+</script>
+
     <Menu mode="horizontal" :theme="theme1" active-name="1">
       <Row>
         <Col span="21">
