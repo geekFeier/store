@@ -1,5 +1,15 @@
 <template>
   <div id="app">
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?f5cdf1b9888fd1d6d66220c6ec4d0630";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
     <Menu mode="horizontal" :theme="theme1" active-name="1">
       <Row>
         <Col span="21">
