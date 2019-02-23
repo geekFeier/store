@@ -40,6 +40,7 @@ steps:
      - npm install vue-router --save 
      - npm install vue-cookies --save
      - npm install vue-template-compiler -D
+     - npm i --save gitalk
      - npm run build
 
 - name: publish-font

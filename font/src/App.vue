@@ -1,25 +1,5 @@
 <template>
   <div id="app">
-    <script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?f5cdf1b9888fd1d6d66220c6ec4d0630";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-119962244-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-119962244-1');
-</script>
-
     <Menu mode="horizontal" :theme="theme1" active-name="1">
       <Row>
         <Col span="21">
@@ -101,7 +81,9 @@ var _hmt = _hmt || [];
       <Col span="8">
         <HelloWorld msg="Welcome to SealYun"/>
       </Col>
-      <Col span="8"></Col>
+      <Col span="8">
+        <div id="gitalk-container"></div>
+      </Col>
     </Row>
     <!--router-view></router-view-->
   </div>
@@ -111,7 +93,38 @@ var _hmt = _hmt || [];
 import HelloWorld from "./components/HelloWorld.vue";
 import VueCookies from "vue-cookies";
 
+import "gitalk/dist/gitalk.css";
+import Gitalk from "gitalk";
+
+/*
+const gitalk = new Gitalk({
+  clientID: '98478b0f6bfacff7cdf0',
+  clientSecret: 'a882c5ed737d7453392b83c6b25e232a9d859d03',
+  repo: 'https://github.com/fanux/store',
+  owner: 'fanux',
+  admin: ['fanux'],
+  id: "gitalk.store.lameleg.com",      // Ensure uniqueness and length less than 50
+  distractionFreeMode: false  // Facebook-like distraction free mode
+})
+
+gitalk.render('gitalk-container')
+*/
+
 export default {
+  mounted() {
+    const gitalk = new Gitalk({
+      clientID: "98478b0f6bfacff7cdf0",
+      clientSecret: "a882c5ed737d7453392b83c6b25e232a9d859d03",
+      repo: "gitalk",
+      owner: "fanux",
+      admin: ["fanux"],
+      id: window.location.pathname, // Ensure uniqueness and length less than 50
+      distractionFreeMode: false // Facebook-like distraction free mode
+    });
+
+    gitalk.render("gitalk-container");
+  },
+
   data() {
     var a = {
       account: "",
@@ -148,8 +161,9 @@ export default {
                 continue;
               }
               if (res.data[i].login == res.data[j].login) {
-               // res.data.splice(j - 1, 1);
-               res.data[j].avata_url = "https://avatars2.githubusercontent.com/u/8912557?v=4"
+                // res.data.splice(j - 1, 1);
+                res.data[j].avata_url =
+                  "https://avatars2.githubusercontent.com/u/8912557?v=4";
               }
             }
           }
