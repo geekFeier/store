@@ -28,6 +28,11 @@
               <li>售后支持</li>
             </a>
           </MenuItem>
+          <MenuItem name="3">
+            <a target="_blank" href="https://shop929htt07.market.aliyun.com/page/productlist.html?cId=53366009">
+              <li>阿里云市场</li>
+            </a>
+          </MenuItem>
         </Col>
         <Col span="3">
           <MenuItem name="4">
