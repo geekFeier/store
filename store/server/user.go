@@ -13,16 +13,34 @@ func (PayedUser) TableName() string {
 	return "user"
 }
 
+func inUserList(u PayedUser, list []PayedUser) bool {
+	for _, ul := range PayedUser {
+		if ul.Name == u.Name {
+			return true
+		}
+	}
+
+	return false
+}
+
 func payedUserList(request *restful.Request, response *restful.Response) {
 	productName := request.PathParameter("product")
 
 	var users []PayedUser
+	var usersUni []PayedUser
 	//err := engine.Join("INNER", "user_product", "user_product.login = user.login").Where("status = ?", "payed").And("product_name = ?", productName).Find(&users)
 	err := engine.Join("INNER", "user_product", "user_product.login = user.login").Where("status = ?", "payed").Find(&users)
 	_ = productName
 
+	for _, u := range users {
+		if inUserList(u, usersUni) {
+			continue
+		}
+		usersUni = append(usersUni, u)
+	}
+
 	if err != nil {
 		response.WriteEntity(&Res{1, "get payed user list failed"})
 	}
-	response.WriteEntity(&users)
+	response.WriteEntity(&usersUni)
 }
