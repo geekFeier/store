@@ -42,12 +42,15 @@ steps:
      - npm install vue-template-compiler -D
      - npm i --save gitalk
      - npm run build
-  settings:
-    event:
-        - promote
+  when:
+    target:
+        - production
 
 - name: publish-font
   image: plugins/docker
+  when:
+    target:
+        - production
   settings:
     repo: fanux/store-font
     tags: ${DRONE_TAG=latest}
@@ -55,14 +58,12 @@ steps:
     dockerfile: Dockerfile-font
     password:
       from_secret: docker-hub-pass
-    event:
-        - promote
 
 - name: deploy-font
   image: lachlanevenson/k8s-kubectl
-  settings:
-    event:
-        - promote
+  when:
+    target:
+        - production
   commands:
     - mkdir ~/.kube
     - cp deploy/config ~/.kube/config
