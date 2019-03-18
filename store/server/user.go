@@ -14,7 +14,7 @@ func (PayedUser) TableName() string {
 }
 
 func inUserList(u PayedUser, list []PayedUser) bool {
-	for _, ul := range PayedUser {
+	for _, ul := range list {
 		if ul.Name == u.Name {
 			return true
 		}
