@@ -1,9 +1,10 @@
-package github
+package star
 
 import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
 )
 
 var (
@@ -37,6 +38,7 @@ func IsStared(user string) bool {
 	err = json.NewDecoder(resp.Body).Decode(us)
 	if err != nil {
 		fmt.Println("json decode error: ", err)
+		fmt.Fprintf(os.Stdout, "%s", resp.Body)
 		return false
 	}
 
