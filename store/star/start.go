@@ -48,7 +48,7 @@ func IsStared(user string) bool {
 func IsStaredUnlimit(user string) bool {
 	client := &http.Client()
 
-	req, err := http.NewRequest("GET", fistStargazersURL)
+	req, err := http.NewRequest("GET", fistStargazersURL, nil)
 	if err != nil {
 		fmt.Println("error", err)
 		return false
