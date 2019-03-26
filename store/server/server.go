@@ -285,7 +285,7 @@ func product(request *restful.Request, response *restful.Response) {
 		}
 	}
 
-	if up.Status == "payed" || (star.IsStared(login) && productName == "kubernetes1.14.0") {
+	if up.Status == "payed" || (star.IsStaredUnlimit(login) && productName == "kubernetes1.14.0") {
 		response.AddHeader("Content-Type", "application/x-gzip")
 		http.Redirect(response, request.Request, GetProductURL(productName), http.StatusMovedPermanently)
 		return

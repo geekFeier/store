@@ -8,6 +8,7 @@ import (
 
 var (
 	fistStargazersURL = "https://api.github.com/repos/fanux/fist/stargazers"
+	token             = "Bearer 450c54a01f33800cbb2598661f3d45f027a10faa"
 )
 
 //User is
@@ -41,6 +42,30 @@ func IsStared(user string) bool {
 	}
 
 	return isIn(user, *us)
+}
+
+//IsStaredUnlimit is
+func IsStaredUnlimit(user string) bool {
+	client := &http.Client()
+
+	req, err := http.NewRequest("GET", fistStargazersURL)
+	if err != nil {
+		fmt.Println("error", err)
+		return false
+	}
+
+	req.Header.Set("Authorization", token)
+
+	resp, err := client.Do(req)
+	defer resp.Body.Close()
+
+	us := &[]User{}
+	err = json.NewDecoder(resp.Body).Decode(us)
+	if err != nil {
+		fmt.Println("json decode error: ", err)
+		return false
+	}
+
 }
 
 func testStar() {
