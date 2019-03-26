@@ -7,7 +7,7 @@ import (
 )
 
 var (
-	fistStargazersURL = "https://api.github.com/repos/fanux/fist/stargazers"
+	fistStargazersURL = "https://api.github.com/repos/fanux/fist/stargazers?page=0&per_page=300"
 	token             = "Bearer 450c54a01f33800cbb2598661f3d45f027a10faa"
 )
 
