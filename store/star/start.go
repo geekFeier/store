@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"os"
 )
 
 var (
@@ -34,11 +33,10 @@ func IsStared(user string) bool {
 	}
 
 	defer resp.Body.Close()
-	us := new([]User)
+	us := &[]User{}
 	err = json.NewDecoder(resp.Body).Decode(us)
 	if err != nil {
 		fmt.Println("json decode error: ", err)
-		fmt.Fprintf(os.Stdout, "%s", resp.Body)
 		return false
 	}
 
