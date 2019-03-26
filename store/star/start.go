@@ -46,7 +46,7 @@ func IsStared(user string) bool {
 
 //IsStaredUnlimit is
 func IsStaredUnlimit(user string) bool {
-	client := &http.Client()
+	client := &http.Client{}
 
 	req, err := http.NewRequest("GET", fistStargazersURL, nil)
 	if err != nil {
@@ -65,7 +65,7 @@ func IsStaredUnlimit(user string) bool {
 		fmt.Println("json decode error: ", err)
 		return false
 	}
-
+	return isIn(user, *us)
 }
 
 func testStar() {
