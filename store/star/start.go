@@ -47,10 +47,11 @@ func IsStared(user string) bool {
 func starPage(user string, page int) bool {
 	client := &http.Client{}
 
-	url = fmt.Sprintf(fistStargazersURL, page)
+	url := fmt.Sprintf(fistStargazersURL, page)
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		fmt.Println("error", err)
+		fmt.Println("url", url)
 		return false
 	}
 
