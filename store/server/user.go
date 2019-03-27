@@ -29,7 +29,8 @@ func payedUserList(request *restful.Request, response *restful.Response) {
 	var users []PayedUser
 	var usersUni []PayedUser
 	//err := engine.Join("INNER", "user_product", "user_product.login = user.login").Where("status = ?", "payed").And("product_name = ?", productName).Find(&users)
-	err := engine.Join("INNER", "user_product", "user_product.login = user.login").Where("status = ?", "payed").Find(&users)
+	//err := engine.Join("INNER", "user_product", "user_product.login = user.login").Where("status = ?", "payed").Find(&users)
+	err := engine.Join("INNER", "user_product", "user_product.login = user.login").Find(&users)
 	_ = productName
 
 	for _, u := range users {
