@@ -7,7 +7,7 @@ import (
 )
 
 var (
-	fistStargazersURL = "https://api.github.com/repos/fanux/fist/stargazers?page=0&per_page=300"
+	fistStargazersURL = "https://api.github.com/repos/fanux/fist/stargazers?page=%d&per_page=300"
 	token             = "Bearer 450c54a01f33800cbb2598661f3d45f027a10faa"
 )
 
@@ -44,11 +44,11 @@ func IsStared(user string) bool {
 	return isIn(user, *us)
 }
 
-//IsStaredUnlimit is
-func IsStaredUnlimit(user string) bool {
+func starPage(user string, page int) bool {
 	client := &http.Client{}
 
-	req, err := http.NewRequest("GET", fistStargazersURL, nil)
+	url = fmt.Sprintf(fistStargazersURL, page)
+	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		fmt.Println("error", err)
 		return false
@@ -66,6 +66,16 @@ func IsStaredUnlimit(user string) bool {
 		return false
 	}
 	return isIn(user, *us)
+}
+
+//IsStaredUnlimit is
+func IsStaredUnlimit(user string) bool {
+	for i := 1; i < 4; i++ {
+		if starPage(user, i) {
+			return true
+		}
+	}
+	return false
 }
 
 func testStar() {
