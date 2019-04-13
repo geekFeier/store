@@ -7,7 +7,7 @@ import (
 )
 
 var (
-	fistStargazersURL = "https://api.github.com/repos/fanux/fist/stargazers?page=%d&per_page=300"
+	fistStargazersURL = "https://api.github.com/repos/fanux/sealos/stargazers?page=%d&per_page=300"
 	token             = "Bearer 450c54a01f33800cbb2598661f3d45f027a10faa"
 )
 
@@ -23,6 +23,11 @@ func isIn(user string, users []User) bool {
 		}
 	}
 	return false
+}
+
+//CheckFree is
+func CheckFree(user string, pro string) bool {
+	return IsStared(user) && (pro == "kubernetes1.14.1-HA")
 }
 
 //IsStared is
