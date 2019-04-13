@@ -1,13 +1,14 @@
 <template>
   <div class="hello">
     <img src="https://github.com/sealyun/hugo/blob/master/static/logo.jpeg?raw=true" />
-    <br>kubernetes集群离线安装包, 仅需三步, HA安装
+    <br>kubernetes集群离线安装包, 仅需三步 (1.14.0以下版本)
     <p>sh init.sh && sh master.sh
       <br>kubeadm join 47.51.23.28:6443 --token 17r0uw.i04zbcsllzxoa0tb
       <!--a href="https://github.com/login/oauth/authorize?client_id=89c1b05d77fb1c92a1ef&scope=user:email" target="_blank" rel="noopener">login github</a-->
     </p>
-    <code>
-     超级简单的 HA 多master高可用安装<br/>
+    <br/>
+    <code style="text-align:left;float:left;padding-left:90px;">
+    1.14.1以上版本 超级简单的 HA 多master高可用安装<br/>
     sealos init \ <br/>
     --master 192.168.0.2 \<br/>
     --master 192.168.0.3 \<br/>
