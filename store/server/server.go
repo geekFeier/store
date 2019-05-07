@@ -8,7 +8,6 @@ import (
 	"time"
 
 	"github.com/emicklei/go-restful"
-	"github.com/fanux/store/store/star"
 )
 
 // Cross-origin resource sharing (CORS) is a mechanism that allows JavaScript on a web page
@@ -285,7 +284,7 @@ func product(request *restful.Request, response *restful.Response) {
 		}
 	}
 
-	if up.Status == "payed" || star.CheckFree(login, productName) {
+	if up.Status == "payed" {
 		response.AddHeader("Content-Type", "application/x-gzip")
 		http.Redirect(response, request.Request, GetProductURL(productName), http.StatusMovedPermanently)
 		return
