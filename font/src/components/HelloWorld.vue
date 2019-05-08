@@ -7,18 +7,6 @@
       <!--a href="https://github.com/login/oauth/authorize?client_id=89c1b05d77fb1c92a1ef&scope=user:email" target="_blank" rel="noopener">login github</a-->
     </p>
     <br/>
-    <code style="text-align:left;float:left;padding-left:90px;">
-    1.14.1以上版本 超级简单的 HA 多master高可用安装<br/>
-    sealos init \ <br/>
-    --master 192.168.0.2 \<br/>
-    --master 192.168.0.3 \<br/>
-    --master 192.168.0.4 \          # master地址列表<br/>
-    --node 192.168.0.5 \            # node地址列表<br/>
-    --user root \                   # 服务用户名<br/>
-    --passwd your-server-password \ # 服务器密码，用于远程执行命令<br/>
-    --pkg kube1.14.1.tar.gz  \      # 离线安装包名称<br/>
-    --version v1.14.1               # kubernetes 离线安装包版本，这渲染kubeadm配置时需要使用<br/>
-    </code>
     <h3>商品列表</h3>
     <div id="pro-link">
       <ul>
