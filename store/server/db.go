@@ -209,9 +209,9 @@ func init() {
 	saveProduct(p)
 
 	p = &Product{
-		ProductName:   "kubernetes1.14.1-HA",
+		ProductName:   "kubernetes1.14.1",
 		ProductURL:    "https://sealyun.oss-cn-beijing.aliyuncs.com/6300ecea5ab9621-14-1/kube1.14.1.tar.gz",
-		ProductPrice:  50,
+		ProductPrice:  0.01,
 		ProductDivide: 0.6,
 	}
 	saveProduct(p)
@@ -228,6 +228,14 @@ func init() {
 		ProductName:   "kubernetes1.14.3",
 		ProductURL:    "https://sealyun.oss-cn-beijing.aliyuncs.com/kasjfjkadf1-14-2/kube1.14.3.tar.gz",
 		ProductPrice:  50,
+		ProductDivide: 0.6,
+	}
+	saveProduct(p)
+
+	p = &Product{
+		ProductName:   "kubernetes1.15.0",
+		ProductURL:    "https://sealyun.oss-cn-beijing.aliyuncs.com/free/kube1.15.0.tar.gz",
+		ProductPrice:  0.01,
 		ProductDivide: 0.6,
 	}
 	saveProduct(p)
