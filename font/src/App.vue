@@ -87,7 +87,7 @@
         <HelloWorld msg="Welcome to SealYun"/>
       </Col>
       <Col span="8">
-        <div type="text-align:left;" id="gitalk-container"></div>
+        <div style="text-align:left;" id="gitalk-container"></div>
       </Col>
     </Row>
     <!--router-view></router-view-->
