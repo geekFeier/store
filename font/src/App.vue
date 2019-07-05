@@ -35,7 +35,7 @@
           </MenuItem>
         <Submenu name="4">
             <template slot="title">
-                <Icon type="ios-stats" />
+                <Icon type="logo-github" />
                 开源项目
             </template>
             <MenuGroup title="使用">
