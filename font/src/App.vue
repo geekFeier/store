@@ -33,6 +33,30 @@
               <li>阿里云市场</li>
             </a>
           </MenuItem>
+        <Submenu name="4">
+            <template slot="title">
+                <Icon type="ios-stats" />
+                开源项目
+            </template>
+            <MenuGroup title="使用">
+              <MenuItem name="0">
+                <a target="_blank" href="https://github.com/fanux/sealos">
+                  <li>kubernetes一键HA</li>
+                </a>
+              </MenuItem>
+              <MenuItem name="1">
+                <a target="_blank" href="https://github.com/fanux/fist">
+                  <li>轻量级kubernetes管理工具</li>
+                </a>
+              </MenuItem>
+              <MenuItem name="1">
+                <a target="_blank" href="https://github.com/fanux/lhttp">
+                  <li>好用的websocket框架</li>
+                </a>
+              </MenuItem>
+            </MenuGroup>
+        </Submenu>
+
         </Col>
         <Col span="3">
           <MenuItem name="4">
