@@ -58,7 +58,7 @@
         </Submenu>
         </Col>
         <Col span="3">
-            <Tooltip :content="年费会员，任意下载所有版本软件包">
+            <Tooltip content="年费会员，任意下载所有版本软件包">
             <a href="http://store.lameleg.com:8080/user/vip/charge" target="_blank" rel="noopener">
               <Button id="buy" type="success">会员69元/年</Button>
             </a>
