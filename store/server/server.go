@@ -259,7 +259,7 @@ func vipChargeNotify(request *restful.Request, response *restful.Response) {
 	vip.Type = "nomal"
 	vip.Date = time
 	vip.Update()
-	response.Write("充值年费会员成功，一年内享有免费下载所有软件包权利")
+	io.WriteString(response.ResponseWriter, "充值年费会员成功，一年内享有免费下载所有软件包权利")
 }
 
 func vipCharge(request *restful.Request, response *restful.Response) {
