@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <img src="https://s2.ax1x.com/2019/09/12/nBpyZt.jpg" />
+    <img src="https://s2.ax1x.com/2019/09/12/nBpyZt.jpg" style="width:300px"/>
     <br>kubernetes集群离线安装包, 一条命令高可用
     <p>      
 <!--a href="https://github.com/login/oauth/authorize?client_id=89c1b05d77fb1c92a1ef&scope=user:email" target="_blank" rel="noopener">login github</a-->

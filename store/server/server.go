@@ -67,6 +67,8 @@ func (u UserResource) RegisterTo(container *restful.Container) {
 	loginless.Route(loginless.GET("/loginless/pro").To(productList))
 	loginless.Route(loginless.GET("/loginless/user/payee").To(userPayeeInfo))
 	loginless.Route(loginless.GET("/loginless/info/user").To(userInfo))
+	loginless.Route(loginless.GET("/loginless/vip/notify/{login}").To(vipChargeNotify))
+	loginless.Route(loginless.POST("/loginless/vip/notify/{login}").To(vipChargeNotify))
 
 	ws := new(restful.WebService)
 	ws.
@@ -277,8 +279,8 @@ func vipCharge(request *restful.Request, response *restful.Response) {
 	productName := "sealyunvip"
 	viprand := fmt.Sprintf("%s-%d", login, time.Now().Unix())
 	fmt.Printf("vip %s charge", login)
-	returnURL := fmt.Sprintf("/user/vip/notify/%s", login)
-	notifyURL := fmt.Sprintf("/user/vip/notify/%s", login)
+	returnURL := fmt.Sprintf("/loginless/vip/notify/%s", login)
+	notifyURL := fmt.Sprintf("/loginless/vip/notify/%s", login)
 	payURL := PayURL(price, viprand, productName, GetFullURL(returnURL), GetFullURL(notifyURL))
 	http.Redirect(response, request.Request, payURL, http.StatusMovedPermanently)
 }
