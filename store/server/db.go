@@ -105,6 +105,9 @@ func (user *User) Get(login string) (bool, error) {
 
 //Save is
 func (vip *VIP) Save() (int64, error) {
+	if ok,_:= vip.Get(vip.Login);ok {
+		return 0,nil
+	}
 	return engine.Insert(vip)
 }
 
