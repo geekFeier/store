@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8a78b05b-fb3f-4765-9f36-22786a70d14a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/server/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/db.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/vip.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/vip.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -31,8 +29,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server/vip.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" column="19" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
+            <state relative-caret-position="180">
+              <caret line="12" column="14" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
               <folding>
                 <element signature="e#15#40#0" expanded="true" />
               </folding>
@@ -43,8 +41,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/server.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-168">
-              <caret line="274" column="20" selection-start-line="274" selection-start-column="20" selection-end-line="274" selection-end-column="20" />
+            <state relative-caret-position="642">
+              <caret line="327" column="13" selection-start-line="327" selection-start-column="13" selection-end-line="327" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -58,9 +56,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/server/db.go" />
         <option value="$PROJECT_DIR$/server/server.go" />
         <option value="$PROJECT_DIR$/server/vip.go" />
-        <option value="$PROJECT_DIR$/server/db.go" />
       </list>
     </option>
   </component>
@@ -97,6 +95,11 @@
               <item name="store" type="b2602c69:ProjectViewProjectNode" />
               <item name="store" type="462c0819:PsiDirectoryNode" />
               <item name="server" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="store" type="b2602c69:ProjectViewProjectNode" />
+              <item name="store" type="462c0819:PsiDirectoryNode" />
+              <item name="star" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -175,15 +178,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server/server.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-168">
-          <caret line="274" column="20" selection-start-line="274" selection-start-column="20" selection-end-line="274" selection-end-column="20" />
+        <state relative-caret-position="642">
+          <caret line="327" column="13" selection-start-line="327" selection-start-column="13" selection-end-line="327" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server/vip.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="19" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
+        <state relative-caret-position="180">
+          <caret line="12" column="14" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
           <folding>
             <element signature="e#15#40#0" expanded="true" />
           </folding>

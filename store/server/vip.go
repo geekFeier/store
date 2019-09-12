@@ -9,7 +9,8 @@ func overTime(t int64, years, months, days int) bool {
 	now := time.Now().Unix()
 	after := time.Unix(t, 0).AddDate(years, months, days).Unix()
 
-	if after > now {
+	fmt.Printf("Now %d a years later %d, vip time %d",now,after,t)
+	if after <= now {
 		fmt.Println("vip not past due")
 		return true
 	}
