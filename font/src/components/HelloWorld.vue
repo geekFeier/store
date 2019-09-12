@@ -1,13 +1,12 @@
 <template>
   <div class="hello">
-    <img src="https://github.com/sealyun/hugo/blob/master/static/logo.jpeg?raw=true" />
-    <br>kubernetes集群离线安装包, 仅需三步 
-    <p>sh init.sh && sh master.sh
-      <br>kubeadm join 47.51.23.28:6443 --token 17r0uw.i04zbcsllzxoa0tb
-      <!--a href="https://github.com/login/oauth/authorize?client_id=89c1b05d77fb1c92a1ef&scope=user:email" target="_blank" rel="noopener">login github</a-->
+    <img src="https://s2.ax1x.com/2019/09/12/nBpyZt.jpg" />
+    <br>kubernetes集群离线安装包, 一条命令高可用
+    <p>      
+<!--a href="https://github.com/login/oauth/authorize?client_id=89c1b05d77fb1c92a1ef&scope=user:email" target="_blank" rel="noopener">login github</a-->
     </p>
     <p>
-      使用kubeadm安装，包含安装所需的所有二进制文件，镜像文件，systemd配置，yaml配置与一些简单的启动脚本，五分钟搞定kubernetes安装~ 遇到任何问题可进群咨询，安装出问题提供远程协助
+      使用kubeadm安装，包含安装所需的所有二进制文件，镜像文件，systemd配置，yaml配置与一些简单的启动脚本，五分钟搞定kubernetes安装~ 遇到任何问题可进群咨询，安装出问题提供远程协助,内核负载高可用，不依赖haproxy keepalived ansible,99年证书
     </p>
     <br/>
     <h3>商品列表</h3>

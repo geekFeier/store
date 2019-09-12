@@ -90,6 +90,7 @@ func (u UserResource) RegisterTo(container *restful.Container) {
 	user.Route(user.GET("/info/payee").To(userPayeeInfo))
 	user.Route(user.PUT("/info/payee").To(updateUserPayeeInfo))
 	user.Route(user.POST("/info/withdraw").To(userWithdraw))
+	user.Route(user.GET("/vip/charge").To(vipCharge))
 
 	container.Add(ws)
 	container.Add(user)
@@ -248,6 +249,40 @@ func checkCookie(req *restful.Request, resp *restful.Response, chain *restful.Fi
 	chain.ProcessFilter(req, resp)
 }
 
+func vipChargeNotify(request *restful.Request, response *restful.Response) {
+	login := request.PathParameter("login")
+	time := time.Now().Unix()
+
+	vip := &VIP{Login: login}
+	vip.Type = "nomal"
+	vip.Date = time
+	vip.Update()
+}
+
+func vipCharge(request *restful.Request, response *restful.Response) {
+	cookie, err := request.Request.Cookie("user")
+	if err != nil {
+		fmt.Println("Can't get cookie")
+		return
+	}
+	login := cookie.Value
+	var price float64
+	price = 69
+	vip := &VIP{}
+	vip.Login = login
+	vip.Price = price
+
+	vip.Save()
+
+	productName := "sealyunvip"
+	viprand := fmt.Sprintf("%s-%d", login, time.Now().Unix())
+	fmt.Printf("vip %s charge", login)
+	returnURL := fmt.Sprintf("/user/vip/notify/%s", login)
+	notifyURL := fmt.Sprintf("/user/vip/notify/%s", login)
+	payURL := PayURL(price, viprand, productName, GetFullURL(returnURL), GetFullURL(notifyURL))
+	http.Redirect(response, request.Request, payURL, http.StatusMovedPermanently)
+}
+
 func product(request *restful.Request, response *restful.Response) {
 	referrer := request.QueryParameter(Referrer)
 	productName := request.PathParameter("product")
@@ -284,7 +319,7 @@ func product(request *restful.Request, response *restful.Response) {
 		}
 	}
 
-	if up.Status == "payed" {
+	if up.Status == "payed" || isVip(login) {
 		response.AddHeader("Content-Type", "application/x-gzip")
 		http.Redirect(response, request.Request, GetProductURL(productName), http.StatusMovedPermanently)
 		return

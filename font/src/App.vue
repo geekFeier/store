@@ -2,7 +2,7 @@
   <div id="app">
     <Menu mode="horizontal" :theme="theme1" active-name="1">
       <Row>
-        <Col span="21">
+        <Col span="18">
           <MenuItem name="1">
             <a href="http://store.lameleg.com">
               <li>SealYun</li>
@@ -14,7 +14,7 @@
             </a>
           </MenuItem>
           <MenuItem name="3">
-            <a target="_blank" href="https://sealyun.com/post/docs/">
+            <a target="_blank" href="https://github.com/fanux/sealos">
               <li>文档</li>
             </a>
           </MenuItem>
@@ -56,7 +56,13 @@
               </MenuItem>
             </MenuGroup>
         </Submenu>
-
+        </Col>
+        <Col span="3">
+            <Tooltip :content="年费会员，任意下载所有版本软件包">
+            <a :href="http://store.lameleg.com:8080/user/vip/charge" target="_blank" rel="noopener">
+              <Button id="buy" type="success">会员69元/年</Button>
+            </a>
+            </Tooltip>
         </Col>
         <Col span="3">
           <MenuItem name="4">

@@ -19,6 +19,14 @@ func GetEngine() {
 	}
 }
 
+//VIP is
+type VIP struct {
+	Login string
+	Price float64
+	Date  int64
+	Type  string // normal super
+}
+
 //Product is
 type Product struct {
 	ProductName string
@@ -54,11 +62,13 @@ type UserPayeeAccount struct {
 //CreateTables is
 func CreateTables() {
 	err := engine.CreateTables(new(User))
+	err = engine.CreateTables(new(VIP))
 	err = engine.CreateTables(new(Product))
 	err = engine.CreateTables(new(UserProduct))
 	err = engine.CreateTables(new(UserPayeeAccount))
 
 	err = engine.Sync(new(User))
+	err = engine.Sync(new(VIP))
 	err = engine.Sync(new(Product))
 	err = engine.Sync(new(UserProduct))
 	err = engine.Sync(new(UserPayeeAccount))
@@ -91,6 +101,21 @@ func (user *User) Save() (int64, error) {
 //Get is
 func (user *User) Get(login string) (bool, error) {
 	return engine.Where("login = ?", login).Get(user)
+}
+
+//Save is
+func (vip *VIP) Save() (int64, error) {
+	return engine.Insert(vip)
+}
+
+//Get is
+func (vip *VIP) Get(login string) (bool, error) {
+	return engine.Where("login = ?", login).Get(vip)
+}
+
+//Update is
+func (vip *VIP) Update() (int64, error) {
+	return engine.Where("login = ?", vip.Login).Update(vip)
 }
 
 //Save is
