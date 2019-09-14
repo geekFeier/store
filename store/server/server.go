@@ -276,7 +276,7 @@ func vipCharge(request *restful.Request, response *restful.Response) {
 	vip.Price = price
 
 	if isVip(login) {
-		response.WriteString("您已经是会员了，还要再充一次，钱多吗？")
+		response.WriteEntity(&Res{1, "您已经是会员了，还要再充一次，钱多吗？"})
 		return
 	}
 
