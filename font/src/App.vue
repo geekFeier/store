@@ -56,6 +56,33 @@
               </MenuItem>
             </MenuGroup>
         </Submenu>
+        <Submenu name="5">
+            <template slot="title">
+                友情链接
+            </template>
+            <MenuGroup title="kuboard">
+              <MenuItem name="0">
+                <a target="_blank" href="https://kuboard.cn/#sealyun">
+                  <li>kuboard 美观简约的k8s dashboard</li>
+                </a>
+              </MenuItem>
+              <MenuItem name="1">
+                <a target="_blank" href="https://www.yangcs.net#sealyun">
+                  <li>骚客米开朗琪杨</li>
+                </a>
+              </MenuItem>
+              <MenuItem name="2">
+                <a target="_blank" href="https://www.qikqiak.com/?utm_source=sealyun.com">
+                  <li>阳明的博客</li>
+                </a>
+              </MenuItem>
+              <MenuItem name="3">
+                <a target="_blank" href="https://zhangguanzhang.github.io/#sealyun">
+                  <li>张馆长</li>
+                </a>
+              </MenuItem>
+            </MenuGroup>
+        </Submenu>
         </Col>
         <Col span="3">
             <Tooltip content="年费会员，任意下载所有版本软件包">
