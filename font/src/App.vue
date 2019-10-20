@@ -18,27 +18,27 @@
               <li>文档</li>
             </a>
           </MenuItem>
-          <MenuItem name="3">
+          <MenuItem name="4">
             <a target="_blank" href="https://sealyun.com/post/referrer/">
               <li>加入营销</li>
             </a>
           </MenuItem>
-          <MenuItem name="3">
+          <MenuItem name="5">
             <a target="_blank" href="https://mp.weixin.qq.com/s/Ra722VtdLitDbM0GExom6A">
               <li>售后支持</li>
             </a>
           </MenuItem>
-          <MenuItem name="3">
+          <MenuItem name="6">
             <a target="_blank" href="https://shop929htt07.market.aliyun.com/page/productlist.html?cId=53366009">
               <li>阿里云市场</li>
             </a>
           </MenuItem>
-        <Submenu name="4">
+        <Submenu name="7">
             <template slot="title">
                 <Icon type="logo-github" />
                 开源项目
             </template>
-            <MenuGroup title="使用">
+            <MenuGroup title="简单而不失强大">
               <MenuItem name="0">
                 <a target="_blank" href="https://github.com/fanux/sealos">
                   <li>kubernetes一键HA</li>
@@ -56,14 +56,14 @@
               </MenuItem>
             </MenuGroup>
         </Submenu>
-        <Submenu name="5">
+        <Submenu name="8">
             <template slot="title">
                 友情链接
             </template>
-            <MenuGroup title="kuboard">
+            <MenuGroup title="友情链接">
               <MenuItem name="0">
                 <a target="_blank" href="https://kuboard.cn/#sealyun">
-                  <li>kuboard 美观简约的k8s dashboard</li>
+                  <li>kuboard k8s dashboard</li>
                 </a>
               </MenuItem>
               <MenuItem name="1">
