@@ -33,11 +33,16 @@ func payedUserList(request *restful.Request, response *restful.Response) {
 	err := engine.Join("INNER", "user_product", "user_product.login = user.login").Find(&users)
 	_ = productName
 
+	c := 0
 	for _, u := range users {
 		if inUserList(u, usersUni) {
 			continue
 		}
+		c++
 		usersUni = append(usersUni, u)
+		if c > 250 {
+			break
+		}
 	}
 
 	if err != nil {
