@@ -196,6 +196,7 @@ func init() {
 	GetEngine()
 	CreateTables()
 
+	/*
 	p := &Product{
 		ProductName:   "kubernetes1.13.1",
 		ProductURL:    "http://sealyun.oss-cn-beijing.aliyuncs.com/c89602f7cb2a/kube1.13.1.tar.gz",
@@ -283,4 +284,5 @@ func init() {
 		ProductDivide: 0.6,
 	}
 	saveProduct(p)
+	*/
 }
