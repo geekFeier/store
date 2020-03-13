@@ -242,7 +242,7 @@ func checkCookie(req *restful.Request, resp *restful.Response, chain *restful.Fi
 	resp.AddHeader("Pragma", "no-cache")
 	resp.AddHeader("Expires", "0")
 	cookie, err := req.Request.Cookie("user")
-	if err != nil || cookie == nil {
+	if err != nil || cookie == nil || len(cookie.Value) == 0{
 		fmt.Println("login please : ", err, req.Request.URL.String(), req.QueryParameter(Referrer))
 		state := fmt.Sprintf("%s", req.Request.URL.String())
 		http.Redirect(resp, req.Request, GetLoginURL(state), http.StatusMovedPermanently)
