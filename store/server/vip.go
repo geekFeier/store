@@ -2,6 +2,7 @@ package serve
 
 import (
 	"fmt"
+	"github.com/fanux/store/store/server/module"
 	"time"
 )
 
@@ -9,7 +10,7 @@ func overTime(t int64, years, months, days int) bool {
 	now := time.Now().Unix()
 	after := time.Unix(t, 0).AddDate(years, months, days).Unix()
 
-	fmt.Printf("Now %d a years later %d, vip time %d",now,after,t)
+	fmt.Printf("Now %d a years later %d, vip time %d", now, after, t)
 	if after <= now {
 		fmt.Println("vip not past due")
 		return true
@@ -19,7 +20,7 @@ func overTime(t int64, years, months, days int) bool {
 }
 
 func isVip(login string) bool {
-	vip := &VIP{Login: login}
+	vip := &module.VIP{Login: login}
 	ok, err := vip.Get(login)
 	if err != nil || !ok {
 		fmt.Printf("get vip %s failed", login)

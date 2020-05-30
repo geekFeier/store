@@ -1,41 +1,21 @@
 package serve
 
-import restful "github.com/emicklei/go-restful"
-
-//PayedUser is
-type PayedUser struct {
-	User `xorm:"extends"`
-	Name string
-}
-
-//TableName is
-func (PayedUser) TableName() string {
-	return "user"
-}
-
-func inUserList(u PayedUser, list []PayedUser) bool {
-	for _, ul := range list {
-		if ul.User.Login == u.User.Login {
-			return true
-		}
-	}
-
-	return false
-}
+import (
+	restful "github.com/emicklei/go-restful"
+	"github.com/fanux/store/store/server/module"
+)
 
 func payedUserList(request *restful.Request, response *restful.Response) {
 	productName := request.PathParameter("product")
 
-	var users []PayedUser
-	var usersUni []PayedUser
-	//err := engine.Join("INNER", "user_product", "user_product.login = user.login").Where("status = ?", "payed").And("product_name = ?", productName).Find(&users)
-	//err := engine.Join("INNER", "user_product", "user_product.login = user.login").Where("status = ?", "payed").Find(&users)
-	err := engine.Join("INNER", "user_product", "user_product.login = user.login").Find(&users)
+	var users []module.PayedUser
+	var usersUni []module.PayedUser
+	users, err := module.PayedUserLoginList(users)
 	_ = productName
 
 	c := 0
 	for _, u := range users {
-		if inUserList(u, usersUni) {
+		if module.InUserList(u, usersUni) {
 			continue
 		}
 		c++

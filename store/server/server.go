@@ -2,6 +2,7 @@ package serve
 
 import (
 	"fmt"
+	"github.com/fanux/store/store/server/module"
 	"io"
 	"log"
 	"net/http"
@@ -107,7 +108,7 @@ func userWithdraw(request *restful.Request, response *restful.Response) {
 		return
 	}
 
-	upa := &UserPayeeAccount{Login: cookie.Value}
+	upa := &module.UserPayeeAccount{Login: cookie.Value}
 	has, err := upa.Get(cookie.Value)
 	if err != nil {
 		fmt.Println("Can't get user payee account")
@@ -139,7 +140,7 @@ func userInfo(request *restful.Request, response *restful.Response) {
 		}
 	*/
 
-	user := &User{}
+	user := &module.User{}
 	has, err := user.Get(cookie.Value)
 	if err != nil {
 		io.WriteString(response.ResponseWriter, "get user info failed")
@@ -165,7 +166,7 @@ func userPayeeInfo(request *restful.Request, response *restful.Response) {
 		}
 	*/
 
-	upa := &UserPayeeAccount{
+	upa := &module.UserPayeeAccount{
 		Login: cookie.Value,
 	}
 	has, err := upa.Get(cookie.Value)
@@ -188,7 +189,7 @@ func updateUserPayeeInfo(request *restful.Request, response *restful.Response) {
 		return
 	}
 
-	upa := &UserPayeeAccount{}
+	upa := &module.UserPayeeAccount{}
 	err = request.ReadEntity(upa)
 	if err != nil {
 		response.WriteEntity(&Res{1, "get user payee account failed"})
@@ -203,7 +204,7 @@ func updateUserPayeeInfo(request *restful.Request, response *restful.Response) {
 		}
 	*/
 
-	upaDB := &UserPayeeAccount{}
+	upaDB := &module.UserPayeeAccount{}
 	has, err := upaDB.Get(upa.Login)
 	if err != nil {
 		response.WriteEntity(&Res{1, "get user payee account info failed"})
@@ -242,10 +243,10 @@ func checkCookie(req *restful.Request, resp *restful.Response, chain *restful.Fi
 	resp.AddHeader("Pragma", "no-cache")
 	resp.AddHeader("Expires", "0")
 	cookie, err := req.Request.Cookie("user")
-	if err != nil || cookie == nil || len(cookie.Value) == 0{
+	if err != nil || cookie == nil || len(cookie.Value) == 0 {
 		fmt.Println("login please : ", err, req.Request.URL.String(), req.QueryParameter(Referrer))
 		state := fmt.Sprintf("%s", req.Request.URL.String())
-		http.Redirect(resp, req.Request, GetLoginURL(state), http.StatusMovedPermanently)
+		http.Redirect(resp, req.Request, module.GetLoginURL(state), http.StatusMovedPermanently)
 		return
 	}
 	chain.ProcessFilter(req, resp)
@@ -255,7 +256,7 @@ func vipChargeNotify(request *restful.Request, response *restful.Response) {
 	login := request.PathParameter("login")
 	time := time.Now().Unix()
 
-	vip := &VIP{Login: login}
+	vip := &module.VIP{Login: login}
 	vip.Type = "nomal"
 	vip.Date = time
 	vip.Update()
@@ -271,7 +272,7 @@ func vipCharge(request *restful.Request, response *restful.Response) {
 	login := cookie.Value
 	var price float64
 	price = 69
-	vip := &VIP{}
+	vip := &module.VIP{}
 	vip.Login = login
 	vip.Price = price
 
@@ -305,7 +306,7 @@ func product(request *restful.Request, response *restful.Response) {
 	fmt.Printf("user %s buy product %s", login, productName)
 
 	//read user product in database by key (login , productname)
-	up := &UserProduct{}
+	up := &module.UserProduct{}
 	var has bool
 	has, err = up.Get(login, productName)
 	fmt.Printf("user %s product %s status %s", login, productName, up.Status)
@@ -329,14 +330,14 @@ func product(request *restful.Request, response *restful.Response) {
 
 	if up.Status == "payed" || isVip(login) {
 		response.AddHeader("Content-Type", "application/x-gzip")
-		http.Redirect(response, request.Request, GetProductURL(productName), http.StatusMovedPermanently)
+		http.Redirect(response, request.Request, module.GetProductURL(productName), http.StatusMovedPermanently)
 		return
 	}
 	if referrer == "" && up.Referrer == "" {
 		referrer = "fanux"
 	}
 
-	price := GetProductPrice(productName)
+	price := module.GetProductPrice(productName)
 	//returnURL := fmt.Sprintf("pro/%s", productName)
 	returnURL := fmt.Sprintf("/pro/pay/notify/%s/%s/%s", login, productName, referrer)
 	notifyURL := fmt.Sprintf("/pro/pay/notify/%s/%s/%s", login, productName, referrer)
@@ -362,7 +363,7 @@ func pay(request *restful.Request, response *restful.Response) {
 	fmt.Println("notify called", login, productName, referrer)
 
 	//save up
-	up := &UserProduct{
+	up := &module.UserProduct{
 		Login:       login,
 		ProductName: productName,
 	}
@@ -371,8 +372,8 @@ func pay(request *restful.Request, response *restful.Response) {
 		fmt.Println("get user pro error", err)
 	}
 	up.Referrer = referrer
-	up.PayReferrer = GetProductDevide(productName)
-	up.ProductPrice = GetProductPrice(productName)
+	up.PayReferrer = module.GetProductDevide(productName)
+	up.ProductPrice = module.GetProductPrice(productName)
 	if !has {
 		fmt.Println("can't find up")
 	}
@@ -383,7 +384,7 @@ func pay(request *restful.Request, response *restful.Response) {
 		fmt.Println("save up error", err)
 	}
 
-	upa := &UserPayeeAccount{
+	upa := &module.UserPayeeAccount{
 		Login: referrer,
 	}
 	has, err = upa.Get(referrer)
@@ -399,17 +400,17 @@ func pay(request *restful.Request, response *restful.Response) {
 	}
 
 	response.AddHeader("Content-Type", "application/x-gzip")
-	http.Redirect(response, request.Request, GetProductURL(productName), http.StatusMovedPermanently)
+	http.Redirect(response, request.Request, module.GetProductURL(productName), http.StatusMovedPermanently)
 }
 
 func (u UserResource) callback(request *restful.Request, response *restful.Response) {
 	code := request.QueryParameter("code")
-	accessToken, err := GetGithubAccessToken(clientID, clientSecret, code)
+	accessToken, err := module.GetGithubAccessToken(module.ClientID, module.ClientSecret, code)
 	if err != nil {
 		io.WriteString(response.ResponseWriter, "fetch token failed"+accessToken)
 		return
 	}
-	user, err := GetUserInfo(accessToken)
+	user, err := module.GetUserInfo(accessToken)
 	if err != nil {
 		fmt.Println(err)
 		io.WriteString(response.ResponseWriter, fmt.Sprintf("get user info failed %s", err))
