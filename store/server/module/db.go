@@ -11,7 +11,7 @@ var engine *xorm.Engine
 //GetEngine is
 func GetEngine() {
 	var err error
-	engine, err = xorm.NewEngine("mysql", "root:admin@/store?charset=utf8")
+	engine, err = xorm.NewEngine("mysql", "root:Fanux#123@/store?charset=utf8")
 	if err != nil {
 		fmt.Println(err)
 		panic("start engine failed")
