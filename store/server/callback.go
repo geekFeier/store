@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/emicklei/go-restful"
 	"github.com/fanux/store/store/server/module"
+	"github.com/fanux/store/store/server/vars"
 	"io"
 	"net/http"
 )
@@ -50,10 +51,10 @@ func (u UserResource) callback(request *restful.Request, response *restful.Respo
 	var url string
 	if state == "" {
 		//TODO return to home page
-		url = fmt.Sprintf("http://%s", Domain)
+		url = fmt.Sprintf("http://%s", vars.Domain)
 		fmt.Println("login redirect rul is: ", url)
 	} else {
-		url = fmt.Sprintf("http://%s:%s%s?user=%s", Domain, BackPort, state, user.Login)
+		url = fmt.Sprintf("http://%s:%s%s?user=%s", vars.Domain, vars.BackPort, state, user.Login)
 	}
 	//io.WriteString(response.ResponseWriter, "this would be a normal response")
 	//http.Redirect(response, request.Request, url+state, http.StatusMovedPermanently)

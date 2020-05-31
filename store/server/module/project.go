@@ -33,14 +33,14 @@ func (ProjectInfo) TableName() string {
 }
 
 //engine.SQL("" ).Find()
-func (p *Project) GetFromProject(class, projectName, version string) ([]ProjectInfo, error) {
+func (p *Project) GetFromProject(class, projectName string) ([]ProjectInfo, error) {
 	var projects []ProjectInfo
 	err := engine.
 		Join("left", "project_version", "project_version.project_name=project.name").
 		Join("left", "product", "project_version.product_name=product.product_name").
 		Where("project.class=?", class).
 		Where("project.name=?", projectName).
-		Where("project_version.version=?", version).
+		//Where("project_version.version=?", version).
 		Find(&projects)
 	if err != nil {
 		return projects, fmt.Errorf("list project failed %v", err)

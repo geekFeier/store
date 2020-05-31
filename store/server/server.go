@@ -3,6 +3,7 @@ package server
 import (
 	"fmt"
 	"github.com/emicklei/go-restful"
+	"github.com/fanux/store/store/server/vars"
 	"log"
 	"net/http"
 )
@@ -31,12 +32,6 @@ const (
 	Referrer = "referrer"
 )
 
-//const
-var (
-	Domain   = "store.lameleg.com"
-	BackPort = "8080"
-)
-
 //Res is
 type Res struct {
 	Code   int
@@ -49,7 +44,7 @@ func (r Res) String() string {
 
 //GetFullURL is
 func GetFullURL(path string) string {
-	return fmt.Sprintf("http://%s:%s/%s", Domain, BackPort, path)
+	return fmt.Sprintf("http://%s:%s/%s", vars.Domain, vars.BackPort, path)
 }
 
 //RegisterTo is
@@ -66,6 +61,10 @@ func (u UserResource) RegisterTo(container *restful.Container) {
 	loginless.Route(loginless.GET("/loginless/info/user").To(userInfo))
 	loginless.Route(loginless.GET("/loginless/vip/notify/{login}").To(vipChargeNotify))
 	loginless.Route(loginless.POST("/loginless/vip/notify/{login}").To(vipChargeNotify))
+	// /class/{class_name}/project/{project_name}/version/{version}
+	loginless.Route(loginless.GET("/loginless/class").To(classList))
+	//loginless.Route(loginless.GET("/loginless/class/{class_name}/project").To(vipChargeNotify))
+	//loginless.Route(loginless.GET("/loginless/class/{class_name}/project/{project_name}/version").To(vipChargeNotify))
 
 	ws := new(restful.WebService)
 	ws.

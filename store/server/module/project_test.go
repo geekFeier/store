@@ -75,7 +75,6 @@ func TestProject_GetFromProject(t *testing.T) {
 	type args struct {
 		class       string
 		projectName string
-		version     string
 	}
 	tests := []struct {
 		name    string
@@ -87,7 +86,6 @@ func TestProject_GetFromProject(t *testing.T) {
 		{name: "fromProject", fields: fields{}, args: args{
 			class:       "cloud_kernel",
 			projectName: "kubernetes",
-			version:     "1.14.4",
 		}, want: []ProjectInfo{
 			{
 				Project: Project{
@@ -111,6 +109,28 @@ func TestProject_GetFromProject(t *testing.T) {
 					Version:     "1.14.4",
 				},
 			},
+			{
+				Project: Project{
+					Name:     "kubernetes",
+					Describe: "kubernetes一键安装",
+					Owner:    "fanux",
+					VipPrice: 69,
+					Docs:     "xxx",
+					Homepage: "sealyun.com",
+					Class:    "cloud_kernel",
+				},
+				Product: Product{
+					ProductName:   "kubernetes1.14.5",
+					ProductURL:    "https://sealyun.oss-cn-beijing.aliyuncs.com/98f70342b5e59cf6c244072e19dae133-1.14.5/kube1.14.5.tar.gz",
+					ProductPrice:  50,
+					ProductDivide: 0.6,
+				},
+				ProjectVersion: ProjectVersion{
+					ProjectName: "kubernetes",
+					ProductName: "kubernetes1.14.5",
+					Version:     "1.14.5",
+				},
+			},
 		}, wantErr: false},
 	}
 	for _, tt := range tests {
@@ -124,7 +144,7 @@ func TestProject_GetFromProject(t *testing.T) {
 				Homepage: tt.fields.Homepage,
 				Class:    tt.fields.Class,
 			}
-			got, err := p.GetFromProject(tt.args.class, tt.args.projectName, tt.args.version)
+			got, err := p.GetFromProject(tt.args.class, tt.args.projectName)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("GetFromProduct() error = %v, wantErr %v", err, tt.wantErr)
 				return

@@ -16,6 +16,7 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/fanux/store/store/server/vars"
 
 	serve "github.com/fanux/store/store/server"
 	"github.com/spf13/cobra"
@@ -46,8 +47,9 @@ func init() {
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
 	// serveCmd.PersistentFlags().String("foo", "", "A help for foo")
-	serveCmd.Flags().StringVarP(&serve.Domain, "domain", "d", "localhost", "backend domain")
-	serveCmd.Flags().StringVarP(&serve.BackPort, "port", "p", "8001", "backend domain")
+	serveCmd.Flags().StringVarP(&vars.Domain, "domain", "d", "localhost", "backend domain")
+	serveCmd.Flags().StringVarP(&vars.BackPort, "port", "p", "8001", "backend domain")
+	serveCmd.Flags().BoolVar(&vars.ShowSQL, "show-sql", false, "show sql")
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:

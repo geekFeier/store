@@ -2,6 +2,7 @@ package module
 
 import (
 	"fmt"
+	"github.com/fanux/store/store/server/vars"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/go-xorm/xorm"
 )

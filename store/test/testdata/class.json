@@ -1,0 +1,14 @@
+[
+  {
+    "Name": "cloud_kernel",
+    "Alias": "云内核",
+    "Label": "key=kernel",
+    "Describe": "xxx"
+  },
+  {
+    "Name": "stateful_set",
+    "Alias": "有状态应用",
+    "Label": "key=app",
+    "Describe": "xxx"
+  }
+]
