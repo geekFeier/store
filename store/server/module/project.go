@@ -33,7 +33,7 @@ func (ProjectInfo) TableName() string {
 }
 
 //engine.SQL("" ).Find()
-func (p *Project) GetFromProject(class, projectName string) ([]ProjectInfo, error) {
+func (p *Project) ListVersionsFromProject(class, projectName string) ([]ProjectInfo, error) {
 	var projects []ProjectInfo
 	err := engine.
 		Join("left", "project_version", "project_version.project_name=project.name").

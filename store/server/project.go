@@ -13,3 +13,24 @@ func classList(request *restful.Request, response *restful.Response) {
 	}
 	response.WriteEntity(&ps)
 }
+
+func projectList(request *restful.Request, response *restful.Response) {
+	className := request.PathParameter("class_name")
+	p := &module.Project{}
+	ps, err := p.ListFromClass(className)
+	if err != nil {
+		response.WriteEntity(&Res{1, "list project from class name failed"})
+	}
+	response.WriteEntity(&ps)
+}
+
+func versionList(request *restful.Request, response *restful.Response) {
+	className := request.PathParameter("class_name")
+	projectName := request.PathParameter("project_name")
+	p := &module.ProjectInfo{}
+	ps, err := p.ListVersionsFromProject(className, projectName)
+	if err != nil {
+		response.WriteEntity(&Res{1, "list project version from class and class name failed"})
+	}
+	response.WriteEntity(&ps)
+}

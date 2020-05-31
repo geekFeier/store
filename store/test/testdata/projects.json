@@ -1,0 +1,20 @@
+[
+  {
+    "Name": "kubernetes",
+    "Describe": "kubernetes一键安装",
+    "Owner": "fanux",
+    "VipPrice": 69,
+    "Docs": "xxx",
+    "Homepage": "sealyun.com",
+    "Class": "cloud_kernel"
+  },
+  {
+    "Name": "kubernetes11",
+    "Describe": "kubernetes一键安装11",
+    "Owner": "fanux",
+    "VipPrice": 69,
+    "Docs": "xxx",
+    "Homepage": "sealyun.com",
+    "Class": "cloud_kernel"
+  }
+]

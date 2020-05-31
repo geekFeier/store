@@ -63,8 +63,8 @@ func (u UserResource) RegisterTo(container *restful.Container) {
 	loginless.Route(loginless.POST("/loginless/vip/notify/{login}").To(vipChargeNotify))
 	// /class/{class_name}/project/{project_name}/version/{version}
 	loginless.Route(loginless.GET("/loginless/class").To(classList))
-	//loginless.Route(loginless.GET("/loginless/class/{class_name}/project").To(vipChargeNotify))
-	//loginless.Route(loginless.GET("/loginless/class/{class_name}/project/{project_name}/version").To(vipChargeNotify))
+	loginless.Route(loginless.GET("/loginless/class/{class_name}/project").To(projectList))
+	loginless.Route(loginless.GET("/loginless/class/{class_name}/project/{project_name}/version").To(versionList))
 
 	ws := new(restful.WebService)
 	ws.

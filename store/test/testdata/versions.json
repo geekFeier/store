@@ -1,0 +1,30 @@
+[
+  {
+    "Name": "kubernetes",
+    "Describe": "kubernetes一键安装",
+    "Owner": "fanux",
+    "VipPrice": 69,
+    "Docs": "xxx",
+    "Homepage": "sealyun.com",
+    "Class": "cloud_kernel",
+    "ProjectName": "kubernetes",
+    "Version": "1.14.4",
+    "ProductURL": "https://sealyun.oss-cn-beijing.aliyuncs.com/9763df396eeb1359fa9d0a34de64e8a7-1.14.4/kube1.14.4.tar.gz",
+    "ProductPrice": 50,
+    "ProductDivide": 0.6
+  },
+  {
+    "Name": "kubernetes",
+    "Describe": "kubernetes一键安装",
+    "Owner": "fanux",
+    "VipPrice": 69,
+    "Docs": "xxx",
+    "Homepage": "sealyun.com",
+    "Class": "cloud_kernel",
+    "ProjectName": "kubernetes",
+    "Version": "1.14.5",
+    "ProductURL": "https://sealyun.oss-cn-beijing.aliyuncs.com/98f70342b5e59cf6c244072e19dae133-1.14.5/kube1.14.5.tar.gz",
+    "ProductPrice": 50,
+    "ProductDivide": 0.6
+  }
+]

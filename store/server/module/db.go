@@ -17,6 +17,7 @@ func GetEngine() {
 		fmt.Println(err)
 		panic("start engine failed")
 	}
+	engine.ShowSQL(vars.ShowSQL)
 }
 
 //CreateTables is
