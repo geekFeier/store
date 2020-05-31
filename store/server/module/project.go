@@ -40,6 +40,7 @@ func (p *Project) ListVersionsFromProject(class, projectName string) ([]ProjectI
 		Join("left", "product", "project_version.product_name=product.product_name").
 		Where("project.class=?", class).
 		Where("project.name=?", projectName).
+		OrderBy("project_version.version desc").
 		//Where("project_version.version=?", version).
 		Find(&projects)
 	if err != nil {
