@@ -10,7 +10,6 @@ Vue.use(VueResource);
 Vue.use(VueCookies);
 VueCookies.config('7d')
 
-//import HelloWorld from './components/HelloWorld.vue'
 import App from './App.vue'
 
 
@@ -28,16 +27,16 @@ Vue.use(iView)
 
 
 const router = new VueRouter({
-    mode: 'history',
-    base: __dirname,
-    routes: [{
-        path: '*',
-        components: () =>
-            import ('./components/HelloWorld.vue')
-    }]
+  mode: 'history',
+  base: __dirname,
+  routes: [{
+    path: '*',
+    components: () =>
+      import('./components/index.vue')
+  }]
 })
 new Vue({
-    el: '#app',
-    router,
-    render: h => h(App),
+  el: '#app',
+  router,
+  render: h => h(App),
 })
