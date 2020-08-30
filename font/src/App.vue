@@ -1,5 +1,120 @@
 <template>
   <div id="app">
+    <header class="header-area">
+      <div class="main-header-area">
+        <div class="classy-nav-container breakpoint-off">
+          <div class="container">
+            <!-- Classy Menu -->
+            <nav class="classy-navbar justify-content-between" id="hamiNav">
+
+              <!-- Logo -->
+              <a class="nav-brand" href="http://store.lameleg.com"><img width="100px" src="./assets/logo.png" alt=""></a>
+
+              <!-- Navbar Toggler -->
+              <div class="classy-navbar-toggler">
+                <span class="navbarToggler"><span></span><span></span><span></span></span>
+              </div>
+
+              <div class="classy-menu">
+                <div class="classycloseIcon">
+                  <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                </div>
+                <div class="classynav">
+                  <ul id="nav">
+                    <li class="active"><a target="_blank" href="http://store.lameleg.com">SealYun</a></li>
+                    <li><a target="_blank" href="https://sealyun.com">博客</a></li>
+                    <li><a target="_blank" href="https://github.com/fanux/sealos">文档</a></li>
+                    <li><a target="_blank" href="https://sealyun.com/post/referrer/">加入营销</a></li>
+                    <li><a target="_blank" href="https://mp.weixin.qq.com/s/Ra722VtdLitDbM0GExom6A">售后支持</a></li>
+                    <li><a target="_blank" href="https://shop929htt07.market.aliyun.com/page/productlist.html?cId=53366009">阿里云市场</a></li>
+                    <li class="cn-dropdown-item has-down">
+                      <a href="javascript:void(0)">
+                        <Icon type="logo-github" />
+                        开源项目</a>
+                      <ul class="dropdown">
+                        <!-- <li><a>- 简单而不失强大</a></li> -->
+                        <li><a target="_blank" href="https://github.com/fanux/sealos">- kubernetes一键HA</a></li>
+                        <li><a target="_blank" href="https://github.com/fanux/fist">- 轻量级kubernetes管理工具</a></li>
+                        <li><a target="_blank" href="https://github.com/fanux/lhttp">- 好用的websocket框架</a></li>
+                      </ul>
+                    </li>
+
+                    <li class="cn-dropdown-item has-down">
+                      <a href="javascript:void(0)">
+                        <Icon type="logo-github" />
+                        友情链接</a>
+                      <ul class="dropdown">
+                        <li><a target="_blank" href="https://www.yangcs.net#sealyun">- 骚客米开朗琪杨</a></li>
+                        <li><a target="_blank" href="https://www.qikqiak.com/?utm_source=sealyun.com">- 阳明的博客</a></li>
+                        <li><a target="_blank" href="https://zhangguanzhang.github.io/#sealyun">- 张馆长</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+
+                  <div class="live-chat-btn ml-5 mt-4 mt-lg-0 ml-md-4" style="margin-bottom:12px;">
+                    <Avatar v-if="avata" :src="avata_url" />
+                    <Tooltip v-else content="请使用github账户登录">
+                      <a :href="loginurl" target="_blank" rel="noopener">
+                        <li>
+                          <i class="ivu-icon ivu-icon-logo-github"></i>
+                          登录
+                        </li>
+                      </a>
+                    </Tooltip>
+                  </div>
+                </div>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="welcome-area">
+
+      <div class="welcome-pattern">
+        <img src="./assets/img/core-img/welcome-pattern.png" alt="">
+      </div>
+
+      <div class="welcome-slides">
+
+        <div class="single-welcome-slide">
+          <div class="welcome-content h-100">
+            <div class="container h-100">
+              <div class="row h-100 align-items-center">
+                <!-- Welcome Text -->
+                <div class="col-12 col-md-9 col-lg-7">
+                  <div class="welcome-text mb-50">
+                    <h2 data-animation="fadeInLeftBig" data-delay="200ms" data-duration="1s">kubernetes集群离线安装包 <br> 一条命令高可用</h2>
+                    <h3 data-animation="fadeInLeftBig" data-delay="400ms" data-duration="1s">现在开始 <span>￥99</span> ￥69/年</h3>
+                    <p data-animation="fadeInLeftBig" data-delay="600ms" data-duration="1s">欢迎成为年费会员，任意下载所有版本软件包!</p>
+                    <a href="http://store.lameleg.com" target="_blank" class="btn2 hami-btn btn-2" data-animation="fadeInLeftBig" data-delay="800ms" data-duration="1s">点击购买</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Welcome Thumbnail -->
+          <div class="welcome-thumbnail">
+            <img src="./assets/img/bg-img/1.png" alt="">
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Clouds -->
+      <div class="clouds">
+        <img src="./assets/img/core-img/cloud-1.png" alt="" class="cloud-1">
+        <img src="./assets/img/core-img/cloud-2.png" alt="" class="cloud-2">
+        <img src="./assets/img/core-img/cloud-3.png" alt="" class="cloud-3">
+        <img src="./assets/img/core-img/cloud-4.png" alt="" class="cloud-4">
+        <img src="./assets/img/core-img/cloud-5.png" alt="" class="cloud-5">
+      </div>
+    </section>
+
+    <!-- 留言 -->
+    <div style="text-align:left;" id="gitalk-container"></div>
+    <!-- 
     <Menu mode="horizontal" :theme="theme1" active-name="1">
       <Row>
         <Col span="18">
@@ -116,10 +231,8 @@
         </MenuItem>
 
         <MenuItem name="5">
-        <!--img v-if="avata" :src="avata_url" style="border-radius:50%;width:30px;height:30px;cursor:pointer;margin-top:12px;"></img-->
         <Avatar v-if="avata" :src="avata_url" />
         <Tooltip v-else content="请使用github账户登录">
-          <!-- useless, please redirect on backend-->
           <a :href="loginurl" target="_blank" rel="noopener">
             <li>
               <i class="ivu-icon ivu-icon-logo-github"></i>
@@ -146,8 +259,7 @@
       <Col span="8">
       <div style="text-align:left;" id="gitalk-container"></div>
       </Col>
-    </Row>
-    <!--router-view></router-view-->
+    </Row> -->
   </div>
 </template>
 
@@ -157,6 +269,7 @@ import VueCookies from 'vue-cookies'
 
 import 'gitalk/dist/gitalk.css'
 import Gitalk from 'gitalk'
+import './assets/style.css'
 
 /*
 const gitalk = new Gitalk({
@@ -334,25 +447,10 @@ export default {
   },
 }
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-.payee {
-  margin: 10px;
-}
-.payee label {
-  margin: 10px;
-}
-.payee input {
-  margin: 10px;
-}
-.payedUser {
-  margin: 10px;
+ <style>
+.btn2 {
+  text-decoration: none;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 </style>
