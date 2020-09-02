@@ -1,16 +1,14 @@
 <template>
   <div id="app">
     <header class="header-area">
+
       <div class="main-header-area">
         <div class="classy-nav-container breakpoint-off">
           <div class="container">
-            <!-- Classy Menu -->
             <nav class="classy-navbar justify-content-between" id="hamiNav">
 
-              <!-- Logo -->
               <a class="nav-brand" href="http://store.lameleg.com"><img width="100px" src="./assets/logo.png" alt=""></a>
 
-              <!-- Navbar Toggler -->
               <div class="classy-navbar-toggler">
                 <span class="navbarToggler"><span></span><span></span><span></span></span>
               </div>
@@ -41,7 +39,6 @@
 
                     <li class="cn-dropdown-item has-down">
                       <a href="javascript:void(0)">
-                        <Icon type="logo-github" />
                         友情链接</a>
                       <ul class="dropdown">
                         <li><a target="_blank" href="https://www.yangcs.net#sealyun">- 骚客米开朗琪杨</a></li>
@@ -88,13 +85,12 @@
                     <h2 data-animation="fadeInLeftBig" data-delay="200ms" data-duration="1s">kubernetes集群离线安装包 <br> 一条命令高可用</h2>
                     <h3 data-animation="fadeInLeftBig" data-delay="400ms" data-duration="1s">现在开始 <span>￥99</span> ￥69/年</h3>
                     <p data-animation="fadeInLeftBig" data-delay="600ms" data-duration="1s">欢迎成为年费会员，任意下载所有版本软件包!</p>
-                    <a href="http://store.lameleg.com" target="_blank" class="btn2 hami-btn btn-2" data-animation="fadeInLeftBig" data-delay="800ms" data-duration="1s">点击购买</a>
+                    <a href="http://store.lameleg.com:8080/user/vip/charge" target="_blank" rel="noopener" class="btn2 hami-btn btn-2" data-animation="fadeInLeftBig" data-delay="800ms" data-duration="1s">成为会员</a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <!-- Welcome Thumbnail -->
           <div class="welcome-thumbnail">
             <img src="./assets/img/bg-img/1.png" alt="">
           </div>
@@ -102,7 +98,6 @@
 
       </div>
 
-      <!-- Clouds -->
       <div class="clouds">
         <img src="./assets/img/core-img/cloud-1.png" alt="" class="cloud-1">
         <img src="./assets/img/core-img/cloud-2.png" alt="" class="cloud-2">
@@ -112,93 +107,40 @@
       </div>
     </section>
 
+    <section class="find-domain-area section-padding-100-0">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-12 col-md-4">
+            <div class="domain-text mb-100">
+              <h2>公告</h2>
+              <!-- <h6>公告描述。。。。。。</h6> -->
+            </div>
+          </div>
+          <div class="col-12 col-md-8">
+            <div class="domain-search-form mb-100" style="font-size:14px">
+              kubernetes集群离线安装包, 一条命令高可用<br />
+              使用kubeadm安装，包含安装所需的所有二进制文件，镜像文件，systemd配置，yaml配置与一些简单的启动脚本，五分钟搞定kubernetes安装~ 遇到任何问题可进群咨询，安装出问题提供远程协助,内核负载高可用，不依赖haproxy keepalived ansible,99年证书
+              <!-- <div class="domain-price-help mt-30 d-flex align-items-center justify-content-between">
+                <p>$公告一</p>
+                <p>公告二</p>
+                <p>公告二</p>
+                <p>公告二</p>
+                <p>公告二</p>
+                <p>公告二</p>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <goods-list />
+
     <!-- 留言 -->
-    <div style="text-align:left;" id="gitalk-container"></div>
+    <div id="gitalk-container"></div>
     <!-- 
     <Menu mode="horizontal" :theme="theme1" active-name="1">
-      <Row>
-        <Col span="18">
-        <MenuItem name="1">
-        <a href="http://store.lameleg.com">
-          <li>SealYun</li>
-        </a>
-        </MenuItem>
-        <MenuItem name="2">
-        <a target="_blank" href="https://sealyun.com">
-          <li>博客</li>
-        </a>
-        </MenuItem>
-        <MenuItem name="3">
-        <a target="_blank" href="https://github.com/fanux/sealos">
-          <li>文档</li>
-        </a>
-        </MenuItem>
-        <MenuItem name="4">
-        <a target="_blank" href="https://sealyun.com/post/referrer/">
-          <li>加入营销</li>
-        </a>
-        </MenuItem>
-        <MenuItem name="5">
-        <a target="_blank" href="https://mp.weixin.qq.com/s/Ra722VtdLitDbM0GExom6A">
-          <li>售后支持</li>
-        </a>
-        </MenuItem>
-        <MenuItem name="6">
-        <a target="_blank" href="https://shop929htt07.market.aliyun.com/page/productlist.html?cId=53366009">
-          <li>阿里云市场</li>
-        </a>
-        </MenuItem>
-        <Submenu name="7">
-          <template slot="title">
-            <Icon type="logo-github" />
-            开源项目
-          </template>
-          <MenuGroup title="简单而不失强大">
-            <MenuItem name="0">
-            <a target="_blank" href="https://github.com/fanux/sealos">
-              <li>kubernetes一键HA</li>
-            </a>
-            </MenuItem>
-            <MenuItem name="1">
-            <a target="_blank" href="https://github.com/fanux/fist">
-              <li>轻量级kubernetes管理工具</li>
-            </a>
-            </MenuItem>
-            <MenuItem name="1">
-            <a target="_blank" href="https://github.com/fanux/lhttp">
-              <li>好用的websocket框架</li>
-            </a>
-            </MenuItem>
-          </MenuGroup>
-        </Submenu>
-        <Submenu name="8">
-          <template slot="title">
-            友情链接
-          </template>
-          <MenuGroup title="友情链接">
-            <MenuItem name="0">
-            <a target="_blank" href="https://kuboard.cn/#sealyun">
-              <li>kuboard k8s dashboard</li>
-            </a>
-            </MenuItem>
-            <MenuItem name="1">
-            <a target="_blank" href="https://www.yangcs.net#sealyun">
-              <li>骚客米开朗琪杨</li>
-            </a>
-            </MenuItem>
-            <MenuItem name="2">
-            <a target="_blank" href="https://www.qikqiak.com/?utm_source=sealyun.com">
-              <li>阳明的博客</li>
-            </a>
-            </MenuItem>
-            <MenuItem name="3">
-            <a target="_blank" href="https://zhangguanzhang.github.io/#sealyun">
-              <li>张馆长</li>
-            </a>
-            </MenuItem>
-          </MenuGroup>
-        </Submenu>
-        </Col>
+      <Row> 
         <Col span="3">
         <Tooltip content="年费会员，任意下载所有版本软件包">
           <a href="http://store.lameleg.com:8080/user/vip/charge" target="_blank" rel="noopener">
@@ -244,29 +186,45 @@
         </Col>
       </Row>
     </Menu>
-    <Row>
-      <Col span="8">
-      <h1 class="payedUser">已购用户</h1>
-      <label v-for="u in payedUser">
-        <a :href="'https://github.com/'+u.login" target="_blank">
-          <Avatar class="payedUser" :src="u.avatar_url" />
-        </a>
-      </label>
-      </Col>
-      <Col span="8">
-      <index msg="Welcome to SealYun" />
-      </Col>
-      <Col span="8">
-      <div style="text-align:left;" id="gitalk-container"></div>
-      </Col>
-    </Row> -->
+    <Row> -->
+    <!-- <index msg="Welcome to SealYun" /> -->
+    <section class="hami-support-area">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="support-text">
+              <h2>需要帮助? 发邮件给我们~ fhtjob@hotmail.com</h2>
+              <img src="https://sealyun.com/kubernetes-qrcode.jpg" width="100" class="mt-15">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <img class="support-pattern" src="./assets/img/core-img/support-pattern.png" alt="">
+    </section>
+
+    <!-- <section class="hami-cta-area">
+      <div class="container">
+        <div class="cta-text">
+          <h2>已购用户</h2>
+          <ul class="grid">
+            <li v-for="u in payedUser">
+              <a :href="'https://github.com/'+u.login" target="_blank">
+                <img :src="u.avatar_url" alt="" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section> -->
+
   </div>
 </template>
 
 <script>
 import index from './components/index.vue'
+import goodsList from './components/goodsList.vue'
 import VueCookies from 'vue-cookies'
-
 import 'gitalk/dist/gitalk.css'
 import Gitalk from 'gitalk'
 import './assets/style.css'
@@ -301,19 +259,16 @@ export default {
   },
 
   data() {
-    var a = {
+    let a = {
       account: '',
       passwd: '',
       passwdCheck: '',
-
       amount: 1,
       theme1: 'light',
       avata: false,
       avata_url: '',
       payeeForm: false,
-
       payedUser: [],
-
       loginurl:
         'https://github.com/login/oauth/authorize?client_id=89c1b05d77fb1c92a1ef&scope=user:email',
     }
@@ -324,16 +279,15 @@ export default {
       })
       .then(
         function (res) {
-          for (var i = 0; i < res.data.length; i++) {
+          for (let i = 0; i < res.data.length; i++) {
             if (res.data[i] == null) {
               continue
             }
-            for (var j = i + 1; j < res.data.length; j++) {
+            for (let j = i + 1; j < res.data.length; j++) {
               if (res.data[j] == null) {
                 continue
               }
               if (res.data[i].login == res.data[j].login) {
-                // res.data.splice(j - 1, 1);
                 res.data[j].avata_url = 'https://avatars2.githubusercontent.com/u/8912557?v=4'
               }
             }
@@ -345,52 +299,39 @@ export default {
       )
 
     if (typeof this.$route.query.referrer != 'undefined') {
-      // a.loginurl += "&redirect_uri=http://store.lameleg.com/referrer/" + this.$route.query.referrer;
       VueCookies.set('referrer', this.$route.query.referrer)
     }
-    if (VueCookies.get('referrer') != null) {
-      console.log('cookie', VueCookies.get('referrer'))
-    }
+    // if (VueCookies.get('referrer') != null) {
+    //   console.log('cookie', VueCookies.get('referrer'))
+    // }
     this.$http
       .get('http://store.lameleg.com:8080/loginless/user/payee', {
         credentials: true,
       })
-      .then(
-        function (res) {
-          a.amount = res.data.Amount
-          if (typeof a.amount == 'undefined') {
-            a.amount = 0
-          }
-          console.log(res.data)
-        },
-        function (res) {
-          console.log(res.data)
+      .then(function (res) {
+        a.amount = res.data.Amount
+        if (typeof a.amount == 'undefined') {
+          a.amount = 0
         }
-      )
+      })
 
     this.$http
       .get('http://store.lameleg.com:8080/loginless/info/user', {
         credentials: true,
       })
-      .then(
-        function (res) {
-          a.avata_url = res.data.avatar_url
-          //              a.avata_url="https://avatars2.githubusercontent.com/u/8912557?v=4"
-          if (typeof a.avata_url != 'undefined') {
-            a.avata = true
-          }
-          console.log(res.data, 'avata:', a)
-        },
-        function (res) {
-          console.log(res.data)
+      .then(function (res) {
+        a.avata_url = res.data.avatar_url
+        if (typeof a.avata_url != 'undefined') {
+          a.avata = true
         }
-      )
+      })
 
     return a
   },
   name: 'app',
   components: {
     index,
+    'goods-list': goodsList,
   },
   methods: {
     ok() {
@@ -399,7 +340,7 @@ export default {
         return
       }
 
-      var para = {
+      let para = {
         PayeeAccount: this.account,
         Passwd: this.passwd,
       }
@@ -411,7 +352,6 @@ export default {
         })
         .then(
           function (res) {
-            console.log(res)
             this.$Message.info(res.data.Reason)
           },
           function (res) {
@@ -453,4 +393,4 @@ export default {
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
-</style>
+</style> 

@@ -1339,7 +1339,7 @@ input:focus {
 }
 
 .hami-support-area .support-text {
-  padding: 60px 0;
+  padding: 60px 0 15px;
   text-align: center;
 }
 
@@ -4644,4 +4644,27 @@ input:focus {
 .classynav ul li.megamenu-item>a:after,
 .classynav ul li.has-down>a:after {
   color: #fff !important;
+}
+
+.grid {
+  height: auto;
+  margin: 100px 60px 80px 60px;
+  text-align: center;
+}
+
+.grid li {
+  display: inline-block;
+  width: 5%;
+  max-width: 40px;
+  margin: 3px;
+}
+
+.grid img {
+  width: 100%;
+  border-radius: 50%;
+}
+
+#gitalk-container {
+  max-width: 1200px;
+  margin: 0 auto;
 }
