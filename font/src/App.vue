@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <header class="header-area">
-
       <div class="main-header-area">
         <div class="classy-nav-container breakpoint-off">
           <div class="container">
@@ -67,72 +66,9 @@
       </div>
     </header>
 
-    <section class="welcome-area">
+    <banner />
 
-      <div class="welcome-pattern">
-        <img src="./assets/img/core-img/welcome-pattern.png" alt="">
-      </div>
-
-      <div class="welcome-slides">
-
-        <div class="single-welcome-slide">
-          <div class="welcome-content h-100">
-            <div class="container h-100">
-              <div class="row h-100 align-items-center">
-                <!-- Welcome Text -->
-                <div class="col-12 col-md-9 col-lg-7">
-                  <div class="welcome-text mb-50">
-                    <h2 data-animation="fadeInLeftBig" data-delay="200ms" data-duration="1s">kubernetes集群离线安装包 <br> 一条命令高可用</h2>
-                    <h3 data-animation="fadeInLeftBig" data-delay="400ms" data-duration="1s">现在开始 <span>￥99</span> ￥69/年</h3>
-                    <p data-animation="fadeInLeftBig" data-delay="600ms" data-duration="1s">欢迎成为年费会员，任意下载所有版本软件包!</p>
-                    <a href="http://store.lameleg.com:8080/user/vip/charge" target="_blank" rel="noopener" class="btn2 hami-btn btn-2" data-animation="fadeInLeftBig" data-delay="800ms" data-duration="1s">成为会员</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="welcome-thumbnail">
-            <img src="./assets/img/bg-img/1.png" alt="">
-          </div>
-        </div>
-
-      </div>
-
-      <div class="clouds">
-        <img src="./assets/img/core-img/cloud-1.png" alt="" class="cloud-1">
-        <img src="./assets/img/core-img/cloud-2.png" alt="" class="cloud-2">
-        <img src="./assets/img/core-img/cloud-3.png" alt="" class="cloud-3">
-        <img src="./assets/img/core-img/cloud-4.png" alt="" class="cloud-4">
-        <img src="./assets/img/core-img/cloud-5.png" alt="" class="cloud-5">
-      </div>
-    </section>
-
-    <section class="find-domain-area section-padding-100-0">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-12 col-md-4">
-            <div class="domain-text mb-100">
-              <h2>公告</h2>
-              <!-- <h6>公告描述。。。。。。</h6> -->
-            </div>
-          </div>
-          <div class="col-12 col-md-8">
-            <div class="domain-search-form mb-100" style="font-size:14px">
-              kubernetes集群离线安装包, 一条命令高可用<br />
-              使用kubeadm安装，包含安装所需的所有二进制文件，镜像文件，systemd配置，yaml配置与一些简单的启动脚本，五分钟搞定kubernetes安装~ 遇到任何问题可进群咨询，安装出问题提供远程协助,内核负载高可用，不依赖haproxy keepalived ansible,99年证书
-              <!-- <div class="domain-price-help mt-30 d-flex align-items-center justify-content-between">
-                <p>$公告一</p>
-                <p>公告二</p>
-                <p>公告二</p>
-                <p>公告二</p>
-                <p>公告二</p>
-                <p>公告二</p>
-              </div> -->
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <annotation />
 
     <goods-list />
 
@@ -188,20 +124,7 @@
     </Menu>
     <Row> -->
     <!-- <index msg="Welcome to SealYun" /> -->
-    <section class="hami-support-area">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <div class="support-text">
-              <h2>需要帮助? 发邮件给我们~ fhtjob@hotmail.com</h2>
-              <img src="https://sealyun.com/kubernetes-qrcode.jpg" width="100" class="mt-15">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <img class="support-pattern" src="./assets/img/core-img/support-pattern.png" alt="">
-    </section>
+    <help />
 
     <!-- <section class="hami-cta-area">
       <div class="container">
@@ -224,6 +147,9 @@
 <script>
 import index from './components/index.vue'
 import goodsList from './components/goodsList.vue'
+import banner from './components/banner.vue'
+import help from './components/help.vue'
+import annotation from './components/annotation.vue'
 import VueCookies from 'vue-cookies'
 import 'gitalk/dist/gitalk.css'
 import Gitalk from 'gitalk'
@@ -331,7 +257,10 @@ export default {
   name: 'app',
   components: {
     index,
-    'goods-list': goodsList,
+    banner,
+    help,
+    annotation,
+    goodsList,
   },
   methods: {
     ok() {
@@ -379,7 +308,6 @@ export default {
             console.log(res.data)
           },
           function (res) {
-            console.log('user info withdraw failed', res.data)
             this.payeeForm = true
           }
         )
@@ -387,10 +315,11 @@ export default {
   },
 }
 </script>
- <style>
+
+ <style lang="css">
 .btn2 {
   text-decoration: none;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
-</style> 
+</style>
