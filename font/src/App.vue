@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <header class="header-area">
+    <header class="header-area" :style="hasAnnotaion ? 'margin-top:60px':'margin-top:0;'">
       <div class="main-header-area">
         <div class="classy-nav-container breakpoint-off">
           <div class="container">
@@ -65,10 +65,9 @@
         </div>
       </div>
     </header>
-
     <banner />
 
-    <annotation />
+    <annotation :hasAnnotaion="hasAnnotaion" />
 
     <goods-list />
 
@@ -139,8 +138,8 @@
           </ul>
         </div>
       </div>
-    </section> -->
-
+    </section> 
+    -->
   </div>
 </template>
 
@@ -186,6 +185,7 @@ export default {
 
   data() {
     let a = {
+      hasAnnotaion: true, //是否有公告
       account: '',
       passwd: '',
       passwdCheck: '',
