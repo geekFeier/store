@@ -40,6 +40,8 @@
 <script type="text/javascript">
 export default {
   name: 'banner',
-  data() {},
+  data() {
+    return {}
+  },
 }
 </script> 

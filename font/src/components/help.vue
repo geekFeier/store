@@ -18,6 +18,8 @@
 <script type="text/javascript">
 export default {
   name: 'help',
-  data() {},
+  data() {
+    return {}
+  },
 }
 </script> 

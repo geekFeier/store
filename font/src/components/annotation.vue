@@ -44,7 +44,9 @@
 export default {
   name: 'annotation',
   props: ['hasAnnotaion'],
-  data() {},
+  data() {
+    return {}
+  },
 }
 </script> 
 <style lang="css">

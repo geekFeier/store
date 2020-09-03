@@ -5,5 +5,9 @@
 </template>
 
 <script  type="text/javascript">
-export default {}
+export default {
+  data() {
+    return {}
+  },
+}
 </script> 
