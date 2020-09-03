@@ -6,17 +6,17 @@
           <div class="col-12">
             <div class="section-heading text-center">
               <h2>商品列表</h2>
-              <p>
-                您还可获取专有分享链接，享受60%交易提成
-                <Poptip title="专有分享链接 - 通过sealyun赚钱" placement="right-end">
+              <!-- <p> -->
+              <!-- 您还可获取专有分享链接，享受60%交易提成 -->
+              <!-- <Poptip title="专有分享链接 - 通过sealyun赚钱" placement="right-end">
                   <div slot="content" class="poptip">
                     <p>{{ shareLink }}</p>
                     <p>任何用户通过上面链接访问网站并成功交易您将获得交易的60%提成</p>
                     <p>如嵌入自己的markdown文档中, 发到群里，或者把链接直接发给有需要的朋友</p>
                   </div>
                   <span id="sharelink">推广链接</span>
-                </Poptip>
-              </p>
+                </Poptip> -->
+              <!-- </p> -->
             </div>
           </div>
         </div>

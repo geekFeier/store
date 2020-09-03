@@ -19,32 +19,8 @@
                 <div class="classynav">
                   <ul id="nav">
                     <li class="active"><a target="_blank" href="http://store.lameleg.com">SealYun</a></li>
-                    <li><a target="_blank" href="https://sealyun.com">博客</a></li>
-                    <li><a target="_blank" href="https://github.com/fanux/sealos">文档</a></li>
-                    <li><a target="_blank" href="https://sealyun.com/post/referrer/">加入营销</a></li>
-                    <li><a target="_blank" href="https://mp.weixin.qq.com/s/Ra722VtdLitDbM0GExom6A">售后支持</a></li>
-                    <li><a target="_blank" href="https://shop929htt07.market.aliyun.com/page/productlist.html?cId=53366009">阿里云市场</a></li>
-                    <li class="cn-dropdown-item has-down">
-                      <a href="javascript:void(0)">
-                        <Icon type="logo-github" />
-                        开源项目</a>
-                      <ul class="dropdown">
-                        <!-- <li><a>- 简单而不失强大</a></li> -->
-                        <li><a target="_blank" href="https://github.com/fanux/sealos">- kubernetes一键HA</a></li>
-                        <li><a target="_blank" href="https://github.com/fanux/fist">- 轻量级kubernetes管理工具</a></li>
-                        <li><a target="_blank" href="https://github.com/fanux/lhttp">- 好用的websocket框架</a></li>
-                      </ul>
-                    </li>
+                    <li><a target="_blank" href="https://sealyun.com">使用说明</a></li>
 
-                    <li class="cn-dropdown-item has-down">
-                      <a href="javascript:void(0)">
-                        友情链接</a>
-                      <ul class="dropdown">
-                        <li><a target="_blank" href="https://www.yangcs.net#sealyun">- 骚客米开朗琪杨</a></li>
-                        <li><a target="_blank" href="https://www.qikqiak.com/?utm_source=sealyun.com">- 阳明的博客</a></li>
-                        <li><a target="_blank" href="https://zhangguanzhang.github.io/#sealyun">- 张馆长</a></li>
-                      </ul>
-                    </li>
                   </ul>
 
                   <div class="live-chat-btn ml-5 mt-4 mt-lg-0 ml-md-4" style="margin-bottom:12px;">
@@ -71,8 +47,43 @@
 
     <goods-list />
 
+    <section class="hami-cta-area">
+      <div class="container">
+        <div class="cta-text">
+          <h2>已购用户</h2>
+          <ul class="grid">
+            <li v-for="u in payedUser">
+              <a :href="'https://github.com/'+u.login" target="_blank">
+                <img :src="u.avatar_url" alt="" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
     <!-- 留言 -->
     <div id="gitalk-container"></div>
+    <!-- 放底部 -->
+    <!-- 加入组织: 钉钉群(35371178), Telegram -->
+    <a target="_blank" href="https://mp.weixin.qq.com/s/Ra722VtdLitDbM0GExom6A">售后支持</a>
+    <a href="javascript:void(0)">
+      <Icon type="logo-github" />
+      开源项目</a>
+    <ul class="dropdown">
+      <!-- <li><a>- 简单而不失强大</a></li> -->
+      <li><a target="_blank" href="https://github.com/fanux/sealos">- kubernetes一键HA</a></li>
+      <li><a target="_blank" href="https://github.com/fanux/fist">- 轻量级kubernetes管理工具</a></li>
+      <li><a target="_blank" href="https://github.com/fanux/lhttp">- 好用的websocket框架</a></li>
+    </ul>
+
+    <a href="javascript:void(0)">
+      友情链接</a>
+    <ul class="dropdown">
+      <li><a target="_blank" href="https://www.yangcs.net#sealyun">- 骚客米开朗琪杨</a></li>
+      <li><a target="_blank" href="https://www.qikqiak.com/?utm_source=sealyun.com">- 阳明的博客</a></li>
+      <li><a target="_blank" href="https://zhangguanzhang.github.io/#sealyun">- 张馆长</a></li>
+    </ul>
     <!-- 
     <Menu mode="horizontal" :theme="theme1" active-name="1">
       <Row> 
@@ -125,21 +136,6 @@
     <!-- <index msg="Welcome to SealYun" /> -->
     <help />
 
-    <!-- <section class="hami-cta-area">
-      <div class="container">
-        <div class="cta-text">
-          <h2>已购用户</h2>
-          <ul class="grid">
-            <li v-for="u in payedUser">
-              <a :href="'https://github.com/'+u.login" target="_blank">
-                <img :src="u.avatar_url" alt="" />
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section> 
-    -->
   </div>
 </template>
 

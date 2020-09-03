@@ -33,7 +33,7 @@
       </div>
       <div class="annotation-right">
 
-        <marquee direction="left" align="bottom" width="100%" onmouseout="this.start()" onmouseover="this.stop()" scrollamount="7" scrolldelay="1">使用kubeadm安装，包含安装所需的所有二进制文件，镜像文件，systemd配置，yaml配置与一些简单的启动脚本，五分钟搞定kubernetes安装~ 遇到任何问题可进群咨询，安装出问题提供远程协助,内核负载高可用，不依赖haproxy keepalived ansible,99年证书</marquee>
+        <marquee direction="left" align="bottom" width="100%" onmouseout="this.start()" onmouseover="this.stop()" scrollamount="7" scrolldelay="1">只能用丝滑一词形容的kubernetes高可用安装（kubernetes install）工具，一条命令，离线安装，包含所有依赖，内核负载不依赖haproxy keepalived,纯golang开发,99年证书,支持v1.16 v1.15 v1.17 v1.18 v1.19! <a href="https://github.com/fanux/sealos">github地址</a></marquee>
 
       </div>
     </div>
