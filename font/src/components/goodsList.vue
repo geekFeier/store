@@ -56,7 +56,7 @@
           </div>
         </div>
         <div v-if="tab === 'selfGoods'">
-
+          <div class="empty">暂无购买记录</div>
         </div>
 
       </div>
@@ -220,5 +220,10 @@ export default {
 .pb-1,
 .py-1 {
   padding-bottom: 0;
+}
+.empty {
+  text-align: center;
+  font-size: 30px;
+  margin: 100px;
 }
 </style>
