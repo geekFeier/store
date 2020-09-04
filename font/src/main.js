@@ -12,14 +12,6 @@ VueCookies.config('7d')
 
 import App from './App.vue'
 
-
-/*
-import axios from 'axios'
-
-axios.defaults.withCredentials = true; //让ajax携带cookie
-Vue.prototype.$axios = axios;
-*/
-
 Vue.config.productionTip = false
 
 Vue.use(iView)
@@ -30,9 +22,25 @@ const router = new VueRouter({
   mode: 'history',
   base: __dirname,
   routes: [{
+    path: '/',
+    name: 'index',
+    component: () =>
+      import( /* webpackChunkName: "index" */ '@/views/index/index.vue'),
+    meta: {
+      title: 'sealYun',
+    }
+  }, {
+    path: '/comment',
+    name: 'comment',
+    component: () =>
+      import( /* webpackChunkName: "comment" */ '@/views/comment/index.vue'),
+    meta: {
+      title: 'sealYun 评论区',
+    }
+  }, {
     path: '*',
     components: () =>
-      import('./components/index.vue')
+      import('./components/404.vue')
   }]
 })
 new Vue({

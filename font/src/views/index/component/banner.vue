@@ -1,7 +1,7 @@
 <template>
   <section class="welcome-area">
     <div class="welcome-pattern">
-      <img src="../assets/img/core-img/welcome-pattern.png" alt="">
+      <img src="../../../assets/img/core-img/welcome-pattern.png" alt="">
     </div>
 
     <div class="welcome-slides">
@@ -21,18 +21,18 @@
           </div>
         </div>
         <div class="welcome-thumbnail">
-          <img src="../assets/img/bg-img/1.png" alt="">
+          <img src="../../../assets/img/bg-img/1.png" alt="">
         </div>
       </div>
 
     </div>
 
     <div class="clouds">
-      <img src="../assets/img/core-img/cloud-1.png" alt="" class="cloud-1">
-      <img src="../assets/img/core-img/cloud-2.png" alt="" class="cloud-2">
-      <img src="../assets/img/core-img/cloud-3.png" alt="" class="cloud-3">
-      <img src="../assets/img/core-img/cloud-4.png" alt="" class="cloud-4">
-      <img src="../assets/img/core-img/cloud-5.png" alt="" class="cloud-5">
+      <img src="../../../assets/img/core-img/cloud-1.png" alt="" class="cloud-1">
+      <img src="../../../assets/img/core-img/cloud-2.png" alt="" class="cloud-2">
+      <img src="../../../assets/img/core-img/cloud-3.png" alt="" class="cloud-3">
+      <img src="../../../assets/img/core-img/cloud-4.png" alt="" class="cloud-4">
+      <img src="../../../assets/img/core-img/cloud-5.png" alt="" class="cloud-5">
     </div>
   </section>
 </template>
