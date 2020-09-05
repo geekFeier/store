@@ -1678,6 +1678,7 @@ input:focus {
 
 /* :: 13.0 Price Area CSS */
 .single-price-plan {
+  height: 330px;
   position: relative;
   z-index: 1;
   padding: 40px;

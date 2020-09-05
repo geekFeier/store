@@ -45,3 +45,10 @@ export default {
   },
 }
 </script> 
+ <style lang="css">
+.btn2 {
+  text-decoration: none;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+</style>

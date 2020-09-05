@@ -55,19 +55,27 @@
     <div class="bottom-footer-area bg-gray">
       <div class="container">
         <div class="row align-items-center">
-          <div style="width:320px">
+          <div>
+            <div class="copywrite-text">
+              <p>
+                备案信息。。。。。 by <a href="#" target="_blank">fanux</a>
+              </p>
+            </div>
+          </div>
+          <!-- <div style="width:320px">
             <div class="copywrite-text">
               <p>
                 <a href="https://github.com/fanux/sealos" target="_blank">sealyun</a> 专注于kubernetes安装 <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="#" target="_blank">fanux</a>
               </p>
             </div>
           </div>
-          <div style="flex:1">
+        <div style="flex:1">
             <div class="payments-methods d-flex align-items-center">
               <p>核心贡献者</p>
               <a v-for="(item,index) in developer" :key="index" :title="item.author.path.slice(1)" :href="'https://github.com'+item.author.path"><img :src="item.author.avatar" alt=""></a>
             </div>
-          </div>
+          </div> -->
+
         </div>
       </div>
     </div>
@@ -76,7 +84,7 @@
 
 <script type="text/javascript">
 export default {
-  name: 'footer',
+  name: 'footCommon',
   data() {
     return {
       developer: [],

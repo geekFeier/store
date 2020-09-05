@@ -1,11 +1,16 @@
 <template>
   <div class="comment">
+
+    <head-common :hasAnnotaion="false" />
     <!-- 留言 -->
     <div id="gitalk-container"></div>
+    <foot-common />
   </div>
 </template>
 
 <script type="text/javascript">
+import footCommon from '@/components/layout/footCommon.vue'
+import headCommon from '@/components/layout/headCommon.vue'
 import VueCookies from 'vue-cookies'
 import 'gitalk/dist/gitalk.css'
 import Gitalk from 'gitalk'
@@ -27,6 +32,10 @@ export default {
   },
   data() {
     return {}
+  },
+  components: {
+    'head-common': headCommon,
+    'foot-common': footCommon,
   },
 }
 </script> 
